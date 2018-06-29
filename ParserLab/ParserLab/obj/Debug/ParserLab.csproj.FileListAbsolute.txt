@@ -1,0 +1,7 @@
+E:\универ\ParserLab\ParserLab\ParserLab\bin\Debug\ParserLab.exe.config
+E:\универ\ParserLab\ParserLab\ParserLab\bin\Debug\ParserLab.exe
+E:\универ\ParserLab\ParserLab\ParserLab\bin\Debug\ParserLab.pdb
+E:\универ\ParserLab\ParserLab\ParserLab\obj\Debug\ParserLab.csprojResolveAssemblyReference.cache
+E:\универ\ParserLab\ParserLab\ParserLab\obj\Debug\ParserLab.csproj.CoreCompileInputs.cache
+E:\универ\ParserLab\ParserLab\ParserLab\obj\Debug\ParserLab.exe
+E:\универ\ParserLab\ParserLab\ParserLab\obj\Debug\ParserLab.pdb
