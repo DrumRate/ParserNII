@@ -1,0 +1,10 @@
+E:\универ\ParserNII\ParserNII\bin\Debug\ParserNII.exe.config
+E:\универ\ParserNII\ParserNII\bin\Debug\ParserNII.exe
+E:\универ\ParserNII\ParserNII\bin\Debug\ParserNII.pdb
+E:\универ\ParserNII\ParserNII\obj\Debug\ParserNII.csprojAssemblyReference.cache
+E:\универ\ParserNII\ParserNII\obj\Debug\ParserNII.Form1.resources
+E:\универ\ParserNII\ParserNII\obj\Debug\ParserNII.Properties.Resources.resources
+E:\универ\ParserNII\ParserNII\obj\Debug\ParserNII.csproj.GenerateResource.cache
+E:\универ\ParserNII\ParserNII\obj\Debug\ParserNII.csproj.CoreCompileInputs.cache
+E:\универ\ParserNII\ParserNII\obj\Debug\ParserNII.exe
+E:\универ\ParserNII\ParserNII\obj\Debug\ParserNII.pdb
