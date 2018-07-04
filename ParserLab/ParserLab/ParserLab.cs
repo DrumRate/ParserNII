@@ -115,7 +115,7 @@ namespace ParserLab
 
         private static void InitEnvironment()
         {
-            _fs = MyFileStream.GetFileStreamInstance("E:\\универ\\ParserLab\\ParserLab\\198_смена.dat");
+            _fs = MyFileStream.GetFileStreamInstance("C:\\Users\\nick\\Desktop\\ParserLab-master\\198_смена.dat");
             _time = new Time(0, 4);
             _singleValues = new SingleValue[35];
             _minuteBitRecord1 = new MinuteBitRecord1(4, 2);
