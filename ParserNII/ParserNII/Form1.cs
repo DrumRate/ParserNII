@@ -42,8 +42,16 @@ namespace ParserNII
                 label7.Text = result.LocomotiveType.ToString();
                 label6.Text = (stream.Length / 1024).ToString();
                 label10.Text = result.LocomotiveSection.ToString();
+                label12.Text = result.LocomotiveNumber.ToString();
+
+                panel1.Text = result.ColdWaterCircuitTemperature.ToString();
                 stream.Close();
             }
+        }
+
+        private void zedGraphControl1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
