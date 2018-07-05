@@ -50,6 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataStructures\DataFile.cs" />
+    <Compile Include="DataStructures\DatFileParser.cs" />
+    <Compile Include="DataStructures\FirstMinuteByteParams.cs" />
+    <Compile Include="DataStructures\FirstSecondByteParams.cs" />
     <Compile Include="DataStructures\SecondBlock.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

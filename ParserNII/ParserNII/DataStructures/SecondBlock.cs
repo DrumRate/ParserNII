@@ -2,18 +2,18 @@
 {
     public class SecondBlock
     {
-        public short BitParametrsSecond;
+        public FirstSecondByteParams BitParametrsSecond;
         public short TurnoversDisel;
         public short TurnoversTurbochanrger;
         public short GeneratorPower;
-        public short CurrentGenerator;
+        public short GeneratorCurrent;
         public short VoltageGenerator;
         public short Speed;
         public byte BoostPressure;
-        public short AverageVolumeFuel;
-        public byte FuelDensity;
-        public byte OilDensity;
+        public short AverageFuelVolume;
+        public byte FuelPressure;
+        public byte OilPressure;
         public byte PositionControllerDriver;
-        public byte OilDensityWithFilter;
+        public byte OilPressureWithFilter;
     }
 }

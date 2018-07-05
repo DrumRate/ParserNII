@@ -8,7 +8,7 @@
         public byte LocomotiveType;
         public short LocomotiveNumber;
         public byte LocomotiveSection;
-        public short MinuteByteParametrs;
+        public FirstMinuteByteParams MinuteByteParametrs;
         public byte CoolingCircuitTemperature;
         public short LeftFuelVolume;
         public short RightFuelVolume;
@@ -18,7 +18,7 @@
         public byte RightTsDutTemperature;
         public int Latitude;
         public int Longitude;
-        public byte FuelTeemperature;
+        public byte FuelTemperature;
         public byte FuelDensityCurrent;
         public byte FuelDensityStandard;
         public byte OilCircuitTemperature;
@@ -41,7 +41,7 @@
         public byte FuelDensityOnEquip;
         
         // time data
-
+        public readonly SecondBlock[] SecondsBlock = new SecondBlock[20];
         public short CRC;
     }
 }

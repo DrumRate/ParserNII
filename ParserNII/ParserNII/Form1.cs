@@ -3,6 +3,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
+using ParserNII.DataStructures;
 
 namespace ParserNII
 {
@@ -33,6 +34,14 @@ namespace ParserNII
             {
                 IFormatter formatter = new BinaryFormatter();
                 Stream stream = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+                DatFileParser parser = new DatFileParser();
+                var result = parser.Parse(stream);
+                label2.Text = result.LabelType.ToString();
+                DateTimeOffset time = DateTimeOffset.FromUnixTimeSeconds(result.UnixTime);
+                label4.Text = DateTimeOffset.Now.ToString("dd.MM.yyyy HH:mm:ss");
+                label7.Text = result.LocomotiveType.ToString();
+                label6.Text = (stream.Length / 1024).ToString();
+                label10.Text = result.LocomotiveSection.ToString();
                 stream.Close();
             }
         }
