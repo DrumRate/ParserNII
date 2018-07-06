@@ -39,8 +39,9 @@ namespace ParserNII
             return colors[i];
         }
 
-        public static void DrawGraph(ZedGraphControl control, List<DateTimeOffset> x, List<double> y, string name, string title, Color color)
+        public static Dictionary<PointPair,string> DrawGraph(ZedGraphControl control, List<DateTimeOffset> x, List<double> y, string name, string title, Color color)
         {
+            
             GraphPane pane = control.GraphPane;
             pane.XAxis.Type = AxisType.Date;
             pane.XAxis.Scale.Format = "dd.MM.yyyy HH:mm:ss";
@@ -50,10 +51,17 @@ namespace ParserNII
             pane.XAxis.Title.Text = "t";
             pane.YAxis.Title.Text = "P(t)";
             PointPairList list1 = new PointPairList();
+            var result = new Dictionary<PointPair, string>();
 
             for (int i = 0; i < x.Count; i++)
             {
-                list1.Add(new XDate(x[i].DateTime), y[i]);
+                var point = new PointPair()
+                {
+                    X = new XDate(x[i].DateTime),
+                    Y = y[i]
+                };
+                list1.Add(point);
+                result.Add(point,name);
                 if (y[i] > Ymax)
                 {
                     Ymax = y[i];
@@ -65,7 +73,7 @@ namespace ParserNII
             //    Xmax = x[x.Count - 1];
             //}
 
-            LineItem myCurve = pane.AddCurve(name, list1, color, SymbolType.None);
+            LineItem myCurve = pane.AddCurve(name, list1, color, SymbolType.Diamond);
             myCurve.Line.Width = 2.0F;
             pane.XAxis.Scale.Min = 0;
             pane.YAxis.Scale.Min = 0;
@@ -84,6 +92,9 @@ namespace ParserNII
             pane.YAxis.MajorGrid.IsZeroLine = true;
 
             control.RestoreScale(pane);
+            control.AxisChange();
+            control.Invalidate();
+            return result;
         }
 
         public static void Clear(ZedGraphControl control)
@@ -97,6 +108,7 @@ namespace ParserNII
 
             pane.CurveList.Clear();
 
+            control.AxisChange();
             control.Invalidate();
         }
     }

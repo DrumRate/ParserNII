@@ -49,6 +49,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataCurveItem.cs" />
+    <Compile Include="DataPointPair.cs" />
     <Compile Include="DataStructures\BinFile.cs" />
     <Compile Include="DataStructures\BinFileParser.cs" />
     <Compile Include="DataStructures\DataFile.cs" />

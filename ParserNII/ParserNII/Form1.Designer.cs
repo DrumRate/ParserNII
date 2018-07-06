@@ -34,7 +34,6 @@
             this.открытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label38 = new System.Windows.Forms.Label();
-            this.panel27 = new System.Windows.Forms.Panel();
             this.label37 = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
@@ -60,34 +59,11 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.panel26 = new System.Windows.Forms.Panel();
-            this.panel25 = new System.Windows.Forms.Panel();
-            this.panel24 = new System.Windows.Forms.Panel();
-            this.panel23 = new System.Windows.Forms.Panel();
-            this.panel22 = new System.Windows.Forms.Panel();
-            this.panel21 = new System.Windows.Forms.Panel();
-            this.panel20 = new System.Windows.Forms.Panel();
-            this.panel19 = new System.Windows.Forms.Panel();
-            this.panel18 = new System.Windows.Forms.Panel();
-            this.panel17 = new System.Windows.Forms.Panel();
-            this.panel16 = new System.Windows.Forms.Panel();
-            this.panel15 = new System.Windows.Forms.Panel();
-            this.panel14 = new System.Windows.Forms.Panel();
-            this.panel13 = new System.Windows.Forms.Panel();
-            this.panel12 = new System.Windows.Forms.Panel();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -100,8 +76,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
-            this.label40 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -137,8 +113,9 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.textBox2);
+            this.panel3.Controls.Add(this.textBox1);
             this.panel3.Controls.Add(this.label38);
-            this.panel3.Controls.Add(this.panel27);
             this.panel3.Controls.Add(this.label37);
             this.panel3.Controls.Add(this.label36);
             this.panel3.Controls.Add(this.label35);
@@ -164,31 +141,6 @@
             this.panel3.Controls.Add(this.label15);
             this.panel3.Controls.Add(this.label14);
             this.panel3.Controls.Add(this.label13);
-            this.panel3.Controls.Add(this.panel26);
-            this.panel3.Controls.Add(this.panel25);
-            this.panel3.Controls.Add(this.panel24);
-            this.panel3.Controls.Add(this.panel23);
-            this.panel3.Controls.Add(this.panel22);
-            this.panel3.Controls.Add(this.panel21);
-            this.panel3.Controls.Add(this.panel20);
-            this.panel3.Controls.Add(this.panel19);
-            this.panel3.Controls.Add(this.panel18);
-            this.panel3.Controls.Add(this.panel17);
-            this.panel3.Controls.Add(this.panel16);
-            this.panel3.Controls.Add(this.panel15);
-            this.panel3.Controls.Add(this.panel14);
-            this.panel3.Controls.Add(this.panel13);
-            this.panel3.Controls.Add(this.panel12);
-            this.panel3.Controls.Add(this.panel11);
-            this.panel3.Controls.Add(this.panel10);
-            this.panel3.Controls.Add(this.panel9);
-            this.panel3.Controls.Add(this.panel8);
-            this.panel3.Controls.Add(this.panel7);
-            this.panel3.Controls.Add(this.panel6);
-            this.panel3.Controls.Add(this.panel5);
-            this.panel3.Controls.Add(this.panel4);
-            this.panel3.Controls.Add(this.panel2);
-            this.panel3.Controls.Add(this.panel1);
             this.panel3.Location = new System.Drawing.Point(889, 81);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(268, 558);
@@ -202,14 +154,6 @@
             this.label38.Size = new System.Drawing.Size(156, 13);
             this.label38.TabIndex = 29;
             this.label38.Text = "Давление масла с фильтром";
-            // 
-            // panel27
-            // 
-            this.panel27.Location = new System.Drawing.Point(3, 529);
-            this.panel27.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.panel27.Name = "panel27";
-            this.panel27.Size = new System.Drawing.Size(83, 18);
-            this.panel27.TabIndex = 7;
             // 
             // label37
             // 
@@ -436,205 +380,6 @@
             this.label13.TabIndex = 7;
             this.label13.Text = "Т воды контура охлаждения";
             // 
-            // panel26
-            // 
-            this.panel26.Location = new System.Drawing.Point(3, 508);
-            this.panel26.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.panel26.Name = "panel26";
-            this.panel26.Size = new System.Drawing.Size(83, 18);
-            this.panel26.TabIndex = 6;
-            // 
-            // panel25
-            // 
-            this.panel25.Location = new System.Drawing.Point(3, 486);
-            this.panel25.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.panel25.Name = "panel25";
-            this.panel25.Size = new System.Drawing.Size(83, 18);
-            this.panel25.TabIndex = 6;
-            // 
-            // panel24
-            // 
-            this.panel24.Location = new System.Drawing.Point(3, 465);
-            this.panel24.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.panel24.Name = "panel24";
-            this.panel24.Size = new System.Drawing.Size(83, 18);
-            this.panel24.TabIndex = 6;
-            // 
-            // panel23
-            // 
-            this.panel23.Location = new System.Drawing.Point(3, 444);
-            this.panel23.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.panel23.Name = "panel23";
-            this.panel23.Size = new System.Drawing.Size(83, 18);
-            this.panel23.TabIndex = 6;
-            // 
-            // panel22
-            // 
-            this.panel22.Location = new System.Drawing.Point(3, 423);
-            this.panel22.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.panel22.Name = "panel22";
-            this.panel22.Size = new System.Drawing.Size(83, 18);
-            this.panel22.TabIndex = 6;
-            // 
-            // panel21
-            // 
-            this.panel21.Location = new System.Drawing.Point(3, 402);
-            this.panel21.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(83, 18);
-            this.panel21.TabIndex = 6;
-            // 
-            // panel20
-            // 
-            this.panel20.Location = new System.Drawing.Point(3, 381);
-            this.panel20.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.panel20.Name = "panel20";
-            this.panel20.Size = new System.Drawing.Size(83, 18);
-            this.panel20.TabIndex = 6;
-            // 
-            // panel19
-            // 
-            this.panel19.Location = new System.Drawing.Point(3, 360);
-            this.panel19.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(83, 18);
-            this.panel19.TabIndex = 6;
-            // 
-            // panel18
-            // 
-            this.panel18.Location = new System.Drawing.Point(3, 339);
-            this.panel18.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(83, 18);
-            this.panel18.TabIndex = 6;
-            // 
-            // panel17
-            // 
-            this.panel17.Location = new System.Drawing.Point(3, 318);
-            this.panel17.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(83, 18);
-            this.panel17.TabIndex = 6;
-            // 
-            // panel16
-            // 
-            this.panel16.Location = new System.Drawing.Point(3, 297);
-            this.panel16.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(83, 18);
-            this.panel16.TabIndex = 6;
-            // 
-            // panel15
-            // 
-            this.panel15.Location = new System.Drawing.Point(3, 276);
-            this.panel15.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(83, 18);
-            this.panel15.TabIndex = 6;
-            // 
-            // panel14
-            // 
-            this.panel14.Location = new System.Drawing.Point(3, 255);
-            this.panel14.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(83, 18);
-            this.panel14.TabIndex = 6;
-            // 
-            // panel13
-            // 
-            this.panel13.Location = new System.Drawing.Point(3, 234);
-            this.panel13.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(83, 18);
-            this.panel13.TabIndex = 6;
-            // 
-            // panel12
-            // 
-            this.panel12.Location = new System.Drawing.Point(3, 213);
-            this.panel12.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(83, 18);
-            this.panel12.TabIndex = 6;
-            // 
-            // panel11
-            // 
-            this.panel11.Location = new System.Drawing.Point(3, 192);
-            this.panel11.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(83, 18);
-            this.panel11.TabIndex = 6;
-            // 
-            // panel10
-            // 
-            this.panel10.Location = new System.Drawing.Point(3, 171);
-            this.panel10.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(83, 18);
-            this.panel10.TabIndex = 6;
-            // 
-            // panel9
-            // 
-            this.panel9.Location = new System.Drawing.Point(3, 150);
-            this.panel9.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(83, 18);
-            this.panel9.TabIndex = 6;
-            // 
-            // panel8
-            // 
-            this.panel8.Location = new System.Drawing.Point(3, 129);
-            this.panel8.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(83, 18);
-            this.panel8.TabIndex = 5;
-            // 
-            // panel7
-            // 
-            this.panel7.Location = new System.Drawing.Point(3, 108);
-            this.panel7.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(83, 18);
-            this.panel7.TabIndex = 5;
-            // 
-            // panel6
-            // 
-            this.panel6.Location = new System.Drawing.Point(3, 87);
-            this.panel6.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(83, 18);
-            this.panel6.TabIndex = 4;
-            // 
-            // panel5
-            // 
-            this.panel5.Location = new System.Drawing.Point(3, 66);
-            this.panel5.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(83, 18);
-            this.panel5.TabIndex = 3;
-            // 
-            // panel4
-            // 
-            this.panel4.Location = new System.Drawing.Point(3, 45);
-            this.panel4.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(83, 18);
-            this.panel4.TabIndex = 2;
-            // 
-            // panel2
-            // 
-            this.panel2.Location = new System.Drawing.Point(3, 24);
-            this.panel2.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(83, 18);
-            this.panel2.TabIndex = 1;
-            // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(3, 4);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(83, 18);
-            this.panel1.TabIndex = 0;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.zedGraphControl1);
@@ -683,6 +428,23 @@
             this.groupBox4.TabIndex = 13;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Файл";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(99, 77);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(0, 13);
+            this.label40.TabIndex = 25;
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(10, 77);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(83, 13);
+            this.label39.TabIndex = 24;
+            this.label39.Text = "Время данных:";
             // 
             // label12
             // 
@@ -788,22 +550,19 @@
             this.label1.TabIndex = 16;
             this.label1.Text = "Имя:";
             // 
-            // label39
+            // textBox1
             // 
-            this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(10, 77);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(83, 13);
-            this.label39.TabIndex = 24;
-            this.label39.Text = "Время данных:";
+            this.textBox1.Location = new System.Drawing.Point(4, 4);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 30;
             // 
-            // label40
+            // textBox2
             // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(99, 77);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(0, 13);
-            this.label40.TabIndex = 25;
+            this.textBox2.Location = new System.Drawing.Point(4, 30);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 31;
             // 
             // Form1
             // 
@@ -850,30 +609,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Panel panel23;
-        private System.Windows.Forms.Panel panel22;
-        private System.Windows.Forms.Panel panel21;
-        private System.Windows.Forms.Panel panel20;
-        private System.Windows.Forms.Panel panel19;
-        private System.Windows.Forms.Panel panel18;
-        private System.Windows.Forms.Panel panel17;
-        private System.Windows.Forms.Panel panel16;
-        private System.Windows.Forms.Panel panel15;
-        private System.Windows.Forms.Panel panel14;
-        private System.Windows.Forms.Panel panel13;
-        private System.Windows.Forms.Panel panel12;
-        private System.Windows.Forms.Panel panel11;
-        private System.Windows.Forms.Panel panel10;
-        private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label38;
-        private System.Windows.Forms.Panel panel27;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.Label label35;
@@ -899,11 +635,10 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Panel panel26;
-        private System.Windows.Forms.Panel panel25;
-        private System.Windows.Forms.Panel panel24;
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
