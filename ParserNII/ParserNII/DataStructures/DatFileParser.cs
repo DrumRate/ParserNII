@@ -25,7 +25,7 @@ namespace ParserNII.DataStructures
                 // int
                 buffer = new byte[4];
                 stream.Read(buffer, 0, buffer.Length);
-                result.UnixTime = BitConverter.ToInt32(buffer, 0);
+                result.UnixTime = BitConverter.ToUInt32(buffer, 0);
 
                 // byte
                 result.LocomotiveType = (byte)stream.ReadByte();
@@ -165,6 +165,9 @@ namespace ParserNII.DataStructures
 
                 // byte
                 result.FuelDensityOnEquip = (byte)stream.ReadByte();
+
+                // skip byte
+                stream.ReadByte();
 
                 for (int i = 0; i < result.SecondsBlock.Length; i++)
                 {
