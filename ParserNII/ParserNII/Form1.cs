@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
@@ -34,17 +35,43 @@ namespace ParserNII
             {
                 IFormatter formatter = new BinaryFormatter();
                 Stream stream = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
-                DatFileParser parser = new DatFileParser();
-                var result = parser.Parse(stream);
-                label2.Text = result.LabelType.ToString();
-                DateTimeOffset time = DateTimeOffset.FromUnixTimeSeconds(result.UnixTime);
-                label4.Text = DateTimeOffset.Now.ToString("dd.MM.yyyy HH:mm:ss");
-                label7.Text = result.LocomotiveType.ToString();
-                label6.Text = (stream.Length / 1024).ToString();
-                label10.Text = result.LocomotiveSection.ToString();
-                label12.Text = result.LocomotiveNumber.ToString();
+                if (Path.GetExtension(ofd.FileName) == ".dat"){
+                    DatFileParser parser = new DatFileParser();
+                    var result = parser.Parse(stream);
+                    label2.Text = result[0].LabelType.ToString();
+                    DateTimeOffset time = DateTimeOffset.FromUnixTimeSeconds(result[0].UnixTime);
+                    label4.Text = DateTimeOffset.Now.ToString("dd.MM.yyyy HH:mm:ss");
+                    label7.Text = result[0].LocomotiveType.ToString();
+                    label6.Text = (stream.Length / 1024).ToString();
+                    label10.Text = result[0].LocomotiveSection.ToString();
+                    label12.Text = result[0].LocomotiveNumber.ToString();
+                    DateTimeOffset startTime = DateTimeOffset.FromUnixTimeSeconds(result.First().UnixTime).AddHours(3);
+                    DateTimeOffset endTime = DateTimeOffset.FromUnixTimeSeconds(result.Last().UnixTime).AddHours(3);
 
-                panel1.Text = result.ColdWaterCircuitTemperature.ToString();
+                    label40.Text = startTime.ToString("dd.MM.yyyy HH:mm:ss") + " - " + endTime.ToString("dd.MM.yyyy HH:mm:ss");
+
+                    panel1.Text = result[0].ColdWaterCircuitTemperature.ToString();
+                    Drawer.DrawGraph(zedGraphControl1, 
+                        result.Select(r => DateTimeOffset.FromUnixTimeSeconds(r.UnixTime).AddHours(3)).ToList(), 
+                        result.Select(r => (double)r.FuelTemperature).ToList(),
+                        "test",
+                        "test2",
+                        Drawer.GetColor(1));
+
+                }
+                else
+                {
+                    BinFileParser parser = new BinFileParser();
+                    var result = parser.Parse(stream);
+                    foreach (var binFile in result)
+                    {
+                        var date = DateTimeOffset.FromUnixTimeMilliseconds(binFile.Date);
+                    }
+
+                    var dictionaryResult = parser.ToDictionary(result);
+
+                }
+              
                 stream.Close();
             }
         }

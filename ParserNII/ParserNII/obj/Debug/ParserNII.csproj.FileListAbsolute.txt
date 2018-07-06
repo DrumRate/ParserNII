@@ -8,7 +8,6 @@ E:\универ\ParserNII\ParserNII\obj\Debug\ParserNII.csproj.GenerateResource.
 E:\универ\ParserNII\ParserNII\obj\Debug\ParserNII.csproj.CoreCompileInputs.cache
 E:\универ\ParserNII\ParserNII\obj\Debug\ParserNII.exe
 E:\универ\ParserNII\ParserNII\obj\Debug\ParserNII.pdb
-C:\Users\nick\Documents\GitHub\ParserNII\ParserNII\ParserNII\obj\Debug\ParserNII.csprojResolveAssemblyReference.cache
 C:\Users\nick\Documents\GitHub\ParserNII\ParserNII\ParserNII\obj\Debug\ParserNII.Form1.resources
 C:\Users\nick\Documents\GitHub\ParserNII\ParserNII\ParserNII\obj\Debug\ParserNII.Properties.Resources.resources
 C:\Users\nick\Documents\GitHub\ParserNII\ParserNII\ParserNII\obj\Debug\ParserNII.csproj.GenerateResource.cache
@@ -60,3 +59,4 @@ E:\универ\ParserLab\ParserNII\ParserNII\obj\Debug\ParserNII.csproj.CoreCom
 E:\универ\ParserLab\ParserNII\ParserNII\obj\Debug\ParserNII.csproj.CopyComplete
 E:\универ\ParserLab\ParserNII\ParserNII\obj\Debug\ParserNII.exe
 E:\универ\ParserLab\ParserNII\ParserNII\obj\Debug\ParserNII.pdb
+C:\Users\nick\Documents\GitHub\ParserNII\ParserNII\ParserNII\obj\Debug\ParserNII.csprojResolveAssemblyReference.cache
