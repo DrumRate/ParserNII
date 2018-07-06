@@ -4,7 +4,7 @@
     {
         public (byte, byte, byte) ZeroxEE;
         public byte LabelType;
-        public int UnixTime; // replace with Time class
+        public uint UnixTime; // replace with Time class
         public byte LocomotiveType;
         public ushort LocomotiveNumber;
         public byte LocomotiveSection;

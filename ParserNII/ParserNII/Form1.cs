@@ -45,8 +45,19 @@ namespace ParserNII
                     label6.Text = (stream.Length / 1024).ToString();
                     label10.Text = result[0].LocomotiveSection.ToString();
                     label12.Text = result[0].LocomotiveNumber.ToString();
+                    DateTimeOffset startTime = DateTimeOffset.FromUnixTimeSeconds(result.First().UnixTime).AddHours(3);
+                    DateTimeOffset endTime = DateTimeOffset.FromUnixTimeSeconds(result.Last().UnixTime).AddHours(3);
+
+                    label40.Text = startTime.ToString("dd.MM.yyyy HH:mm:ss") + " - " + endTime.ToString("dd.MM.yyyy HH:mm:ss");
 
                     panel1.Text = result[0].ColdWaterCircuitTemperature.ToString();
+                    Drawer.DrawGraph(zedGraphControl1, 
+                        result.Select(r => DateTimeOffset.FromUnixTimeSeconds(r.UnixTime).AddHours(3)).ToList(), 
+                        result.Select(r => (double)r.FuelTemperature).ToList(),
+                        "test",
+                        "test2",
+                        Drawer.GetColor(1));
+
                 }
                 else
                 {
