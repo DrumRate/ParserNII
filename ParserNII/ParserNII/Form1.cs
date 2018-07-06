@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
@@ -53,8 +54,10 @@ namespace ParserNII
                     var result = parser.Parse(stream);
                     foreach (var binFile in result)
                     {
-                        var date = DateTimeOffset.FromUnixTimeSeconds(binFile.Date);
+                        var date = DateTimeOffset.FromUnixTimeMilliseconds(binFile.Date);
                     }
+
+                    var dictionaryResult = parser.ToDictionary(result);
 
                 }
               
