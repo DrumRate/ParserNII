@@ -49,6 +49,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataStructures\BinFile.cs" />
+    <Compile Include="DataStructures\BinFileParser.cs" />
     <Compile Include="DataStructures\DataFile.cs" />
     <Compile Include="DataStructures\DatFileParser.cs" />
     <Compile Include="DataStructures\FirstMinuteByteParams.cs" />

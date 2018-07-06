@@ -34,17 +34,30 @@ namespace ParserNII
             {
                 IFormatter formatter = new BinaryFormatter();
                 Stream stream = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
-                DatFileParser parser = new DatFileParser();
-                var result = parser.Parse(stream);
-                label2.Text = result.LabelType.ToString();
-                DateTimeOffset time = DateTimeOffset.FromUnixTimeSeconds(result.UnixTime);
-                label4.Text = DateTimeOffset.Now.ToString("dd.MM.yyyy HH:mm:ss");
-                label7.Text = result.LocomotiveType.ToString();
-                label6.Text = (stream.Length / 1024).ToString();
-                label10.Text = result.LocomotiveSection.ToString();
-                label12.Text = result.LocomotiveNumber.ToString();
+                if (Path.GetExtension(ofd.FileName) == ".dat"){
+                    DatFileParser parser = new DatFileParser();
+                    var result = parser.Parse(stream);
+                    label2.Text = result[0].LabelType.ToString();
+                    DateTimeOffset time = DateTimeOffset.FromUnixTimeSeconds(result[0].UnixTime);
+                    label4.Text = DateTimeOffset.Now.ToString("dd.MM.yyyy HH:mm:ss");
+                    label7.Text = result[0].LocomotiveType.ToString();
+                    label6.Text = (stream.Length / 1024).ToString();
+                    label10.Text = result[0].LocomotiveSection.ToString();
+                    label12.Text = result[0].LocomotiveNumber.ToString();
 
-                panel1.Text = result.ColdWaterCircuitTemperature.ToString();
+                    panel1.Text = result[0].ColdWaterCircuitTemperature.ToString();
+                }
+                else
+                {
+                    BinFileParser parser = new BinFileParser();
+                    var result = parser.Parse(stream);
+                    foreach (var binFile in result)
+                    {
+                        var date = DateTimeOffset.FromUnixTimeSeconds(binFile.Date);
+                    }
+
+                }
+              
                 stream.Close();
             }
         }

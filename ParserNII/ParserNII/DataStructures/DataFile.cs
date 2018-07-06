@@ -6,14 +6,14 @@
         public byte LabelType;
         public int UnixTime; // replace with Time class
         public byte LocomotiveType;
-        public short LocomotiveNumber;
+        public ushort LocomotiveNumber;
         public byte LocomotiveSection;
         public FirstMinuteByteParams MinuteByteParametrs;
         public byte CoolingCircuitTemperature;
-        public short LeftFuelVolume;
-        public short RightFuelVolume;
-        public short MiddleFuelVolume;
-        public short FuelMass;
+        public ushort LeftFuelVolume;
+        public ushort RightFuelVolume;
+        public ushort MiddleFuelVolume;
+        public ushort FuelMass;
         public byte LeftTsDutTemperature;
         public byte RightTsDutTemperature;
         public int Latitude;
@@ -28,7 +28,7 @@
         // 2 empty bytes
         public short TKCoefficient;
         public short EquipmentAmount;
-        public short BIVersion;
+        public ushort BIVersion;
         public short LeftDUTOffset;
         public short RightDUTOffset;
         public short CurrentCoefficient;

@@ -1,178 +1,184 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace ParserNII.DataStructures
 {
     public class DatFileParser
     {
-        public DataFile Parse(Stream stream)
+        public List<DataFile> Parse(Stream stream)
         {
-            DataFile result = new DataFile();
+            List<DataFile> results = new List<DataFile>();
             byte[] buffer;
 
-            // 3 bytes
-            buffer = new byte[3];
-            stream.Read(buffer, 0, buffer.Length);
-            result.ZeroxEE = (buffer[0], buffer[1], buffer[2]);
-
-            // byte
-            result.LabelType = (byte)stream.ReadByte();
-
-            // int
-            buffer = new byte[4];
-            stream.Read(buffer, 0, buffer.Length);
-            result.UnixTime = BitConverter.ToInt32(buffer, 0);
-
-            // byte
-            result.LocomotiveType = (byte)stream.ReadByte();
-
-            // short
-            buffer = new byte[2];
-            stream.Read(buffer, 0, buffer.Length);
-            result.LocomotiveNumber = BitConverter.ToInt16(buffer, 0);
-
-            // byte
-            result.LocomotiveSection = (byte)stream.ReadByte();
-
-            // short (enum)
-            buffer = new byte[2];
-            stream.Read(buffer, 0, buffer.Length);
-            result.MinuteByteParametrs = (FirstMinuteByteParams)BitConverter.ToInt16(buffer, 0);
-
-            // byte
-            result.CoolingCircuitTemperature = (byte)stream.ReadByte();
-
-            // short
-            buffer = new byte[2];
-            stream.Read(buffer, 0, buffer.Length);
-            result.LeftFuelVolume = BitConverter.ToInt16(buffer, 0);
-
-            // short
-            buffer = new byte[2];
-            stream.Read(buffer, 0, buffer.Length);
-            result.RightFuelVolume = BitConverter.ToInt16(buffer, 0);
-
-            // short
-            buffer = new byte[2];
-            stream.Read(buffer, 0, buffer.Length);
-            result.MiddleFuelVolume = BitConverter.ToInt16(buffer, 0);
-
-            // short
-            buffer = new byte[2];
-            stream.Read(buffer, 0, buffer.Length);
-            result.FuelMass = BitConverter.ToInt16(buffer, 0);
-
-            // byte
-            result.LeftTsDutTemperature = (byte)stream.ReadByte();
-
-            // byte
-            result.RightTsDutTemperature = (byte)stream.ReadByte();
-
-            // int
-            buffer = new byte[4];
-            stream.Read(buffer, 0, buffer.Length);
-            result.Latitude = BitConverter.ToInt32(buffer, 0);
-
-            // int
-            buffer = new byte[4];
-            stream.Read(buffer, 0, buffer.Length);
-            result.Longitude = BitConverter.ToInt32(buffer, 0);
-
-
-            // byte
-            result.FuelTemperature = (byte)stream.ReadByte();
-
-            // byte
-            result.FuelDensityCurrent = (byte)stream.ReadByte();
-
-            // byte
-            result.FuelDensityStandard = (byte)stream.ReadByte();
-
-            // byte
-            result.OilCircuitTemperature = (byte)stream.ReadByte();
-
-            // byte
-            result.EnvironmentTemperature = (byte)stream.ReadByte();
-
-            // byte
-            result.UPSTemperature = (byte)stream.ReadByte();
-
-            // int
-            buffer = new byte[4];
-            stream.Read(buffer, 0, buffer.Length);
-            result.TabularNumber = BitConverter.ToInt32(buffer, 0);
-
-            // skip 2 bytes
-            stream.ReadByte();
-            stream.ReadByte();
-
-            // short
-            buffer = new byte[2];
-            stream.Read(buffer, 0, buffer.Length);
-            result.TKCoefficient = BitConverter.ToInt16(buffer, 0);
-
-            // short
-            buffer = new byte[2];
-            stream.Read(buffer, 0, buffer.Length);
-            result.EquipmentAmount = BitConverter.ToInt16(buffer, 0);
-
-            // short
-            buffer = new byte[2];
-            stream.Read(buffer, 0, buffer.Length);
-            result.BIVersion = BitConverter.ToInt16(buffer, 0);
-
-            // short
-            buffer = new byte[2];
-            stream.Read(buffer, 0, buffer.Length);
-            result.LeftDUTOffset = BitConverter.ToInt16(buffer, 0);
-
-            // short
-            buffer = new byte[2];
-            stream.Read(buffer, 0, buffer.Length);
-            result.RightDUTOffset = BitConverter.ToInt16(buffer, 0);
-
-            // short
-            buffer = new byte[2];
-            stream.Read(buffer, 0, buffer.Length);
-            result.CurrentCoefficient = BitConverter.ToInt16(buffer, 0);
-
-            // short
-            buffer = new byte[2];
-            stream.Read(buffer, 0, buffer.Length);
-            result.VoltageCoefficient = BitConverter.ToInt16(buffer, 0);
-
-            // byte
-            result.DieselSpeed = (byte)stream.ReadByte();
-
-            // skip 2 bytes
-            stream.ReadByte();
-            stream.ReadByte();
-
-            // byte
-            result.ColdWaterCircuitTemperature = (byte)stream.ReadByte();
-
-            // int
-            buffer = new byte[4];
-            stream.Read(buffer, 0, buffer.Length);
-            result.MinuteRecordId = BitConverter.ToInt32(buffer, 0);
-
-            // byte
-            result.MRKStatusFlags = (byte)stream.ReadByte();
-
-            // byte
-            result.FuelDensityOnEquip = (byte)stream.ReadByte();
-
-            for (int i = 0; i < result.SecondsBlock.Length; i++)
+            while (stream.Position < stream.Length)
             {
-                result.SecondsBlock[i] = ParseSecondBlock(stream);
+                var result = new DataFile();
+                // 3 bytes
+                buffer = new byte[3];
+                stream.Read(buffer, 0, buffer.Length);
+                result.ZeroxEE = (buffer[0], buffer[1], buffer[2]);
+
+                // byte
+                result.LabelType = (byte)stream.ReadByte();
+
+                // int
+                buffer = new byte[4];
+                stream.Read(buffer, 0, buffer.Length);
+                result.UnixTime = BitConverter.ToInt32(buffer, 0);
+
+                // byte
+                result.LocomotiveType = (byte)stream.ReadByte();
+
+                // short
+                buffer = new byte[2];
+                stream.Read(buffer, 0, buffer.Length);
+                result.LocomotiveNumber = BitConverter.ToUInt16(buffer, 0);
+
+                // byte
+                result.LocomotiveSection = (byte)stream.ReadByte();
+
+                // short (enum)
+                buffer = new byte[2];
+                stream.Read(buffer, 0, buffer.Length);
+                result.MinuteByteParametrs = (FirstMinuteByteParams)BitConverter.ToInt16(buffer, 0);
+
+                // byte
+                result.CoolingCircuitTemperature = (byte)stream.ReadByte();
+
+                // short
+                buffer = new byte[2];
+                stream.Read(buffer, 0, buffer.Length);
+                result.LeftFuelVolume = BitConverter.ToUInt16(buffer, 0);
+
+                // short
+                buffer = new byte[2];
+                stream.Read(buffer, 0, buffer.Length);
+                result.RightFuelVolume = BitConverter.ToUInt16(buffer, 0);
+
+                // short
+                buffer = new byte[2];
+                stream.Read(buffer, 0, buffer.Length);
+                result.MiddleFuelVolume = BitConverter.ToUInt16(buffer, 0);
+
+                // short
+                buffer = new byte[2];
+                stream.Read(buffer, 0, buffer.Length);
+                result.FuelMass = BitConverter.ToUInt16(buffer, 0);
+
+                // byte
+                result.LeftTsDutTemperature = (byte)stream.ReadByte();
+
+                // byte
+                result.RightTsDutTemperature = (byte)stream.ReadByte();
+
+                // int
+                buffer = new byte[4];
+                stream.Read(buffer, 0, buffer.Length);
+                result.Latitude = BitConverter.ToInt32(buffer, 0);
+
+                // int
+                buffer = new byte[4];
+                stream.Read(buffer, 0, buffer.Length);
+                result.Longitude = BitConverter.ToInt32(buffer, 0);
+
+
+                // byte
+                result.FuelTemperature = (byte)stream.ReadByte();
+
+                // byte
+                result.FuelDensityCurrent = (byte)stream.ReadByte();
+
+                // byte
+                result.FuelDensityStandard = (byte)stream.ReadByte();
+
+                // byte
+                result.OilCircuitTemperature = (byte)stream.ReadByte();
+
+                // byte
+                result.EnvironmentTemperature = (byte)stream.ReadByte();
+
+                // byte
+                result.UPSTemperature = (byte)stream.ReadByte();
+
+                // int
+                buffer = new byte[4];
+                stream.Read(buffer, 0, buffer.Length);
+                result.TabularNumber = BitConverter.ToInt32(buffer, 0);
+
+                // skip 2 bytes
+                stream.ReadByte();
+                stream.ReadByte();
+
+                // short
+                buffer = new byte[2];
+                stream.Read(buffer, 0, buffer.Length);
+                result.TKCoefficient = BitConverter.ToInt16(buffer, 0);
+
+                // short
+                buffer = new byte[2];
+                stream.Read(buffer, 0, buffer.Length);
+                result.EquipmentAmount = BitConverter.ToInt16(buffer, 0);
+
+                // short
+                buffer = new byte[2];
+                stream.Read(buffer, 0, buffer.Length);
+                result.BIVersion = BitConverter.ToUInt16(buffer, 0);
+
+                // short
+                buffer = new byte[2];
+                stream.Read(buffer, 0, buffer.Length);
+                result.LeftDUTOffset = BitConverter.ToInt16(buffer, 0);
+
+                // short
+                buffer = new byte[2];
+                stream.Read(buffer, 0, buffer.Length);
+                result.RightDUTOffset = BitConverter.ToInt16(buffer, 0);
+
+                // short
+                buffer = new byte[2];
+                stream.Read(buffer, 0, buffer.Length);
+                result.CurrentCoefficient = BitConverter.ToInt16(buffer, 0);
+
+                // short
+                buffer = new byte[2];
+                stream.Read(buffer, 0, buffer.Length);
+                result.VoltageCoefficient = BitConverter.ToInt16(buffer, 0);
+
+                // byte
+                result.DieselSpeed = (byte)stream.ReadByte();
+
+                // skip 2 bytes
+                stream.ReadByte();
+                stream.ReadByte();
+
+                // byte
+                result.ColdWaterCircuitTemperature = (byte)stream.ReadByte();
+
+                // int
+                buffer = new byte[4];
+                stream.Read(buffer, 0, buffer.Length);
+                result.MinuteRecordId = BitConverter.ToInt32(buffer, 0);
+
+                // byte
+                result.MRKStatusFlags = (byte)stream.ReadByte();
+
+                // byte
+                result.FuelDensityOnEquip = (byte)stream.ReadByte();
+
+                for (int i = 0; i < result.SecondsBlock.Length; i++)
+                {
+                    result.SecondsBlock[i] = ParseSecondBlock(stream);
+                }
+
+                // short
+                buffer = new byte[2];
+                stream.Read(buffer, 0, buffer.Length);
+                result.CRC = BitConverter.ToInt16(buffer, 0);
+
+                results.Add(result);
             }
-
-            // short
-            buffer = new byte[2];
-            stream.Read(buffer, 0, buffer.Length);
-            result.CRC = BitConverter.ToInt16(buffer, 0);
-
-            return result;
+            return results;
         }
 
         private SecondBlock ParseSecondBlock(Stream stream)
