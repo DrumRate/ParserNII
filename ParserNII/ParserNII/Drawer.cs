@@ -7,6 +7,7 @@ namespace ParserNII
 {
     public class Drawer
     {
+
         public static Color GetColor(int i)
         {
             List<Color> colors = new List<Color>();
@@ -48,8 +49,8 @@ namespace ParserNII
            // double Xmax = pane.XAxis.Scale.Max;
             double Ymax = pane.YAxis.Scale.Max - 0.05;
             pane.Title.Text = title;
-            pane.XAxis.Title.Text = "t";
-            pane.YAxis.Title.Text = "P(t)";
+            pane.XAxis.Title.Text = "Дата";
+            pane.YAxis.Title.Text = "Значения";
             PointPairList list1 = new PointPairList();
             var result = new Dictionary<PointPair, string>();
 

@@ -7,70 +7,99 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using ParserNII.DataStructures;
 using ZedGraph;
+using Label = System.Windows.Forms.Label;
 
 namespace ParserNII
 {
     public partial class Form1 : Form
     {
+        private List<String> paramNames = new List<string>();
+        private List<TextBox> textBoxes = new List<TextBox>();
+        private List<Label> labels = new List<Label>();
         private Dictionary<PointPair, string> pointsDictionary = new Dictionary<PointPair, string>();
-        private Dictionary<string, TextBox> uidNames;
+        private Dictionary<string, TextBox> uidNames = new Dictionary<string, TextBox>();
 
         public Form1()
         {
             InitializeComponent();
-
-            uidNames = new Dictionary<string, TextBox>
+            paramNames = new List<string>
             {
-                { "Табельный номер", textBox1},
-                { "Скорость по GPS", textBox1},
-                { "Широта", textBox1},
-                { "Долгота", textBox1},
-                { "Обороты дизеля", textBox1},
-                { "Коэффициен по оборотам", textBox1},
-                { "Давление в топливной системе", textBox1},
-                { "Давление в масляной системе", textBox1},
-                { "Давление в масляной системе 2", textBox1},
-                { "Давление наддувочного воздуха", textBox1},
-                { "Обороты турбокомпрессора", textBox1},
-                { "Температура воды на выходе дизеля", textBox1},
-                { "Температура масла на выходе масла", textBox1},
-                { "Сила тока главного генератора", textBox1},
-                { "эффициент по току", textBox1},
-                { "Напряжение главного генератора", textBox1},
-                { "Коэффициент по напряжению", textBox1},
-                { "Мощность главного генератора", textBox1 },
-                { "Позиция контроллера машиниста", textBox1 },
-                { "ДУТ поплавковый", textBox1},
-                { "Объем топлива левый", textBox1 },
-                { "Объем топлива правый", textBox1 },
-                { "Объем топлива секундный", textBox1 },
-                { "Объем топлива", textBox1 },
-                { "Плотность топлива", textBox1},
-                { "Температура топлива левая", textBox1 },
-                { "Температура топлива правая", textBox1 },
-                { "Температура топлива", textBox1 },
-                { "Масса топлива", textBox1 },
-                { "Объем экипированного топлива", textBox1},
-                { "Признак экипировки", textBox1 },
-                { "Температура окружающего воздуха", textBox1},
-                { "Давление в тормозной магистрали", textBox1},
-                { "ЭПК", textBox1},
-                { "Код позиции", textBox1},
-                { "Код АЛСН", textBox1},
-                { "Напряжение АКБ", textBox1},
-                { "Ток зар./разр. АКБ", textBox1},
-                { "Контрольный режим", textBox1},
-                { "Версия БИ", textBox1},
-                { "Связь с РМ РКД", textBox1 },
-                { "Связь с ДУТ левый", textBox1 },
-                { "Связь с ДУТ правый", textBox1 },
-                { "Связь с ДМ", textBox1 },
-                { "Связь с БДП", textBox1 },
-                { "Данные GPS валидны", textBox1 },
-                { "Подключение к ЕСМБС", textBox1 },
-                { "Связь с МЭК", textBox1 },
-                { "Работа САЗДТ", textBox1 }
+                { "Табельный номер"},
+                { "Скорость по GPS"},
+                { "Широта"},
+                { "Долгота"},
+                { "Обороты дизеля"},
+                { "Коэффициент по оборотам"},
+                { "Коэффициент по оборотам дизеля"},
+                { "Давление в топливной системе"},
+                { "Давление в масляной системе"},
+                { "Давление в масляной системе 2"},
+                { "Давление наддувочного воздуха"},
+                { "Обороты турбокомпрессора"},
+                { "Температура воды на выходе дизеля"},
+                { "Температура масла на выходе масла"},
+                { "Сила тока главного генератора"},
+                { "Коэффициент по току"},
+                { "Напряжение главного генератора"},
+                { "Коэффициент по напряжению"},
+                { "Мощность главного генератора" },
+                { "Позиция контроллера машиниста" },
+                { "ДУТ поплавковый"},
+                { "Объем топлива левый" },
+                { "Объем топлива правый" },
+                { "Объем топлива секундный" },
+                { "Объем топлива средний" },
+                { "Объем топлива" },
+                { "Плотность топлива"},
+                { "Температура топлива левая" },
+                { "Температура топлива правая" },
+                { "Температура топлива" },
+                { "Масса топлива" },
+                { "Объем экипированного топлива"},
+                { "Признак экипировки" },
+                { "Температура окружающего воздуха"},
+                { "Давление в тормозной магистрали"},
+                { "ЭПК"},
+                { "Код позиции"},
+                { "Код АЛСН"},
+                { "Напряжение АКБ"},
+                { "Ток зар./разр. АКБ"},
+                { "Контрольный режим"},
+                { "Версия БИ"},
+                { "Связь с РМ РКД" },
+                { "Связь с ДУТ левый" },
+                { "Связь с ДУТ правый" },
+                { "Связь с ДМ" },
+                { "Связь с БДП" },
+                { "Данные GPS валидны" },
+                { "Подключение к ЕСМБС" },
+                { "Связь с МЭК" },
+                { "Работа САЗДТ" }
             };
+
+            for (var i = 0; i < paramNames.Count; i++)
+            {
+                var textBox = new TextBox();
+                textBoxes.Add(textBox);
+                panel3.Controls.Add(textBox);
+                textBox.Location = new System.Drawing.Point(4, 4 + i * 26);
+                textBox.Name = $"textBox{i}";
+                textBox.ReadOnly = true;
+                textBox.Size = new System.Drawing.Size(82, 20);
+                textBox.TabIndex = 30 + i;
+
+                var label = new Label();
+                labels.Add(label);
+                panel3.Controls.Add(label);
+                label.AutoSize = true;
+                label.Location = new System.Drawing.Point(120, 11 + i * 26);
+                label.Name = $"label{i}";
+                label.Size = new System.Drawing.Size(156, 13);
+                // label.TabIndex = 29 + i;
+                label.Text = paramNames[i];
+                uidNames.Add(paramNames[i], textBoxes[i]);
+            }
+
             
         }
 
@@ -109,7 +138,7 @@ namespace ParserNII
 
                     label40.Text = startTime.ToString("dd.MM.yyyy HH:mm:ss") + " - " + endTime.ToString("dd.MM.yyyy HH:mm:ss");
 
-                    textBox1.Text = result[0].ColdWaterCircuitTemperature.ToString();
+                    textBoxes[0].Text = result[0].ColdWaterCircuitTemperature.ToString();
                     var points = Drawer.DrawGraph(zedGraphControl1, 
                         result.Select(r => DateTimeOffset.FromUnixTimeSeconds(r.UnixTime).AddHours(3)).ToList(), 
                         result.Select(r => (double)r.FuelTemperature).ToList(),
