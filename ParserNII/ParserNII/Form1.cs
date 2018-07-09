@@ -80,7 +80,7 @@ namespace ParserNII
                 { "Связь с МЭК" },
                 { "Работа САЗДТ" },
                 { "Температура ТС ДУТ левая"},
-                {"Температура ТС ДУТ правая" },
+                { "Температура ТС ДУТ правая" },
                 { "Плотность топлива текущая"},
                 { "Плотность топлива при 20 С"},
                 { "Температура контура масла"},
@@ -185,9 +185,9 @@ namespace ParserNII
                     Color color;
                     Drawer.Initialize(zedGraphControl1);
                     int i = 0;
-                    Drawer.DrawGraph(zedGraphControl1, yValues,
-                        arrayResult.FuelTemperature.Select(r => (double)r).ToList(),
-                        "Температура топлива",
+                    Drawer.DrawGraph(zedGraphControl1, yValues, 
+                        arrayResult.FuelTemperature.Select(r => (double)r).ToList(),  
+                        "Температура топлива",        
                         Drawer.GetColor(i));
                     panels[paramNames.IndexOf("Температура топлива")].BackColor = Drawer.GetColor(i);
                     i++;
@@ -196,56 +196,152 @@ namespace ParserNII
                         arrayResult.ColdWaterCircuitTemperature.Select(r => (double)r).ToList(),
                         "Температура воды холодного контура",
                         Drawer.GetColor(i));
-                    panels[paramNames.IndexOf("Температура топлива")].BackColor = Drawer.GetColor(i);
+                    panels[paramNames.IndexOf("Температура воды холодного контура")].BackColor = Drawer.GetColor(i);
                     i++;
                     
                     Drawer.DrawGraph(zedGraphControl1, yValues,
                         arrayResult.CoolingCircuitTemperature.Select(r => (double)r).ToList(),
                         "Температура контура охлаждения",
                         Drawer.GetColor(i));
-                    panels[paramNames.IndexOf("Температура топлива")].BackColor = Drawer.GetColor(i);
+                    panels[paramNames.IndexOf("Температура контура охлаждения")].BackColor = Drawer.GetColor(i);
                     i++;
                     Drawer.DrawGraph(zedGraphControl1, yValues,
                         arrayResult.DieselSpeed.Select(r => (double)r).ToList(),
                         "Коэффициент по оборотам дизеля",
                         Drawer.GetColor(i));
-                    panels[paramNames.IndexOf("Температура топлива")].BackColor = Drawer.GetColor(i);
+                    panels[paramNames.IndexOf("Коэффициент по оборотам дизеля")].BackColor = Drawer.GetColor(i);
                     i++;
                     Drawer.DrawGraph(zedGraphControl1, yValues,
                         arrayResult.LeftDUTOffset.Select(r => (double)r).ToList(),
                         "Смещение ДУТ левого",
                         Drawer.GetColor(i));
-                    panels[paramNames.IndexOf("Температура топлива")].BackColor = Drawer.GetColor(i);
+                    panels[paramNames.IndexOf("Смещение ДУТ левого")].BackColor = Drawer.GetColor(i);
                     i++;
                     Drawer.DrawGraph(zedGraphControl1, yValues,
                         arrayResult.RightDUTOffset.Select(r => (double)r).ToList(),
                         "Смещение ДУТ правого",
                         Drawer.GetColor(i));
-                    panels[paramNames.IndexOf("Температура топлива")].BackColor = Drawer.GetColor(i);
+                    panels[paramNames.IndexOf("Смещение ДУТ правого")].BackColor = Drawer.GetColor(i);
                     i++;
                     Drawer.DrawGraph(zedGraphControl1, yValues,
                         arrayResult.LeftFuelVolume.Select(r => (double)r).ToList(),
                         "Объем топлива левого",
                         Drawer.GetColor(i));
-                    panels[paramNames.IndexOf("Температура топлива")].BackColor = Drawer.GetColor(i);
+                    panels[paramNames.IndexOf("Объем топлива левый")].BackColor = Drawer.GetColor(i);
+                    i++;
+                    Drawer.DrawGraph(zedGraphControl1, yValues,
+                        arrayResult.RightFuelVolume.Select(r => (double)r).ToList(),
+                        "Объем топлива правого",
+                        Drawer.GetColor(i));
+                    panels[paramNames.IndexOf("Объем топлива правый")].BackColor = Drawer.GetColor(i);
                     i++;
                     Drawer.DrawGraph(zedGraphControl1, yValues,
                         arrayResult.FuelMass.Select(r => (double)r).ToList(),
                         "Масса топлива",
                         Drawer.GetColor(i));
-                    panels[paramNames.IndexOf("Температура топлива")].BackColor = Drawer.GetColor(i);
+                    panels[paramNames.IndexOf("Масса топлива")].BackColor = Drawer.GetColor(i);
                     i++;
                     Drawer.DrawGraph(zedGraphControl1, yValues,
                         arrayResult.MiddleFuelVolume.Select(r => (double)r).ToList(),
                         "Объем топлива средний",
                         Drawer.GetColor(i));
-                    panels[paramNames.IndexOf("Температура топлива")].BackColor = Drawer.GetColor(i);
+                    panels[paramNames.IndexOf("Объем топлива средний")].BackColor = Drawer.GetColor(i);
                     i++;
                     Drawer.DrawGraph(zedGraphControl1, yValues,
-                        arrayResult.FuelTemperature.Select(r => (double)r).ToList(),
-                        "Температура топлива",
+                        arrayResult.LeftTsDutTemperature.Select(r => (double)r).ToList(),
+                        "Температура ТС ДУТ левая",
                         Drawer.GetColor(i));
-                    panels[paramNames.IndexOf("Температура топлива")].BackColor = Drawer.GetColor(i);
+                    panels[paramNames.IndexOf("Температура ТС ДУТ левая")].BackColor = Drawer.GetColor(i);
+                    i++;
+                    Drawer.DrawGraph(zedGraphControl1, yValues,
+                        arrayResult.RightTsDutTemperature.Select(r => (double)r).ToList(),
+                        "Температура ТС ДУТ правая",
+                        Drawer.GetColor(i));
+                    panels[paramNames.IndexOf("Температура ТС ДУТ правая")].BackColor = Drawer.GetColor(i);
+                    i++;
+                    Drawer.DrawGraph(zedGraphControl1, yValues,
+                        arrayResult.Latitude.Select(r => (double)r).ToList(),
+                        "Широта",
+                        Drawer.GetColor(i));
+                    panels[paramNames.IndexOf("Широта")].BackColor = Drawer.GetColor(i);
+                    i++;
+                    Drawer.DrawGraph(zedGraphControl1, yValues,
+                        arrayResult.Longitude.Select(r => (double)r).ToList(),
+                        "Долгота",
+                        Drawer.GetColor(i));
+                    panels[paramNames.IndexOf("Долгота")].BackColor = Drawer.GetColor(i);
+                    i++;
+                    Drawer.DrawGraph(zedGraphControl1, yValues,
+                        arrayResult.FuelDensityCurrent.Select(r => (double)r).ToList(),
+                        "Плотность топлива текущая",
+                        Drawer.GetColor(i));
+                    panels[paramNames.IndexOf("Плотность топлива текущая")].BackColor = Drawer.GetColor(i);
+                    i++;
+                    Drawer.DrawGraph(zedGraphControl1, yValues,
+                        arrayResult.FuelDensityStandard.Select(r => (double)r).ToList(),
+                        "Плотность топлива при 20 С",
+                        Drawer.GetColor(i));
+                    panels[paramNames.IndexOf("Плотность топлива при 20 С")].BackColor = Drawer.GetColor(i);
+                    i++;
+                    Drawer.DrawGraph(zedGraphControl1, yValues,
+                        arrayResult.OilCircuitTemperature.Select(r => (double)r).ToList(),
+                        "Температура контура масла",
+                        Drawer.GetColor(i));
+                    panels[paramNames.IndexOf("Температура контура масла")].BackColor = Drawer.GetColor(i);
+                    i++;
+                    Drawer.DrawGraph(zedGraphControl1, yValues,
+                        arrayResult.EnvironmentTemperature.Select(r => (double)r).ToList(),
+                        "Температура окружающего воздуха",
+                        Drawer.GetColor(i));
+                    panels[paramNames.IndexOf("Температура окружающего воздуха")].BackColor = Drawer.GetColor(i);
+                    i++;
+                    Drawer.DrawGraph(zedGraphControl1, yValues,
+                        arrayResult.UPSTemperature.Select(r => (double)r).ToList(),
+                        "Напряжение ИБП",
+                        Drawer.GetColor(i));
+                    panels[paramNames.IndexOf("Напряжение ИБП")].BackColor = Drawer.GetColor(i);
+                    i++;
+                    Drawer.DrawGraph(zedGraphControl1, yValues,
+                        arrayResult.TabularNumber.Select(r => (double)r).ToList(),
+                        "Табельный номер",
+                        Drawer.GetColor(i));
+                    panels[paramNames.IndexOf("Табельный номер")].BackColor = Drawer.GetColor(i);
+                    i++;
+                    Drawer.DrawGraph(zedGraphControl1, yValues,
+                        arrayResult.TKCoefficient.Select(r => (double)r).ToList(),
+                        "Коэффициент по ТК",
+                        Drawer.GetColor(i));
+                    panels[paramNames.IndexOf("Коэффициент по ТК")].BackColor = Drawer.GetColor(i);
+                    i++;
+                    Drawer.DrawGraph(zedGraphControl1, yValues,
+                        arrayResult.EquipmentAmount.Select(r => (double)r).ToList(),
+                        "Объем экипировки",
+                        Drawer.GetColor(i));
+                    panels[paramNames.IndexOf("Объем экипировки")].BackColor = Drawer.GetColor(i);
+                    i++;
+                    Drawer.DrawGraph(zedGraphControl1, yValues,
+                        arrayResult.BIVersion.Select(r => (double)r).ToList(),
+                        "Версия БИ",
+                        Drawer.GetColor(i));
+                    panels[paramNames.IndexOf("Версия БИ")].BackColor = Drawer.GetColor(i);
+                    i++;
+                    Drawer.DrawGraph(zedGraphControl1, yValues,
+                        arrayResult.CurrentCoefficient.Select(r => (double)r).ToList(),
+                        "Коэффициент по току",
+                        Drawer.GetColor(i));
+                    panels[paramNames.IndexOf("Коэффициент по току")].BackColor = Drawer.GetColor(i);
+                    i++;
+                    Drawer.DrawGraph(zedGraphControl1, yValues,
+                        arrayResult.VoltageCoefficient.Select(r => (double)r).ToList(),
+                        "Коэффициент по напряжению",
+                        Drawer.GetColor(i));
+                    panels[paramNames.IndexOf("Коэффициент по напряжению")].BackColor = Drawer.GetColor(i);
+                    i++;
+                    Drawer.DrawGraph(zedGraphControl1, yValues,
+                         arrayResult.FuelDensityOnEquip.Select(r => (double)r).ToList(),
+                         "Плотность топлива при экипировке",
+                         Drawer.GetColor(i));
+                    panels[paramNames.IndexOf("Плотность топлива при экипировке")].BackColor = Drawer.GetColor(i);
                     i++;
 
                     zedGraphControl1.IsShowPointValues = true;
