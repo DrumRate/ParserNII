@@ -40,17 +40,31 @@ namespace ParserNII
             return colors[i];
         }
 
-        public static Dictionary<PointPair,string> DrawGraph(ZedGraphControl control, List<DateTimeOffset> x, List<double> y, string name, string title, Color color)
+        public static void Initialize(ZedGraphControl control)
         {
-            
+            Clear(control);
+
             GraphPane pane = control.GraphPane;
             pane.XAxis.Type = AxisType.Date;
             pane.XAxis.Scale.Format = "dd.MM.yyyy HH:mm:ss";
-           // double Xmax = pane.XAxis.Scale.Max;
-            double Ymax = pane.YAxis.Scale.Max - 0.05;
-            pane.Title.Text = title;
+
             pane.XAxis.Title.Text = "Дата";
-            pane.YAxis.Title.Text = "Значения";
+
+            pane.XAxis.MajorGrid.IsVisible = true;
+            pane.XAxis.MajorGrid.DashOn = 10;
+            pane.XAxis.MajorGrid.DashOff = 5;
+            pane.XAxis.MajorGrid.Color = Color.LightGray;
+            pane.XAxis.MajorGrid.IsZeroLine = true;
+
+          
+        }
+
+        public static void DrawGraph(ZedGraphControl control, List<DateTimeOffset> x, List<double> y, string name,Color color)
+        {
+            GraphPane pane = control.GraphPane;
+           
+            //pane.Title.Text = title;
+            
             PointPairList list1 = new PointPairList();
             var result = new Dictionary<PointPair, string>();
 
@@ -63,39 +77,27 @@ namespace ParserNII
                 };
                 list1.Add(point);
                 result.Add(point,name);
-                if (y[i] > Ymax)
-                {
-                    Ymax = y[i];
-                }
             }
 
-            //if (x[x.Count - 1] > Xmax)
-            //{
-            //    Xmax = x[x.Count - 1];
-            //}
-
-            LineItem myCurve = pane.AddCurve(name, list1, color, SymbolType.Diamond);
-            myCurve.Line.Width = 2.0F;
-            pane.XAxis.Scale.Min = 0;
-            pane.YAxis.Scale.Min = 0;
-        //    pane.XAxis.Scale.Max = Xmax;
-            pane.YAxis.Scale.Max = Ymax + 0.05;
-
-            pane.XAxis.MajorGrid.IsVisible = true;
-            pane.XAxis.MajorGrid.DashOn = 10;
-            pane.XAxis.MajorGrid.DashOff = 5;
-            pane.YAxis.MajorGrid.IsVisible = true;
-            pane.YAxis.MajorGrid.DashOn = 10;
-            pane.YAxis.MajorGrid.DashOff = 5;
-            pane.XAxis.MajorGrid.Color = Color.LightGray;
-            pane.YAxis.MajorGrid.Color = Color.LightGray;
-            pane.XAxis.MajorGrid.IsZeroLine = true;
-            pane.YAxis.MajorGrid.IsZeroLine = true;
-
+            int yAxis = pane.AddYAxis(name);
+            LineItem myCurve = pane.AddCurve(name, list1, color, SymbolType.None);
+            myCurve.YAxisIndex = yAxis;
+            myCurve.Line.Width = 1.0F;
+         //   pane.XAxis.Scale.Min = 0;
+            pane.YAxisList[yAxis].Scale.Min = 0;
+            //    pane.XAxis.Scale.Max = Xmax;
+            //    pane.YAxisList[yAxis].Scale.Max = Ymax + 0.05;
+            pane.YAxisList[yAxis].MajorGrid.IsVisible = true;
+            pane.YAxisList[yAxis].MajorGrid.DashOn = 10;
+            pane.YAxisList[yAxis].MajorGrid.DashOff = 5;
+            pane.YAxisList[yAxis].MajorGrid.Color = Color.LightGray;
+            pane.YAxisList[yAxis].MajorGrid.IsZeroLine = false;
+            pane.YAxisList[yAxis].IsVisible = false;
+            control.GraphPane.Title.IsVisible = false;
+            control.GraphPane.Legend.IsVisible = false;
             control.RestoreScale(pane);
             control.AxisChange();
             control.Invalidate();
-            return result;
         }
 
         public static void Clear(ZedGraphControl control)
@@ -108,8 +110,8 @@ namespace ParserNII
             pane.YAxis.Scale.Max = 1.05;
 
             pane.CurveList.Clear();
-
-            control.AxisChange();
+            pane.YAxisList.Clear();
+       //     control.AxisChange();
             control.Invalidate();
         }
     }

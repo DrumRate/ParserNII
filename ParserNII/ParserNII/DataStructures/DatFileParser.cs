@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace ParserNII.DataStructures
 {
@@ -250,5 +251,50 @@ namespace ParserNII.DataStructures
 
             return result;
         }
+
+        public DataArrays ToArray(List<DataFile> data)
+        {
+            var result = new DataArrays
+            {
+                UnixTime = data.Select(d => d.UnixTime).ToArray(),
+                LocomotiveSection = data.Select(d => d.LocomotiveSection).ToArray(),
+                LocomotiveType = data.Select(d => d.LocomotiveType).ToArray(),
+                LabelType = data.Select(d => d.LabelType).ToArray(),
+                CoolingCircuitTemperature = data.Select(d => d.CoolingCircuitTemperature).ToArray(),
+                FuelMass = data.Select(d => d.FuelMass).ToArray(),
+                MiddleFuelVolume = data.Select(d => d.MiddleFuelVolume).ToArray(),
+                RightTsDutTemperature = data.Select(d => d.RightTsDutTemperature).ToArray(),
+                LeftDUTOffset = data.Select(d => d.LeftDUTOffset).ToArray(),
+                Longitude = data.Select(d => d.Longitude).ToArray(),
+                Latitude = data.Select(d => d.Latitude).ToArray(),
+                MinuteByteParametrs = data.Select(d => d.MinuteByteParametrs).ToArray(),
+                ColdWaterCircuitTemperature = data.Select(d => d.ColdWaterCircuitTemperature).ToArray(),
+                RightFuelVolume = data.Select(d => d.RightFuelVolume).ToArray(),
+                LocomotiveNumber = data.Select(d => d.LocomotiveNumber).ToArray(),
+                LeftTsDutTemperature = data.Select(d => d.LeftTsDutTemperature).ToArray(),
+                FuelTemperature = data.Select(d => d.FuelTemperature).ToArray(),
+                BIVersion = data.Select(d => d.BIVersion).ToArray(),
+                CRC = data.Select(d => d.CRC).ToArray(),
+                CurrentCoefficient = data.Select(d => d.CurrentCoefficient).ToArray(),
+                DieselSpeed = data.Select(d => d.DieselSpeed).ToArray(),
+                EnvironmentTemperature = data.Select(d => d.EnvironmentTemperature).ToArray(),
+                EquipmentAmount = data.Select(d => d.EquipmentAmount).ToArray(),
+                FuelDensityCurrent = data.Select(d => d.FuelDensityCurrent).ToArray(),
+                FuelDensityOnEquip = data.Select(d => d.FuelDensityOnEquip).ToArray(),
+                FuelDensityStandard = data.Select(d => d.FuelDensityStandard).ToArray(),
+                LeftFuelVolume = data.Select(d => d.LeftFuelVolume).ToArray(),
+                MRKStatusFlags = data.Select(d => d.MRKStatusFlags).ToArray(),
+                MinuteRecordId = data.Select(d => d.MinuteRecordId).ToArray(),
+                OilCircuitTemperature = data.Select(d => d.OilCircuitTemperature).ToArray(),
+                RightDUTOffset = data.Select(d => d.RightDUTOffset).ToArray(),
+                TKCoefficient = data.Select(d => d.TKCoefficient).ToArray(),
+                TabularNumber = data.Select(d => d.TabularNumber).ToArray(),
+                UPSTemperature = data.Select(d => d.UPSTemperature).ToArray(),
+                VoltageCoefficient = data.Select(d => d.VoltageCoefficient).ToArray(),
+                ZeroxEE = data.Select(d => d.ZeroxEE).ToArray()
+            };
+
+            return result;
+        } 
     }
 }
