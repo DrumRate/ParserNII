@@ -19,7 +19,7 @@ namespace ParserNII.DataStructures
         public FirstMinuteByteParams MinuteByteParametrs;
 
         [ParamName("Температура контура охлаждения")]
-        public byte CoolingCircuitTemperature;
+        public sbyte CoolingCircuitTemperature;
 
         [ParamName("Объем топлива левый")]
         public ushort LeftFuelVolume;
@@ -34,10 +34,10 @@ namespace ParserNII.DataStructures
         public ushort FuelMass;
 
         [ParamName("Температура ТС ДУТ левая")]
-        public byte LeftTsDutTemperature;
+        public sbyte LeftTsDutTemperature;
 
         [ParamName("Температура ТС ДУТ правая")]
-        public byte RightTsDutTemperature;
+        public sbyte RightTsDutTemperature;
 
         [ParamName("Широта")]
         public int Latitude;
@@ -46,22 +46,22 @@ namespace ParserNII.DataStructures
         public int Longitude;
 
         [ParamName("Температура топлива")]
-        public byte FuelTemperature;
+        public sbyte FuelTemperature;
 
         [ParamName("Плотность топлива текущая")]
-        public byte FuelDensityCurrent;
+        public short FuelDensityCurrent;
 
         [ParamName("Плотность топлива при 20 С")]
-        public byte FuelDensityStandard;
+        public short FuelDensityStandard;
 
         [ParamName("Температура контура масла")]
-        public byte OilCircuitTemperature;
+        public sbyte OilCircuitTemperature;
 
         [ParamName("Температура окружающего воздуха")]
-        public byte EnvironmentTemperature;
+        public sbyte EnvironmentTemperature;
 
         [ParamName("Напряжение ИБП")]
-        public byte UPSTemperature;
+        public double UPSVoltage;
 
         [ParamName("Табельный номер")]
         public int TabularNumber;
@@ -78,10 +78,10 @@ namespace ParserNII.DataStructures
         public ushort BIVersion;
 
         [ParamName("Смещение ДУТ левого")]
-        public short LeftDUTOffset;
+        public double LeftDUTOffset;
 
         [ParamName("Смещение ДУТ правого")]
-        public short RightDUTOffset;
+        public double RightDUTOffset;
 
         [ParamName("Коэффициент по току")]
         public short CurrentCoefficient;
@@ -94,7 +94,7 @@ namespace ParserNII.DataStructures
 
         // 2 empty bytes
         [ParamName("Температура воды холодного контура")]
-        public byte ColdWaterCircuitTemperature;
+        public sbyte ColdWaterCircuitTemperature;
 
         //[ParamName("ID минутной записи")]
         public int MinuteRecordId;
@@ -103,7 +103,7 @@ namespace ParserNII.DataStructures
         public byte MRKStatusFlags;
 
         [ParamName("Плотность топлива при экипировке")]
-        public byte FuelDensityOnEquip;
+        public short FuelDensityOnEquip;
         
         // time data
         public readonly SecondBlock[] SecondsBlock = new SecondBlock[20];

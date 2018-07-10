@@ -45,7 +45,7 @@ namespace ParserNII.DataStructures
                 result.MinuteByteParametrs = (FirstMinuteByteParams)BitConverter.ToInt16(buffer, 0);
 
                 // byte
-                result.CoolingCircuitTemperature = (byte)stream.ReadByte();
+                result.CoolingCircuitTemperature = (sbyte)stream.ReadByte();
 
                 // short
                 buffer = new byte[2];
@@ -68,10 +68,10 @@ namespace ParserNII.DataStructures
                 result.FuelMass = BitConverter.ToUInt16(buffer, 0);
 
                 // byte
-                result.LeftTsDutTemperature = (byte)stream.ReadByte();
+                result.LeftTsDutTemperature = (sbyte)stream.ReadByte();
 
                 // byte
-                result.RightTsDutTemperature = (byte)stream.ReadByte();
+                result.RightTsDutTemperature = (sbyte)stream.ReadByte();
 
                 // int
                 buffer = new byte[4];
@@ -85,22 +85,22 @@ namespace ParserNII.DataStructures
 
 
                 // byte
-                result.FuelTemperature = (byte)stream.ReadByte();
+                result.FuelTemperature = (sbyte)stream.ReadByte();
 
                 // byte
-                result.FuelDensityCurrent = (byte)stream.ReadByte();
+                result.FuelDensityCurrent = (short)((sbyte)stream.ReadByte() + 850);
 
                 // byte
-                result.FuelDensityStandard = (byte)stream.ReadByte();
+                result.FuelDensityStandard = (short)((sbyte)stream.ReadByte() + 850);
 
                 // byte
-                result.OilCircuitTemperature = (byte)stream.ReadByte();
+                result.OilCircuitTemperature = (sbyte)stream.ReadByte();
 
                 // byte
-                result.EnvironmentTemperature = (byte)stream.ReadByte();
+                result.EnvironmentTemperature = (sbyte)stream.ReadByte();
 
                 // byte
-                result.UPSTemperature = (byte)stream.ReadByte();
+                result.UPSVoltage = (double)stream.ReadByte() / 10;
 
                 // int
                 buffer = new byte[4];
@@ -129,12 +129,12 @@ namespace ParserNII.DataStructures
                 // short
                 buffer = new byte[2];
                 stream.Read(buffer, 0, buffer.Length);
-                result.LeftDUTOffset = BitConverter.ToInt16(buffer, 0);
+                result.LeftDUTOffset = (double)BitConverter.ToInt16(buffer, 0) /10;
 
                 // short
                 buffer = new byte[2];
                 stream.Read(buffer, 0, buffer.Length);
-                result.RightDUTOffset = BitConverter.ToInt16(buffer, 0);
+                result.RightDUTOffset = (double)BitConverter.ToInt16(buffer, 0) / 10;
 
                 // short
                 buffer = new byte[2];
@@ -154,7 +154,7 @@ namespace ParserNII.DataStructures
                 stream.ReadByte();
 
                 // byte
-                result.ColdWaterCircuitTemperature = (byte)stream.ReadByte();
+                result.ColdWaterCircuitTemperature = (sbyte)stream.ReadByte();
 
                 // int
                 buffer = new byte[4];
@@ -165,7 +165,7 @@ namespace ParserNII.DataStructures
                 result.MRKStatusFlags = (byte)stream.ReadByte();
 
                 // byte
-                result.FuelDensityOnEquip = (byte)stream.ReadByte();
+                result.FuelDensityOnEquip = (short)((sbyte)stream.ReadByte() + 850);
 
                 // skip byte
                 stream.ReadByte();
@@ -289,7 +289,7 @@ namespace ParserNII.DataStructures
                 RightDUTOffset = data.Select(d => d.RightDUTOffset).ToArray(),
                 TKCoefficient = data.Select(d => d.TKCoefficient).ToArray(),
                 TabularNumber = data.Select(d => d.TabularNumber).ToArray(),
-                UPSTemperature = data.Select(d => d.UPSTemperature).ToArray(),
+                UPSVoltage = data.Select(d => d.UPSVoltage).ToArray(),
                 VoltageCoefficient = data.Select(d => d.VoltageCoefficient).ToArray(),
                 ZeroxEE = data.Select(d => d.ZeroxEE).ToArray()
             };

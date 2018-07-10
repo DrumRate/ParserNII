@@ -89,7 +89,7 @@
             this.panel3.AutoScroll = true;
             this.panel3.Location = new System.Drawing.Point(868, 55);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(346, 573);
+            this.panel3.Size = new System.Drawing.Size(350, 575);
             this.panel3.TabIndex = 5;
             // 
             // groupBox1
