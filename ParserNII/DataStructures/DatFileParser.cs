@@ -66,7 +66,7 @@ namespace ParserNII.DataStructures
                 buffer = new byte[2];
                 stream.Read(buffer, 0, buffer.Length);
                 var RightFuelVolume = BitConverter.ToUInt16(buffer, 0);
-                result.data.Add("Объем топлива правый", new DataElement { OriginalValue = LeftFuelVolume, DisplayValue = LeftFuelVolume.ToString(), ChartValue = LeftFuelVolume, Display = true });
+                result.data.Add("Объем топлива правый", new DataElement { OriginalValue = RightFuelVolume, DisplayValue = RightFuelVolume.ToString(), ChartValue = LeftFuelVolume, Display = true });
 
                 // short
                 buffer = new byte[2];
@@ -111,7 +111,7 @@ namespace ParserNII.DataStructures
 
                 // byte
                 var FuelDensityStandard = (short)((sbyte)stream.ReadByte() + 850);
-                result.data.Add("Температура топлива при 20°С", new DataElement { OriginalValue = FuelDensityStandard, DisplayValue = FuelDensityStandard.ToString(), ChartValue = FuelDensityStandard, Display = true });
+                result.data.Add("Плотность топлива при 20°С", new DataElement { OriginalValue = FuelDensityStandard, DisplayValue = FuelDensityStandard.ToString(), ChartValue = FuelDensityStandard, Display = true });
 
                 // byte
                 var OilCircuitTemperature = (sbyte)stream.ReadByte();
@@ -169,7 +169,7 @@ namespace ParserNII.DataStructures
                 buffer = new byte[2];
                 stream.Read(buffer, 0, buffer.Length);
                 var CurrentCoefficient = BitConverter.ToInt16(buffer, 0);
-                result.data.Add("Коэффициент по току", new DataElement { OriginalValue = FuelDensityStandard, DisplayValue = FuelDensityStandard.ToString(), ChartValue = FuelDensityStandard, Display = true });
+                result.data.Add("Коэффициент по току", new DataElement { OriginalValue = CurrentCoefficient, DisplayValue = CurrentCoefficient.ToString(), ChartValue = CurrentCoefficient, Display = true });
 
                 // short
                 buffer = new byte[2];
@@ -179,7 +179,7 @@ namespace ParserNII.DataStructures
 
                 // byte
                 var DieselSpeed = (byte)stream.ReadByte();
-                result.data.Add("Коэффициент по оборотам дизеля", new DataElement { OriginalValue = FuelDensityStandard, DisplayValue = FuelDensityStandard.ToString(), ChartValue = FuelDensityStandard, Display = true });
+                result.data.Add("Коэффициент по оборотам дизеля", new DataElement { OriginalValue = DieselSpeed, DisplayValue = DieselSpeed.ToString(), ChartValue = DieselSpeed, Display = true });
 
                 // skip 2 bytes
                 stream.ReadByte();
@@ -307,7 +307,7 @@ namespace ParserNII.DataStructures
         private string ParseCoordinate(int coordinate)
         {
             string coordinateStr = coordinate.ToString();
-            return $"{coordinateStr.Substring(0, 2)}°{coordinateStr.Substring(2, 2)}′{coordinateStr.Substring(4, 2)},{coordinateStr.Substring(6, coordinateStr.Length - 6)}";
+            return $"{coordinateStr.Substring(0, 2)}.{coordinateStr.Substring(3,coordinateStr.Length - 3)}";
         }
     }
 }
