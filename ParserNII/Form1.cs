@@ -247,6 +247,14 @@ namespace ParserNII
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            foreach (var checkBox in checkBoxes)
+            {
+                checkBox.Checked = false;
+            }
+        }
     }
 }
 
