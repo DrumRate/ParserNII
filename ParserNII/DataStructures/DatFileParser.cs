@@ -18,94 +18,118 @@ namespace ParserNII.DataStructures
                 // 3 bytes
                 buffer = new byte[3];
                 stream.Read(buffer, 0, buffer.Length);
-                result.ZeroxEE = (buffer[0], buffer[1], buffer[2]);
+                result.data.Add("Три байта 0xEE", new DataElement{ OriginalValue = (buffer[0], buffer[1], buffer[2]) });
 
                 // byte
-                result.LabelType = (byte)stream.ReadByte();
+                var labelType = (byte)stream.ReadByte();
+                result.data.Add("Тип метки", new DataElement { OriginalValue = labelType, DisplayValue = labelType.ToString() });
 
                 // int
                 buffer = new byte[4];
                 stream.Read(buffer, 0, buffer.Length);
-                result.UnixTime = BitConverter.ToUInt32(buffer, 0);
+                var unixTime = BitConverter.ToUInt32(buffer, 0);
+                result.data.Add("Время в “UNIX” формате", new DataElement { OriginalValue = unixTime, DisplayValue = DateTimeOffset.FromUnixTimeSeconds(unixTime).AddHours(3).ToString("dd.MM.yyyy HH:mm:ss") });
 
                 // byte
-                result.LocomotiveType = (byte)stream.ReadByte();
+                var LocomotiveType = (byte)stream.ReadByte();
+                result.data.Add("Тип локомотива", new DataElement { OriginalValue = LocomotiveType, DisplayValue = LocomotiveType.ToString() });
 
                 // short
                 buffer = new byte[2];
                 stream.Read(buffer, 0, buffer.Length);
-                result.LocomotiveNumber = BitConverter.ToUInt16(buffer, 0);
+                var LocomotiveNumber = BitConverter.ToUInt16(buffer, 0);
+                result.data.Add("№ тепловоза", new DataElement { OriginalValue = LocomotiveNumber, DisplayValue = LocomotiveNumber.ToString() });
+
 
                 // byte
-                result.LocomotiveSection = (byte)stream.ReadByte();
+                var LocomotiveSection = (byte)stream.ReadByte();
+                result.data.Add("Секция локомотива", new DataElement { OriginalValue = LocomotiveSection, DisplayValue = LocomotiveSection.ToString() });
+
 
                 // short (enum)
                 buffer = new byte[2];
                 stream.Read(buffer, 0, buffer.Length);
-                result.MinuteByteParametrs = (FirstMinuteByteParams)BitConverter.ToInt16(buffer, 0);
+                var MinuteByteParametrs = (FirstMinuteByteParams)BitConverter.ToInt16(buffer, 0);
+
 
                 // byte
-                result.CoolingCircuitTemperature = (sbyte)stream.ReadByte();
+                var CoolingCircuitTemperature = (sbyte)stream.ReadByte();
+                result.data.Add("Температура контура охлаждения", new DataElement { OriginalValue = CoolingCircuitTemperature, DisplayValue = CoolingCircuitTemperature.ToString(), ChartValue = CoolingCircuitTemperature, Display = true });
 
                 // short
                 buffer = new byte[2];
                 stream.Read(buffer, 0, buffer.Length);
-                result.LeftFuelVolume = BitConverter.ToUInt16(buffer, 0);
+                var LeftFuelVolume = BitConverter.ToUInt16(buffer, 0);
+                result.data.Add("Объем топлива левый", new DataElement { OriginalValue = LeftFuelVolume, DisplayValue = LeftFuelVolume.ToString(), ChartValue = LeftFuelVolume, Display = true });
 
                 // short
                 buffer = new byte[2];
                 stream.Read(buffer, 0, buffer.Length);
-                result.RightFuelVolume = BitConverter.ToUInt16(buffer, 0);
+                var RightFuelVolume = BitConverter.ToUInt16(buffer, 0);
+                result.data.Add("Объем топлива правый", new DataElement { OriginalValue = LeftFuelVolume, DisplayValue = LeftFuelVolume.ToString(), ChartValue = LeftFuelVolume, Display = true });
 
                 // short
                 buffer = new byte[2];
                 stream.Read(buffer, 0, buffer.Length);
-                result.MiddleFuelVolume = BitConverter.ToUInt16(buffer, 0);
+                var MiddleFuelVolume = BitConverter.ToUInt16(buffer, 0);
+                result.data.Add("Объем топлива средний", new DataElement { OriginalValue = MiddleFuelVolume, DisplayValue = MiddleFuelVolume.ToString(), ChartValue = MiddleFuelVolume, Display = true });
 
                 // short
                 buffer = new byte[2];
                 stream.Read(buffer, 0, buffer.Length);
-                result.FuelMass = BitConverter.ToUInt16(buffer, 0);
+                var FuelMass = BitConverter.ToUInt16(buffer, 0);
+                result.data.Add("Масса  топлива", new DataElement { OriginalValue = FuelMass, DisplayValue = FuelMass.ToString(), ChartValue = FuelMass, Display = true });
 
                 // byte
-                result.LeftTsDutTemperature = (sbyte)stream.ReadByte();
+                var LeftTsDutTemperature = (sbyte)stream.ReadByte();
+                result.data.Add("Температура ТС ДУТ левая", new DataElement { OriginalValue = LeftTsDutTemperature, DisplayValue = LeftTsDutTemperature.ToString(), ChartValue = LeftTsDutTemperature, Display = true });
 
                 // byte
-                result.RightTsDutTemperature = (sbyte)stream.ReadByte();
+                var RightTsDutTemperature = (sbyte)stream.ReadByte();
+                result.data.Add("Температура ТС ДУТ правая", new DataElement { OriginalValue = RightTsDutTemperature, DisplayValue = RightTsDutTemperature.ToString(), ChartValue = RightTsDutTemperature, Display = true });
 
                 // int
                 buffer = new byte[4];
                 stream.Read(buffer, 0, buffer.Length);
-                result.Latitude = BitConverter.ToInt32(buffer, 0);
+                var Latitude = BitConverter.ToInt32(buffer, 0);
+                result.data.Add("Широта", new DataElement { OriginalValue = Latitude, DisplayValue = Latitude.ToString(), ChartValue = Latitude, Display = true });
 
                 // int
                 buffer = new byte[4];
                 stream.Read(buffer, 0, buffer.Length);
-                result.Longitude = BitConverter.ToInt32(buffer, 0);
+                var Longitude = BitConverter.ToInt32(buffer, 0);
+                result.data.Add("Долгота", new DataElement { OriginalValue = Longitude, DisplayValue = Longitude.ToString(), ChartValue = Longitude, Display = true });
 
 
                 // byte
-                result.FuelTemperature = (sbyte)stream.ReadByte();
+                var FuelTemperature = (sbyte)stream.ReadByte();
+                result.data.Add("Температура топлива", new DataElement { OriginalValue = FuelTemperature, DisplayValue = FuelTemperature.ToString(), ChartValue = FuelTemperature, Display = true });
 
                 // byte
-                result.FuelDensityCurrent = (short)((sbyte)stream.ReadByte() + 850);
+                var FuelDensityCurrent = (short)((sbyte)stream.ReadByte() + 850);
+                result.data.Add("Плотность топлива текущая", new DataElement { OriginalValue = FuelDensityCurrent, DisplayValue = FuelDensityCurrent.ToString(), ChartValue = FuelDensityCurrent, Display = true });
 
                 // byte
-                result.FuelDensityStandard = (short)((sbyte)stream.ReadByte() + 850);
+                var FuelDensityStandard = (short)((sbyte)stream.ReadByte() + 850);
+                result.data.Add("Температура топлива при 20°С", new DataElement { OriginalValue = FuelDensityStandard, DisplayValue = FuelDensityStandard.ToString(), ChartValue = FuelDensityStandard, Display = true });
 
                 // byte
-                result.OilCircuitTemperature = (sbyte)stream.ReadByte();
+                var OilCircuitTemperature = (sbyte)stream.ReadByte();
+                result.data.Add("Температура контура масла", new DataElement { OriginalValue = OilCircuitTemperature, DisplayValue = OilCircuitTemperature.ToString(), ChartValue = OilCircuitTemperature, Display = true });
 
                 // byte
-                result.EnvironmentTemperature = (sbyte)stream.ReadByte();
+                var EnvironmentTemperature = (sbyte)stream.ReadByte();
+                result.data.Add("Температура окружающего воздуха", new DataElement { OriginalValue = EnvironmentTemperature, DisplayValue = EnvironmentTemperature.ToString(), ChartValue = EnvironmentTemperature, Display = true });
 
                 // byte
-                result.UPSVoltage = (double)stream.ReadByte() / 10;
+                var UPSVoltage = (double)stream.ReadByte() / 10;
+                result.data.Add("Напряжение ИБП", new DataElement { OriginalValue = UPSVoltage, DisplayValue = UPSVoltage.ToString(), ChartValue = UPSVoltage, Display = true });
 
                 // int
                 buffer = new byte[4];
                 stream.Read(buffer, 0, buffer.Length);
-                result.TabularNumber = BitConverter.ToInt32(buffer, 0);
+                var TabularNumber = BitConverter.ToInt32(buffer, 0);
+                result.data.Add("Табельный номер", new DataElement { OriginalValue = TabularNumber, DisplayValue = TabularNumber.ToString(), ChartValue = TabularNumber, Display = true });
 
                 // skip 2 bytes
                 stream.ReadByte();
@@ -114,58 +138,71 @@ namespace ParserNII.DataStructures
                 // short
                 buffer = new byte[2];
                 stream.Read(buffer, 0, buffer.Length);
-                result.TKCoefficient = BitConverter.ToInt16(buffer, 0);
+                var TKCoefficient = BitConverter.ToInt16(buffer, 0);
+                result.data.Add("Коэффициент по ТК", new DataElement { OriginalValue = TKCoefficient, DisplayValue = TKCoefficient.ToString(), ChartValue = TKCoefficient, Display = true });
 
                 // short
                 buffer = new byte[2];
                 stream.Read(buffer, 0, buffer.Length);
-                result.EquipmentAmount = BitConverter.ToInt16(buffer, 0);
+                var EquipmentAmount = BitConverter.ToInt16(buffer, 0);
+                result.data.Add("Объем экипировки", new DataElement { OriginalValue = EquipmentAmount, DisplayValue = EquipmentAmount.ToString(), ChartValue = EquipmentAmount, Display = true });
 
                 // short
                 buffer = new byte[2];
                 stream.Read(buffer, 0, buffer.Length);
-                result.BIVersion = BitConverter.ToUInt16(buffer, 0);
+                var BIVersion = BitConverter.ToUInt16(buffer, 0);
+                result.data.Add("Версия БИ", new DataElement { OriginalValue = BIVersion, DisplayValue = BIVersion.ToString(), ChartValue = BIVersion, Display = true });
 
                 // short
                 buffer = new byte[2];
                 stream.Read(buffer, 0, buffer.Length);
-                result.LeftDUTOffset = (double)BitConverter.ToInt16(buffer, 0) /10;
+                var LeftDUTOffset = (double)BitConverter.ToInt16(buffer, 0) /10;
+                result.data.Add("Смещение ДУТ левого", new DataElement { OriginalValue = LeftDUTOffset, DisplayValue = LeftDUTOffset.ToString(), ChartValue = LeftDUTOffset, Display = true });
 
                 // short
                 buffer = new byte[2];
                 stream.Read(buffer, 0, buffer.Length);
-                result.RightDUTOffset = (double)BitConverter.ToInt16(buffer, 0) / 10;
+                var RightDUTOffset = (double)BitConverter.ToInt16(buffer, 0) / 10;
+                result.data.Add("Смещение ДУТ правого", new DataElement { OriginalValue = RightDUTOffset, DisplayValue = RightDUTOffset.ToString(), ChartValue = RightDUTOffset, Display = true });
 
                 // short
                 buffer = new byte[2];
                 stream.Read(buffer, 0, buffer.Length);
-                result.CurrentCoefficient = BitConverter.ToInt16(buffer, 0);
+                var CurrentCoefficient = BitConverter.ToInt16(buffer, 0);
+                result.data.Add("Коэффициент по току", new DataElement { OriginalValue = FuelDensityStandard, DisplayValue = FuelDensityStandard.ToString(), ChartValue = FuelDensityStandard, Display = true });
 
                 // short
                 buffer = new byte[2];
                 stream.Read(buffer, 0, buffer.Length);
-                result.VoltageCoefficient = BitConverter.ToInt16(buffer, 0);
+                var VoltageCoefficient = BitConverter.ToInt16(buffer, 0);
+                result.data.Add("Коэффициент по напряжению", new DataElement { OriginalValue = VoltageCoefficient, DisplayValue = VoltageCoefficient.ToString(), ChartValue = VoltageCoefficient, Display = true });
 
                 // byte
-                result.DieselSpeed = (byte)stream.ReadByte();
+                var DieselSpeed = (byte)stream.ReadByte();
+                result.data.Add("Коэффициент по оборотам дизеля", new DataElement { OriginalValue = FuelDensityStandard, DisplayValue = FuelDensityStandard.ToString(), ChartValue = FuelDensityStandard, Display = true });
 
                 // skip 2 bytes
                 stream.ReadByte();
                 stream.ReadByte();
 
                 // byte
-                result.ColdWaterCircuitTemperature = (sbyte)stream.ReadByte();
+                var ColdWaterCircuitTemperature = (sbyte)stream.ReadByte();
+                result.data.Add("Температура воды холодного контура", new DataElement { OriginalValue = ColdWaterCircuitTemperature, DisplayValue = ColdWaterCircuitTemperature.ToString(), ChartValue = ColdWaterCircuitTemperature, Display = true });
 
                 // int
                 buffer = new byte[4];
                 stream.Read(buffer, 0, buffer.Length);
-                result.MinuteRecordId = BitConverter.ToInt32(buffer, 0);
+                var MinuteRecordId = BitConverter.ToInt32(buffer, 0);
+                result.data.Add("ID минутной записи", new DataElement { OriginalValue = MinuteRecordId, DisplayValue = MinuteRecordId.ToString(), ChartValue = MinuteRecordId });
 
                 // byte
-                result.MRKStatusFlags = (byte)stream.ReadByte();
+                var MRKStatusFlags = (byte)stream.ReadByte();
+                result.data.Add("Флаги состояния МРК", new DataElement { OriginalValue = MRKStatusFlags, DisplayValue = MRKStatusFlags.ToString(), ChartValue = MRKStatusFlags });
 
                 // byte
-                result.FuelDensityOnEquip = (short)((sbyte)stream.ReadByte() + 850);
+                var FuelDensityOnEquip = (short)((sbyte)stream.ReadByte() + 850);
+                result.data.Add("Плотность топлива при экипировке", new DataElement { OriginalValue = FuelDensityOnEquip, DisplayValue = FuelDensityOnEquip.ToString(), ChartValue = FuelDensityOnEquip, Display = true });
+
 
                 // skip byte
                 stream.ReadByte();
@@ -178,7 +215,8 @@ namespace ParserNII.DataStructures
                 // short
                 buffer = new byte[2];
                 stream.Read(buffer, 0, buffer.Length);
-                result.CRC = BitConverter.ToInt16(buffer, 0);
+                var CRC = BitConverter.ToInt16(buffer, 0);
+                result.data.Add("CRC", new DataElement { OriginalValue = CRC, DisplayValue = CRC.ToString(), ChartValue = CRC });
 
                 results.Add(result);
             }
@@ -254,45 +292,14 @@ namespace ParserNII.DataStructures
 
         public DataArrays ToArray(List<DataFile> data)
         {
-            var result = new DataArrays
+            var result = new DataArrays();
+
+            var keys = data[0].data.Keys;
+
+            foreach (var key in keys)
             {
-                UnixTime = data.Select(d => d.UnixTime).ToArray(),
-                LocomotiveSection = data.Select(d => d.LocomotiveSection).ToArray(),
-                LocomotiveType = data.Select(d => d.LocomotiveType).ToArray(),
-                LabelType = data.Select(d => d.LabelType).ToArray(),
-                CoolingCircuitTemperature = data.Select(d => d.CoolingCircuitTemperature).ToArray(),
-                FuelMass = data.Select(d => d.FuelMass).ToArray(),
-                MiddleFuelVolume = data.Select(d => d.MiddleFuelVolume).ToArray(),
-                RightTsDutTemperature = data.Select(d => d.RightTsDutTemperature).ToArray(),
-                LeftDUTOffset = data.Select(d => d.LeftDUTOffset).ToArray(),
-                Longitude = data.Select(d => d.Longitude).ToArray(),
-                Latitude = data.Select(d => d.Latitude).ToArray(),
-                MinuteByteParametrs = data.Select(d => d.MinuteByteParametrs).ToArray(),
-                ColdWaterCircuitTemperature = data.Select(d => d.ColdWaterCircuitTemperature).ToArray(),
-                RightFuelVolume = data.Select(d => d.RightFuelVolume).ToArray(),
-                LocomotiveNumber = data.Select(d => d.LocomotiveNumber).ToArray(),
-                LeftTsDutTemperature = data.Select(d => d.LeftTsDutTemperature).ToArray(),
-                FuelTemperature = data.Select(d => d.FuelTemperature).ToArray(),
-                BIVersion = data.Select(d => d.BIVersion).ToArray(),
-                CRC = data.Select(d => d.CRC).ToArray(),
-                CurrentCoefficient = data.Select(d => d.CurrentCoefficient).ToArray(),
-                DieselSpeed = data.Select(d => d.DieselSpeed).ToArray(),
-                EnvironmentTemperature = data.Select(d => d.EnvironmentTemperature).ToArray(),
-                EquipmentAmount = data.Select(d => d.EquipmentAmount).ToArray(),
-                FuelDensityCurrent = data.Select(d => d.FuelDensityCurrent).ToArray(),
-                FuelDensityOnEquip = data.Select(d => d.FuelDensityOnEquip).ToArray(),
-                FuelDensityStandard = data.Select(d => d.FuelDensityStandard).ToArray(),
-                LeftFuelVolume = data.Select(d => d.LeftFuelVolume).ToArray(),
-                MRKStatusFlags = data.Select(d => d.MRKStatusFlags).ToArray(),
-                MinuteRecordId = data.Select(d => d.MinuteRecordId).ToArray(),
-                OilCircuitTemperature = data.Select(d => d.OilCircuitTemperature).ToArray(),
-                RightDUTOffset = data.Select(d => d.RightDUTOffset).ToArray(),
-                TKCoefficient = data.Select(d => d.TKCoefficient).ToArray(),
-                TabularNumber = data.Select(d => d.TabularNumber).ToArray(),
-                UPSVoltage = data.Select(d => d.UPSVoltage).ToArray(),
-                VoltageCoefficient = data.Select(d => d.VoltageCoefficient).ToArray(),
-                ZeroxEE = data.Select(d => d.ZeroxEE).ToArray()
-            };
+                result.data.Add(key, data.Select(d => d.data[key]).ToArray());
+            }
 
             return result;
         } 

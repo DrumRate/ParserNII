@@ -95,7 +95,7 @@ namespace ParserNII
                 { "Версия БИ"},
             };
 
-            
+
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -117,210 +117,41 @@ namespace ParserNII
                 {
                     DatFileParser parser = new DatFileParser();
                     var result = parser.Parse(stream);
-                    label2.Text = result[0].LabelType.ToString();
-                    DateTimeOffset time = DateTimeOffset.FromUnixTimeSeconds(result[0].UnixTime);
+                    label2.Text = result[0].data["Тип метки"].DisplayValue;
+                    //DateTimeOffset time = DateTimeOffset.FromUnixTimeSeconds(result[0].UnixTime);
                     label4.Text = DateTimeOffset.Now.ToString("dd.MM.yyyy HH:mm:ss");
-                    label7.Text = result[0].LocomotiveType.ToString();
+                    label7.Text = result[0].data["Тип локомотива"].DisplayValue;
                     label6.Text = (stream.Length / 1024).ToString();
-                    label10.Text = result[0].LocomotiveSection.ToString();
-                    label12.Text = result[0].LocomotiveNumber.ToString();
-                    DateTimeOffset startTime = DateTimeOffset.FromUnixTimeSeconds(result.First().UnixTime).AddHours(3);
-                    DateTimeOffset endTime = DateTimeOffset.FromUnixTimeSeconds(result.Last().UnixTime).AddHours(3);
+                    label10.Text = result[0].data["Секция локомотива"].DisplayValue;
+                    label12.Text = result[0].data["№ тепловоза"].DisplayValue;
 
-                    label40.Text = startTime.ToString("dd.MM.yyyy HH:mm:ss") + " - " + endTime.ToString("dd.MM.yyyy HH:mm:ss");
+                    label40.Text = result.First().data["Время в “UNIX” формате"].DisplayValue + " - " + result.Last().data["Время в “UNIX” формате"].DisplayValue;
 
                     var arrayResult = parser.ToArray(result);
 
-                    Type arrayResultType = arrayResult.GetType();
-                    FieldInfo[] arrayResultFieldInfo = arrayResultType.GetFields();
+                    DisplayPanelElements(result[0]);
 
-                    //for (var i = 0; i < arrayResultFieldInfo.Length; i++)
-                    //{
-                    //    var fieldInfo = arrayResultFieldInfo[i];
-                        
-                    //}
+                    var xValues = result.Select(r => DateTimeOffset.FromUnixTimeSeconds((uint)r.data["Время в “UNIX” формате"].OriginalValue).AddHours(3)).ToList();
 
-                    DisplayPanelElements(arrayResult);
-
-                    var yValues = result.Select(r => DateTimeOffset.FromUnixTimeSeconds(r.UnixTime).AddHours(3)).ToList();
-                    Color color;
                     Drawer.Initialize(zedGraphControl1);
-                    int i = 0;
-                    Drawer.DrawGraph(zedGraphControl1, yValues, 
-                        arrayResult.FuelTemperature.Select(r => (double)r).ToList(),  
-                        "Температура топлива",        
-                        Drawer.GetColor(i));
-                    panels[DisplayedParamNames.IndexOf("Температура топлива")].BackColor = Drawer.GetColor(i);
-                    i++;
+                    var keys = result[0].data.Keys.Where(k => result[0].data[k].Display).ToArray();
 
-                    Drawer.DrawGraph(zedGraphControl1, yValues,
-                        arrayResult.ColdWaterCircuitTemperature.Select(r => (double)r).ToList(),
-                        "Температура воды холодного контура",
-                        Drawer.GetColor(i));
-                    panels[DisplayedParamNames.IndexOf("Температура воды холодного контура")].BackColor = Drawer.GetColor(i);
-                    i++;
-                    
-                    Drawer.DrawGraph(zedGraphControl1, yValues,
-                        arrayResult.CoolingCircuitTemperature.Select(r => (double)r).ToList(),
-                        "Температура контура охлаждения",
-                        Drawer.GetColor(i));
-                    panels[DisplayedParamNames.IndexOf("Температура контура охлаждения")].BackColor = Drawer.GetColor(i);
-                    i++;
-                    Drawer.DrawGraph(zedGraphControl1, yValues,
-                        arrayResult.DieselSpeed.Select(r => (double)r).ToList(),
-                        "Коэффициент по оборотам дизеля",
-                        Drawer.GetColor(i));
-                    panels[DisplayedParamNames.IndexOf("Коэффициент по оборотам дизеля")].BackColor = Drawer.GetColor(i);
-                    i++;
-                    Drawer.DrawGraph(zedGraphControl1, yValues,
-                        arrayResult.LeftDUTOffset.Select(r => (double)r).ToList(),
-                        "Смещение ДУТ левого",
-                        Drawer.GetColor(i));
-                    panels[DisplayedParamNames.IndexOf("Смещение ДУТ левого")].BackColor = Drawer.GetColor(i);
-                    i++;
-                    Drawer.DrawGraph(zedGraphControl1, yValues,
-                        arrayResult.RightDUTOffset.Select(r => (double)r).ToList(),
-                        "Смещение ДУТ правого",
-                        Drawer.GetColor(i));
-                    panels[DisplayedParamNames.IndexOf("Смещение ДУТ правого")].BackColor = Drawer.GetColor(i);
-                    i++;
-                    Drawer.DrawGraph(zedGraphControl1, yValues,
-                        arrayResult.LeftFuelVolume.Select(r => (double)r).ToList(),
-                        "Объем топлива левого",
-                        Drawer.GetColor(i));
-                    panels[DisplayedParamNames.IndexOf("Объем топлива левый")].BackColor = Drawer.GetColor(i);
-                    i++;
-                    Drawer.DrawGraph(zedGraphControl1, yValues,
-                        arrayResult.RightFuelVolume.Select(r => (double)r).ToList(),
-                        "Объем топлива правого",
-                        Drawer.GetColor(i));
-                    panels[DisplayedParamNames.IndexOf("Объем топлива правый")].BackColor = Drawer.GetColor(i);
-                    i++;
-                    Drawer.DrawGraph(zedGraphControl1, yValues,
-                        arrayResult.FuelMass.Select(r => (double)r).ToList(),
-                        "Масса топлива",
-                        Drawer.GetColor(i));
-                    panels[DisplayedParamNames.IndexOf("Масса топлива")].BackColor = Drawer.GetColor(i);
-                    i++;
-                    Drawer.DrawGraph(zedGraphControl1, yValues,
-                        arrayResult.MiddleFuelVolume.Select(r => (double)r).ToList(),
-                        "Объем топлива средний",
-                        Drawer.GetColor(i));
-                    panels[DisplayedParamNames.IndexOf("Объем топлива средний")].BackColor = Drawer.GetColor(i);
-                    i++;
-                    Drawer.DrawGraph(zedGraphControl1, yValues,
-                        arrayResult.LeftTsDutTemperature.Select(r => (double)r).ToList(),
-                        "Температура ТС ДУТ левая",
-                        Drawer.GetColor(i));
-                    panels[DisplayedParamNames.IndexOf("Температура ТС ДУТ левая")].BackColor = Drawer.GetColor(i);
-                    i++;
-                    Drawer.DrawGraph(zedGraphControl1, yValues,
-                        arrayResult.RightTsDutTemperature.Select(r => (double)r).ToList(),
-                        "Температура ТС ДУТ правая",
-                        Drawer.GetColor(i));
-                    panels[DisplayedParamNames.IndexOf("Температура ТС ДУТ правая")].BackColor = Drawer.GetColor(i);
-                    i++;
-                    Drawer.DrawGraph(zedGraphControl1, yValues,
-                        arrayResult.Latitude.Select(r => (double)r).ToList(),
-                        "Широта",
-                        Drawer.GetColor(i));
-                    panels[DisplayedParamNames.IndexOf("Широта")].BackColor = Drawer.GetColor(i);
-                    i++;
-                    Drawer.DrawGraph(zedGraphControl1, yValues,
-                        arrayResult.Longitude.Select(r => (double)r).ToList(),
-                        "Долгота",
-                        Drawer.GetColor(i));
-                    panels[DisplayedParamNames.IndexOf("Долгота")].BackColor = Drawer.GetColor(i);
-                    i++;
-                    Drawer.DrawGraph(zedGraphControl1, yValues,
-                        arrayResult.FuelDensityCurrent.Select(r => (double)r).ToList(),
-                        "Плотность топлива текущая",
-                        Drawer.GetColor(i));
-                    panels[DisplayedParamNames.IndexOf("Плотность топлива текущая")].BackColor = Drawer.GetColor(i);
-                    i++;
-                    Drawer.DrawGraph(zedGraphControl1, yValues,
-                        arrayResult.FuelDensityStandard.Select(r => (double)r).ToList(),
-                        "Плотность топлива при 20 С",
-                        Drawer.GetColor(i));
-                    panels[DisplayedParamNames.IndexOf("Плотность топлива при 20 С")].BackColor = Drawer.GetColor(i);
-                    i++;
-                    Drawer.DrawGraph(zedGraphControl1, yValues,
-                        arrayResult.OilCircuitTemperature.Select(r => (double)r).ToList(),
-                        "Температура контура масла",
-                        Drawer.GetColor(i));
-                    panels[DisplayedParamNames.IndexOf("Температура контура масла")].BackColor = Drawer.GetColor(i);
-                    i++;
-                    Drawer.DrawGraph(zedGraphControl1, yValues,
-                        arrayResult.EnvironmentTemperature.Select(r => (double)r).ToList(),
-                        "Температура окружающего воздуха",
-                        Drawer.GetColor(i));
-                    panels[DisplayedParamNames.IndexOf("Температура окружающего воздуха")].BackColor = Drawer.GetColor(i);
-                    i++;
-                    Drawer.DrawGraph(zedGraphControl1, yValues,
-                        arrayResult.UPSVoltage.Select(r => (double)r).ToList(),
-                        "Напряжение ИБП",
-                        Drawer.GetColor(i));
-                    panels[DisplayedParamNames.IndexOf("Напряжение ИБП")].BackColor = Drawer.GetColor(i);
-                    i++;
-                    Drawer.DrawGraph(zedGraphControl1, yValues,
-                        arrayResult.TabularNumber.Select(r => (double)r).ToList(),
-                        "Табельный номер",
-                        Drawer.GetColor(i));
-                    panels[DisplayedParamNames.IndexOf("Табельный номер")].BackColor = Drawer.GetColor(i);
-                    i++;
-                    Drawer.DrawGraph(zedGraphControl1, yValues,
-                        arrayResult.TKCoefficient.Select(r => (double)r).ToList(),
-                        "Коэффициент по ТК",
-                        Drawer.GetColor(i));
-                    panels[DisplayedParamNames.IndexOf("Коэффициент по ТК")].BackColor = Drawer.GetColor(i);
-                    i++;
-                    Drawer.DrawGraph(zedGraphControl1, yValues,
-                        arrayResult.EquipmentAmount.Select(r => (double)r).ToList(),
-                        "Объем экипировки",
-                        Drawer.GetColor(i));
-                    panels[DisplayedParamNames.IndexOf("Объем экипировки")].BackColor = Drawer.GetColor(i);
-                    i++;
-                    Drawer.DrawGraph(zedGraphControl1, yValues,
-                        arrayResult.BIVersion.Select(r => (double)r).ToList(),
-                        "Версия БИ",
-                        Drawer.GetColor(i));
-                    panels[DisplayedParamNames.IndexOf("Версия БИ")].BackColor = Drawer.GetColor(i);
-                    i++;
-                    Drawer.DrawGraph(zedGraphControl1, yValues,
-                        arrayResult.CurrentCoefficient.Select(r => (double)r).ToList(),
-                        "Коэффициент по току",
-                        Drawer.GetColor(i));
-                    panels[DisplayedParamNames.IndexOf("Коэффициент по току")].BackColor = Drawer.GetColor(i);
-                    i++;
-                    Drawer.DrawGraph(zedGraphControl1, yValues,
-                        arrayResult.VoltageCoefficient.Select(r => (double)r).ToList(),
-                        "Коэффициент по напряжению",
-                        Drawer.GetColor(i));
-                    panels[DisplayedParamNames.IndexOf("Коэффициент по напряжению")].BackColor = Drawer.GetColor(i);
-                    i++;
-                    Drawer.DrawGraph(zedGraphControl1, yValues,
-                         arrayResult.FuelDensityOnEquip.Select(r => (double)r).ToList(),
-                         "Плотность топлива при экипировке",
-                         Drawer.GetColor(i));
-                    panels[DisplayedParamNames.IndexOf("Плотность топлива при экипировке")].BackColor = Drawer.GetColor(i);
-                    i++;
+                    for (int i = 0; i < keys.Length; i++)
+                    {
+                        Drawer.DrawGraph(zedGraphControl1, xValues,
+                            arrayResult.data[keys[i]].Select(d => d.ChartValue).ToList(),
+                            keys[i],
+                            Drawer.GetColor(i));
+                        panels[DisplayedParamNames.IndexOf(keys[i])].BackColor = Drawer.GetColor(i);
+                    }
 
                     zedGraphControl1.IsShowPointValues = true;
                     zedGraphControl1.PointValueEvent += (pointSender, graphPane, curve, pt) =>
                     {
-                        Type resultType = result[pt].GetType();
-                        FieldInfo[] fieldInfo = resultType.GetFields();
 
-                        foreach (FieldInfo field in fieldInfo)
+                        for (int i = 0; i < keys.Length; i++)
                         {
-                            object[] attributes = field.GetCustomAttributes(typeof(ParamNameAttribute), false);
-
-                            if (attributes.Length != 0)
-                            {
-                                ParamNameAttribute name = (ParamNameAttribute)attributes[0];
-
-                                uidNames[name.Value].Text = field.GetValue(result[pt]).ToString();
-                            }
+                            uidNames[keys[i]].Text = result[pt].data[keys[i]].DisplayValue;
                         }
 
                         return "";
@@ -345,54 +176,47 @@ namespace ParserNII
             }
         }
 
-        private void DisplayPanelElements(DataArrays data)
+        private void DisplayPanelElements(DataFile data)
         {
-
-            Type resultType = data.GetType();
-            FieldInfo[] fieldInfo = resultType.GetFields();
             DisplayedParamNames = new List<string>();
-            int i = 0;
-            foreach (FieldInfo field in fieldInfo)
+
+            var keys = data.data.Keys.Where(k => data.data[k].Display).ToArray();
+
+            for (int i = 0; i < keys.Length; i++)
             {
-                object[] attributes = field.GetCustomAttributes(typeof(ParamNameAttribute), false);
 
-                if (attributes.Length != 0)
-                {
-                    ParamNameAttribute name = (ParamNameAttribute)attributes[0];
-                    DisplayedParamNames.Add(name.Value);
+                DisplayedParamNames.Add(keys[i]);
 
-                    var textBox = new TextBox();
-                    textBoxes.Add(textBox);
-                    panel3.Controls.Add(textBox);
-                    textBox.Location = new Point(4, 4 + i * 26);
-                    textBox.Name = $"textBox{i}";
-                    textBox.ReadOnly = true;
-                    textBox.Size = new Size(82, 20);
-                    textBox.TabIndex = 30 + i;
+                var textBox = new TextBox();
+                textBoxes.Add(textBox);
+                panel3.Controls.Add(textBox);
+                textBox.Location = new Point(4, 4 + i * 26);
+                textBox.Name = $"textBox{i}";
+                textBox.ReadOnly = true;
+                textBox.Size = new Size(82, 20);
+                textBox.TabIndex = 30 + i;
 
-                    var checkBox = new CheckBox();
-                    panel3.Controls.Add(checkBox);
-                    checkBox.AutoSize = true;
-                    checkBox.Location = new Point(110, 6 + i * 26);
-                    checkBox.Name = $"checkBox{i}";
-                    checkBox.Size = new Size(80, 17);
-                    checkBox.TabIndex = 0;
-                    checkBox.Text = DisplayedParamNames[i];
-                    checkBox.UseVisualStyleBackColor = true;
-                    checkBoxes.Add(checkBox);
+                var checkBox = new CheckBox();
+                panel3.Controls.Add(checkBox);
+                checkBox.AutoSize = true;
+                checkBox.Location = new Point(110, 6 + i * 26);
+                checkBox.Name = $"checkBox{i}";
+                checkBox.Size = new Size(80, 17);
+                checkBox.TabIndex = 0;
+                checkBox.Text = DisplayedParamNames[i];
+                checkBox.UseVisualStyleBackColor = true;
+                checkBoxes.Add(checkBox);
 
-                    var panel = new Panel();
-                    panel3.Controls.Add(panel);
-                    panel.Location = new Point(90, 6 + i * 26);
-                    panel.Name = $"panel{i}";
-                    panel.Size = new Size(17, 17);
-                    panel.TabIndex = 0;
-                    panels.Add(panel);
+                var panel = new Panel();
+                panel3.Controls.Add(panel);
+                panel.Location = new Point(90, 6 + i * 26);
+                panel.Name = $"panel{i}";
+                panel.Size = new Size(17, 17);
+                panel.TabIndex = 0;
+                panels.Add(panel);
 
-                    uidNames.Add(DisplayedParamNames[i], textBoxes[i]);
+                uidNames.Add(DisplayedParamNames[i], textBoxes[i]);
 
-                    i++;
-                }
             }
         }
 

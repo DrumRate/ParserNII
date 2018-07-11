@@ -37,7 +37,7 @@ namespace ParserNII
             colors.Add(Color.Tomato);
             colors.Add(Color.YellowGreen);
             colors.Add(Color.Violet);
-            return colors[i];
+            return colors[i % colors.Count];
         }
 
         public static void Initialize(ZedGraphControl control)

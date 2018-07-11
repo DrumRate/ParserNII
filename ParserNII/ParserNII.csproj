@@ -55,6 +55,7 @@
     <Compile Include="DataStructures\BinFile.cs" />
     <Compile Include="DataStructures\BinFileParser.cs" />
     <Compile Include="DataStructures\DataArrays.cs" />
+    <Compile Include="DataStructures\DataElement.cs" />
     <Compile Include="DataStructures\DataFile.cs" />
     <Compile Include="DataStructures\DatFileParser.cs" />
     <Compile Include="DataStructures\FirstMinuteByteParams.cs" />
@@ -107,9 +108,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="License-LGPL.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
