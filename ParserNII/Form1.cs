@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
-using ParserNII.Attributes;
 using ParserNII.DataStructures;
-using ParserNII.Extensions;
 using ZedGraph;
 using Label = System.Windows.Forms.Label;
 
@@ -19,11 +16,12 @@ namespace ParserNII
     {
         private List<string> paramNames = new List<string>();
         private List<TextBox> textBoxes = new List<TextBox>();
-        private List<Label> labels = new List<Label>();
         private List<CheckBox> checkBoxes = new List<CheckBox>();
         private Dictionary<string, TextBox> uidNames = new Dictionary<string, TextBox>();
         private List<Panel> panels = new List<Panel>();
         private List<string> DisplayedParamNames;
+        private List<LineItem> linesClones = new List<LineItem>();
+        
 
         public Form1()
         {
@@ -142,6 +140,9 @@ namespace ParserNII
                             arrayResult.data[keys[i]].Select(d => d.ChartValue).ToList(),
                             keys[i],
                             Drawer.GetColor(i));
+
+                        linesClones.Add(((LineItem)zedGraphControl1.GraphPane.CurveList.Last()).Clone());
+
                         panels[DisplayedParamNames.IndexOf(keys[i])].BackColor = Drawer.GetColor(i);
                     }
 
@@ -206,6 +207,23 @@ namespace ParserNII
                 checkBox.Text = DisplayedParamNames[i];
                 checkBox.UseVisualStyleBackColor = true;
                 checkBoxes.Add(checkBox);
+                checkBox.Checked = true;
+                int index = i;
+                
+                checkBox.CheckedChanged += (object sender, EventArgs e) =>
+                {
+                    
+                    if (!checkBox.Checked)
+                    {
+                        zedGraphControl1.GraphPane.CurveList[index].Clear();
+                        zedGraphControl1.Refresh();
+                    }
+                    else
+                    {
+                        zedGraphControl1.GraphPane.CurveList[index] = linesClones[index];
+                        zedGraphControl1.Refresh();
+                    }
+                };
 
                 var panel = new Panel();
                 panel3.Controls.Add(panel);
@@ -221,6 +239,11 @@ namespace ParserNII
         }
 
         private void zedGraphControl1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
 
         }
