@@ -92,13 +92,13 @@ namespace ParserNII.DataStructures
                 buffer = new byte[4];
                 stream.Read(buffer, 0, buffer.Length);
                 var Latitude = BitConverter.ToInt32(buffer, 0);
-                result.data.Add("Широта", new DataElement { OriginalValue = Latitude, DisplayValue = Latitude.ToString(), ChartValue = Latitude, Display = true });
+                result.data.Add("Широта", new DataElement { OriginalValue = Latitude, DisplayValue = ParseCoordinate(Latitude), ChartValue = Latitude, Display = true });
 
                 // int
                 buffer = new byte[4];
                 stream.Read(buffer, 0, buffer.Length);
                 var Longitude = BitConverter.ToInt32(buffer, 0);
-                result.data.Add("Долгота", new DataElement { OriginalValue = Longitude, DisplayValue = Longitude.ToString(), ChartValue = Longitude, Display = true });
+                result.data.Add("Долгота", new DataElement { OriginalValue = Longitude, DisplayValue = ParseCoordinate(Longitude), ChartValue = Longitude, Display = true });
 
 
                 // byte
@@ -129,7 +129,7 @@ namespace ParserNII.DataStructures
                 buffer = new byte[4];
                 stream.Read(buffer, 0, buffer.Length);
                 var TabularNumber = BitConverter.ToInt32(buffer, 0);
-                result.data.Add("Табельный номер", new DataElement { OriginalValue = TabularNumber, DisplayValue = TabularNumber.ToString(), ChartValue = TabularNumber, Display = true });
+                result.data.Add("Табельный номер", new DataElement { OriginalValue = TabularNumber, DisplayValue = TabularNumber.ToString(), ChartValue = TabularNumber });
 
                 // skip 2 bytes
                 stream.ReadByte();
@@ -151,7 +151,7 @@ namespace ParserNII.DataStructures
                 buffer = new byte[2];
                 stream.Read(buffer, 0, buffer.Length);
                 var BIVersion = BitConverter.ToUInt16(buffer, 0);
-                result.data.Add("Версия БИ", new DataElement { OriginalValue = BIVersion, DisplayValue = BIVersion.ToString(), ChartValue = BIVersion, Display = true });
+                result.data.Add("Версия БИ", new DataElement { OriginalValue = BIVersion, DisplayValue = BIVersion.ToString(), ChartValue = BIVersion });
 
                 // short
                 buffer = new byte[2];
@@ -302,6 +302,12 @@ namespace ParserNII.DataStructures
             }
 
             return result;
-        } 
+        }
+
+        private string ParseCoordinate(int coordinate)
+        {
+            string coordinateStr = coordinate.ToString();
+            return $"{coordinateStr.Substring(0, 2)}°{coordinateStr.Substring(2, 2)}′{coordinateStr.Substring(4, 2)},{coordinateStr.Substring(6, coordinateStr.Length - 6)}";
+        }
     }
 }
