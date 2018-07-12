@@ -113,28 +113,28 @@ namespace ParserNII
                 {
                     DatFileParser parser = new DatFileParser();
                     var result = parser.Parse(stream);
-                    label2.Text = result[0].data["Тип метки"].DisplayValue;
+                    label2.Text = result[0].Data["Тип метки"].DisplayValue;
                     label4.Text = DateTimeOffset.Now.ToString("dd.MM.yyyy HH:mm:ss");
-                    label7.Text = result[0].data["Тип локомотива"].DisplayValue;
+                    label7.Text = result[0].Data["Тип локомотива"].DisplayValue;
                     label6.Text = (stream.Length / 1024).ToString();
-                    label10.Text = result[0].data["Секция локомотива"].DisplayValue;
-                    label12.Text = result[0].data["№ тепловоза"].DisplayValue;
+                    label10.Text = result[0].Data["Секция локомотива"].DisplayValue;
+                    label12.Text = result[0].Data["№ тепловоза"].DisplayValue;
 
-                    label40.Text = result.First().data["Время в “UNIX” формате"].DisplayValue + " - " + result.Last().data["Время в “UNIX” формате"].DisplayValue;
+                    label40.Text = result.First().Data["Время в “UNIX” формате"].DisplayValue + " - " + result.Last().Data["Время в “UNIX” формате"].DisplayValue;
 
                     var arrayResult = parser.ToArray(result);
 
                     DisplayPanelElements(result[0]);
 
-                    var xValues = result.Select(r => DateTimeOffset.FromUnixTimeSeconds((uint)r.data["Время в “UNIX” формате"].OriginalValue).AddHours(3)).ToList();
+                    var xValues = result.Select(r => DateTimeOffset.FromUnixTimeSeconds((uint)r.Data["Время в “UNIX” формате"].OriginalValue).AddHours(3)).ToList();
 
                     Drawer.Initialize(zedGraphControl1);
-                    var keys = result[0].data.Keys.Where(k => result[0].data[k].Display).ToArray();
+                    var keys = result[0].Data.Keys.Where(k => result[0].Data[k].Display).ToArray();
 
                     for (int i = 0; i < keys.Length; i++)
                     {
                         Drawer.DrawGraph(zedGraphControl1, xValues,
-                            arrayResult.data[keys[i]].Select(d => d.ChartValue).ToList(),
+                            arrayResult.Data[keys[i]].Select(d => d.ChartValue).ToList(),
                             keys[i],
                             Drawer.GetColor(i));
 
@@ -147,7 +147,7 @@ namespace ParserNII
 
                         for (int i = 0; i < keys.Length; i++)
                         {
-                            uidNames[keys[i]].Text = result[pt].data[keys[i]].DisplayValue;
+                            uidNames[keys[i]].Text = result[pt].Data[keys[i]].DisplayValue;
                         }
 
                         return "";
@@ -176,7 +176,7 @@ namespace ParserNII
         {
             DisplayedParamNames = new List<string>();
 
-            var keys = data.data.Keys.Where(k => data.data[k].Display).ToArray();
+            var keys = data.Data.Keys.Where(k => data.Data[k].Display).ToArray();
 
             for (int i = 0; i < keys.Length; i++)
             {
