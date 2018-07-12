@@ -3,23 +3,21 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using ParserNII.DataStructures;
 using ZedGraph;
-using Label = System.Windows.Forms.Label;
 
 namespace ParserNII
 {
     public partial class Form1 : Form
     {
-        private List<string> paramNames = new List<string>();
-        private List<TextBox> textBoxes = new List<TextBox>();
-        private List<CheckBox> checkBoxes = new List<CheckBox>();
-        private Dictionary<string, TextBox> uidNames = new Dictionary<string, TextBox>();
-        private List<Panel> panels = new List<Panel>();
+        private List<string> paramNames;
+        private List<TextBox> textBoxes;
+        private List<CheckBox> checkBoxes;
+        private Dictionary<string, TextBox> uidNames;
+        private List<Panel> panels;
         private List<string> DisplayedParamNames;
+        private List<ZedGraphControl.PointValueHandler> pointEventHandlers = new List<ZedGraphControl.PointValueHandler>();
 
 
         public Form1()
@@ -109,10 +107,22 @@ namespace ParserNII
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 Stream stream = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+                var parser = Path.GetExtension(ofd.FileName) == ".dat" ? (Parser)new DatFileParser() : new BinFileParser();
+                List<DataFile> result = parser.Parse(stream);
+                
+
+                foreach (var pointEventHandler in pointEventHandlers)
+                {
+                    zedGraphControl1.PointValueEvent -= pointEventHandler;
+                }
+
+                pointEventHandlers = new List<ZedGraphControl.PointValueHandler>();
+
+                List<DateTimeOffset> xValues;
                 if (Path.GetExtension(ofd.FileName) == ".dat")
                 {
-                    DatFileParser parser = new DatFileParser();
-                    var result = parser.Parse(stream);
+                    xValues = result.Select(r => DateTimeOffset.FromUnixTimeSeconds((uint)r.Data["Время в “UNIX” формате"].OriginalValue).AddHours(3)).ToList();
+
                     label2.Text = result[0].Data["Тип метки"].DisplayValue;
                     label4.Text = DateTimeOffset.Now.ToString("dd.MM.yyyy HH:mm:ss");
                     label7.Text = result[0].Data["Тип локомотива"].DisplayValue;
@@ -121,52 +131,45 @@ namespace ParserNII
                     label12.Text = result[0].Data["№ тепловоза"].DisplayValue;
 
                     label40.Text = result.First().Data["Время в “UNIX” формате"].DisplayValue + " - " + result.Last().Data["Время в “UNIX” формате"].DisplayValue;
-
-                    var arrayResult = parser.ToArray(result);
-
-                    DisplayPanelElements(result[0]);
-
-                    var xValues = result.Select(r => DateTimeOffset.FromUnixTimeSeconds((uint)r.Data["Время в “UNIX” формате"].OriginalValue).AddHours(3)).ToList();
-
-                    Drawer.Initialize(zedGraphControl1);
-                    var keys = result[0].Data.Keys.Where(k => result[0].Data[k].Display).ToArray();
-
-                    for (int i = 0; i < keys.Length; i++)
-                    {
-                        Drawer.DrawGraph(zedGraphControl1, xValues,
-                            arrayResult.Data[keys[i]].Select(d => d.ChartValue).ToList(),
-                            keys[i],
-                            Drawer.GetColor(i));
-
-                        panels[DisplayedParamNames.IndexOf(keys[i])].BackColor = Drawer.GetColor(i);
-                    }
-
-                    zedGraphControl1.IsShowPointValues = true;
-                    zedGraphControl1.PointValueEvent += (pointSender, graphPane, curve, pt) =>
-                    {
-
-                        for (int i = 0; i < keys.Length; i++)
-                        {
-                            uidNames[keys[i]].Text = result[pt].Data[keys[i]].DisplayValue;
-                        }
-
-                        return "";
-
-                    };
-
                 }
                 else
                 {
-                    BinFileParser parser = new BinFileParser();
-                    var result = parser.Parse(stream);
-                    foreach (var binFile in result)
+                    xValues = result.Select(r => DateTimeOffset.FromUnixTimeMilliseconds((long)r.Data["Время в “UNIX” формате"].OriginalValue).AddHours(3)).ToList();
+                }
+
+                var arrayResult = parser.ToArray(result);
+
+                DisplayPanelElements(result[0]);
+
+
+
+                Drawer.Initialize(zedGraphControl1);
+                var keys = result[0].Data.Keys.Where(k => result[0].Data[k].Display).ToArray();
+
+                for (int i = 0; i < keys.Length; i++)
+                {
+                    Drawer.DrawGraph(zedGraphControl1, xValues,
+                        arrayResult.Data[keys[i]].Select(d => d.ChartValue).ToList(),
+                        keys[i],
+                        Drawer.GetColor(i));
+
+                    panels[DisplayedParamNames.IndexOf(keys[i])].BackColor = Drawer.GetColor(i);
+                }
+
+                zedGraphControl1.IsShowPointValues = true;
+
+                pointEventHandlers.Add((pointSender, graphPane, curve, pt) =>
+                {
+
+                    for (int i = 0; i < keys.Length; i++)
                     {
-                        var date = DateTimeOffset.FromUnixTimeMilliseconds(binFile.Date);
+                        uidNames[keys[i]].Text = result[pt].Data[keys[i]].DisplayValue;
                     }
 
-                    var dictionaryResult = parser.ToDictionary(result);
+                    return "";
 
-                }
+                });
+                zedGraphControl1.PointValueEvent += pointEventHandlers.Last();
 
                 stream.Close();
             }
@@ -174,8 +177,12 @@ namespace ParserNII
 
         private void DisplayPanelElements(DataFile data)
         {
+            panel3.Controls.Clear();
             DisplayedParamNames = new List<string>();
-
+            textBoxes = new List<TextBox>();
+            checkBoxes = new List<CheckBox>();
+            panels = new List<Panel>();
+            uidNames = new Dictionary<string, TextBox>();
             var keys = data.Data.Keys.Where(k => data.Data[k].Display).ToArray();
 
             for (int i = 0; i < keys.Length; i++)
@@ -225,11 +232,6 @@ namespace ParserNII
         }
 
         private void zedGraphControl1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
 
         }

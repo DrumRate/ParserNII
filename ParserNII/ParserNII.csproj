@@ -60,6 +60,7 @@
     <Compile Include="DataStructures\DatFileParser.cs" />
     <Compile Include="DataStructures\FirstMinuteByteParams.cs" />
     <Compile Include="DataStructures\FirstSecondByteParams.cs" />
+    <Compile Include="DataStructures\Parser.cs" />
     <Compile Include="DataStructures\SecondBlock.cs" />
     <Compile Include="Drawer.cs" />
     <Compile Include="Extensions\Extension.cs" />
