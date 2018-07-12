@@ -23,6 +23,7 @@ namespace ParserNII
         public Form1()
         {
             InitializeComponent();
+            button1.Visible = false;
             paramNames = new List<string>
             {
                 { "Температура контура охлаждения" },
@@ -89,6 +90,7 @@ namespace ParserNII
                 { "Плотность топлива при экипировке"},
                 { "Версия БИ"},
             };
+
 
 
         }
@@ -211,6 +213,7 @@ namespace ParserNII
                 checkBoxes.Add(checkBox);
                 checkBox.Checked = true;
                 int index = i;
+                button1.Visible = true;
 
                 checkBox.CheckedChanged += (object sender, EventArgs e) =>
                 {
@@ -238,10 +241,11 @@ namespace ParserNII
 
         private void button1_Click(object sender, EventArgs e)
         {
-            foreach (var checkBox in checkBoxes)
-            {
-                checkBox.Checked = false;
-            }
+                foreach (var checkBox in checkBoxes)
+                {
+                    checkBox.Checked = false;
+                }
+                
         }
     }
 }

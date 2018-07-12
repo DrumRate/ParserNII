@@ -65,7 +65,7 @@ namespace ParserNII.DataStructures
                 buffer = new byte[2];
                 stream.Read(buffer, 0, buffer.Length);
                 var RightFuelVolume = BitConverter.ToUInt16(buffer, 0);
-                result.Data.Add("Объем топлива правый", new DataElement { OriginalValue = RightFuelVolume, DisplayValue = RightFuelVolume.ToString(), ChartValue = LeftFuelVolume, Display = true });
+                result.Data.Add("Объем топлива правый", new DataElement { OriginalValue = RightFuelVolume, DisplayValue = RightFuelVolume.ToString(), ChartValue = RightFuelVolume, Display = true });
 
                 // short
                 buffer = new byte[2];
@@ -293,8 +293,8 @@ namespace ParserNII.DataStructures
 
         private string ParseCoordinate(int coordinate)
         {
-            string coordinateStr = coordinate.ToString();
-            return $"{coordinateStr.Substring(0, 2)}.{coordinateStr.Substring(3,coordinateStr.Length - 3)}";
+            double coordDouble = coordinate * 0.000001000;
+            return coordDouble.ToString();
         }
     }
 }

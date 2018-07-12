@@ -55,8 +55,8 @@ namespace ParserNII
             pane.XAxis.MajorGrid.DashOff = 5;
             pane.XAxis.MajorGrid.Color = Color.LightGray;
             pane.XAxis.MajorGrid.IsZeroLine = true;
+            control.IsEnableVZoom = false;
 
-          
         }
 
         public static void DrawGraph(ZedGraphControl control, List<DateTimeOffset> x, List<double> y, string name,Color color)
