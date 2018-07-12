@@ -20,8 +20,7 @@ namespace ParserNII
         private Dictionary<string, TextBox> uidNames = new Dictionary<string, TextBox>();
         private List<Panel> panels = new List<Panel>();
         private List<string> DisplayedParamNames;
-        private List<LineItem> linesClones = new List<LineItem>();
-        
+
 
         public Form1()
         {
@@ -109,14 +108,12 @@ namespace ParserNII
             ofd.RestoreDirectory = true;
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                IFormatter formatter = new BinaryFormatter();
                 Stream stream = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
                 if (Path.GetExtension(ofd.FileName) == ".dat")
                 {
                     DatFileParser parser = new DatFileParser();
                     var result = parser.Parse(stream);
                     label2.Text = result[0].data["Тип метки"].DisplayValue;
-                    //DateTimeOffset time = DateTimeOffset.FromUnixTimeSeconds(result[0].UnixTime);
                     label4.Text = DateTimeOffset.Now.ToString("dd.MM.yyyy HH:mm:ss");
                     label7.Text = result[0].data["Тип локомотива"].DisplayValue;
                     label6.Text = (stream.Length / 1024).ToString();
@@ -140,8 +137,6 @@ namespace ParserNII
                             arrayResult.data[keys[i]].Select(d => d.ChartValue).ToList(),
                             keys[i],
                             Drawer.GetColor(i));
-
-                        linesClones.Add(((LineItem)zedGraphControl1.GraphPane.CurveList.Last()).Clone());
 
                         panels[DisplayedParamNames.IndexOf(keys[i])].BackColor = Drawer.GetColor(i);
                     }
@@ -209,20 +204,11 @@ namespace ParserNII
                 checkBoxes.Add(checkBox);
                 checkBox.Checked = true;
                 int index = i;
-                
+
                 checkBox.CheckedChanged += (object sender, EventArgs e) =>
                 {
-                    
-                    if (!checkBox.Checked)
-                    {
-                        zedGraphControl1.GraphPane.CurveList[index].Clear();
-                        zedGraphControl1.Refresh();
-                    }
-                    else
-                    {
-                        zedGraphControl1.GraphPane.CurveList[index] = linesClones[index];
-                        zedGraphControl1.Refresh();
-                    }
+                    zedGraphControl1.GraphPane.CurveList[index].IsVisible = checkBox.Checked;
+                    zedGraphControl1.Refresh();
                 };
 
                 var panel = new Panel();
