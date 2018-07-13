@@ -62,6 +62,7 @@
     <Compile Include="DataStructures\FirstSecondByteParams.cs" />
     <Compile Include="DataStructures\Parser.cs" />
     <Compile Include="DataStructures\SecondBlock.cs" />
+    <Compile Include="DataStructures\TrainNames.cs" />
     <Compile Include="Drawer.cs" />
     <Compile Include="Extensions\Extension.cs" />
     <Compile Include="Form1.cs">

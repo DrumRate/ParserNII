@@ -66,7 +66,6 @@ namespace ParserNII
             //pane.Title.Text = title;
             
             PointPairList list1 = new PointPairList();
-            var result = new Dictionary<PointPair, string>();
 
             for (int i = 0; i < x.Count; i++)
             {
@@ -76,7 +75,6 @@ namespace ParserNII
                     Y = y[i]
                 };
                 list1.Add(point);
-                result.Add(point,name);
             }
 
             int yAxis = pane.AddYAxis(name);

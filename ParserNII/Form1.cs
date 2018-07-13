@@ -129,7 +129,8 @@ namespace ParserNII
                     label4.Text = DateTimeOffset.Now.ToString("dd.MM.yyyy HH:mm:ss");
                     label7.Text = result[0].Data["Тип локомотива"].DisplayValue;
                     label6.Text = (stream.Length / 1024).ToString();
-                    label10.Text = result[0].Data["Секция локомотива"].DisplayValue;
+                    //  label10.Text = result[0].Data["Секция локомотива"].DisplayValue;
+                    label10.Text = TrainNames.NamesDictionary[(byte)result[0].Data["Тип локомотива"].OriginalValue];
                     label12.Text = result[0].Data["№ тепловоза"].DisplayValue;
 
                     label40.Text = result.First().Data["Время в “UNIX” формате"].DisplayValue + " - " + result.Last().Data["Время в “UNIX” формате"].DisplayValue;
