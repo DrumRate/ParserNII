@@ -207,14 +207,18 @@ namespace ParserNII
 
                 checkBox.CheckedChanged += (object sender, EventArgs e) =>
                 {
-                    zedGraphControl1.GraphPane.CurveList[index].IsVisible = checkBox.Checked;
-                    if (checkBox.Checked)
+                    if (zedGraphControl1.GraphPane.CurveList[index].IsVisible != checkBox.Checked)
                     {
-                        zedGraphControl1.RestoreScale(zedGraphControl1.GraphPane);
-                    }
-                    else
-                    {
-                        zedGraphControl1.Refresh();
+                        zedGraphControl1.GraphPane.CurveList[index].IsVisible = checkBox.Checked;
+
+                        if (checkBox.Checked)
+                        {
+                            zedGraphControl1.RestoreScale(zedGraphControl1.GraphPane);
+                        }
+                        else
+                        {
+                            zedGraphControl1.Refresh();
+                        }
                     }
                 };
 
@@ -239,10 +243,11 @@ namespace ParserNII
 
         private void button1_Click(object sender, EventArgs e)
         {
-            foreach (var checkBox in checkBoxes)
-            {
-                checkBox.Checked = false;
-            }
+            zedGraphControl1.GraphPane.CurveList.ForEach(c => c.IsVisible = false);
+
+            zedGraphControl1.Refresh();
+
+            checkBoxes.ForEach(cb => cb.Checked = false);
         }
     }
 }
