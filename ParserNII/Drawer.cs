@@ -7,7 +7,6 @@ namespace ParserNII
 {
     public class Drawer
     {
-
         public static Color GetColor(int i)
         {
             List<Color> colors = new List<Color>();
@@ -56,15 +55,14 @@ namespace ParserNII
             pane.XAxis.MajorGrid.Color = Color.LightGray;
             pane.XAxis.MajorGrid.IsZeroLine = true;
             control.IsEnableVZoom = false;
-
         }
 
-        public static void DrawGraph(ZedGraphControl control, List<DateTimeOffset> x, List<double> y, string name,Color color)
+        public static void DrawGraph(ZedGraphControl control, List<DateTimeOffset> x, List<double> y, string name, Color color)
         {
             GraphPane pane = control.GraphPane;
-           
+
             //pane.Title.Text = title;
-            
+
             PointPairList list1 = new PointPairList();
 
             for (int i = 0; i < x.Count; i++)
@@ -81,7 +79,7 @@ namespace ParserNII
             LineItem myCurve = pane.AddCurve(name, list1, color, SymbolType.None);
             myCurve.YAxisIndex = yAxis;
             myCurve.Line.Width = 1.0F;
-         //   pane.XAxis.Scale.Min = 0;
+            //   pane.XAxis.Scale.Min = 0;
             pane.YAxisList[yAxis].Scale.Min = 0;
             //    pane.XAxis.Scale.Max = Xmax;
             //    pane.YAxisList[yAxis].Scale.Max = Ymax + 0.05;
@@ -93,7 +91,11 @@ namespace ParserNII
             pane.YAxisList[yAxis].IsVisible = false;
             control.GraphPane.Title.IsVisible = false;
             control.GraphPane.Legend.IsVisible = false;
-            control.RestoreScale(pane);
+        }
+
+        public static void Refresh(ZedGraphControl control)
+        {
+            control.RestoreScale(control.GraphPane);
             control.AxisChange();
             control.Invalidate();
         }
@@ -109,7 +111,7 @@ namespace ParserNII
 
             pane.CurveList.Clear();
             pane.YAxisList.Clear();
-       //     control.AxisChange();
+            //     control.AxisChange();
             control.Invalidate();
         }
     }

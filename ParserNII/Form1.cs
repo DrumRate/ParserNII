@@ -19,7 +19,6 @@ namespace ParserNII
         private List<string> DisplayedParamNames;
         private List<ZedGraphControl.PointValueHandler> pointEventHandlers = new List<ZedGraphControl.PointValueHandler>();
 
-
         public Form1()
         {
             InitializeComponent();
@@ -90,14 +89,6 @@ namespace ParserNII
                 { "Плотность топлива при экипировке"},
                 { "Версия БИ"},
             };
-
-
-
-        }
-
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
         }
 
         private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -111,7 +102,6 @@ namespace ParserNII
                 Stream stream = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
                 var parser = Path.GetExtension(ofd.FileName) == ".dat" ? (Parser)new DatFileParser() : new BinFileParser();
                 List<DataFile> result = parser.Parse(stream);
-                
 
                 foreach (var pointEventHandler in pointEventHandlers)
                 {
@@ -146,8 +136,6 @@ namespace ParserNII
 
                 DisplayPanelElements(result[0]);
 
-
-
                 Drawer.Initialize(zedGraphControl1);
                 var keys = result[0].Data.Keys.Where(k => result[0].Data[k].Display).ToArray();
 
@@ -163,17 +151,18 @@ namespace ParserNII
 
                 zedGraphControl1.IsShowPointValues = true;
 
+                Drawer.Refresh(zedGraphControl1);
+
                 pointEventHandlers.Add((pointSender, graphPane, curve, pt) =>
                 {
-
                     for (int i = 0; i < keys.Length; i++)
                     {
                         uidNames[keys[i]].Text = result[pt].Data[keys[i]].DisplayValue;
                     }
 
                     return "";
-
                 });
+
                 zedGraphControl1.PointValueEvent += pointEventHandlers.Last();
 
                 stream.Close();
@@ -192,13 +181,12 @@ namespace ParserNII
 
             for (int i = 0; i < keys.Length; i++)
             {
-
                 DisplayedParamNames.Add(keys[i]);
 
                 var textBox = new TextBox();
                 textBoxes.Add(textBox);
                 panel3.Controls.Add(textBox);
-                textBox.Location = new Point(4, 4 + i * 26);
+                textBox.Location = new Point(2, 4 + i * 26);
                 textBox.Name = $"textBox{i}";
                 textBox.ReadOnly = true;
                 textBox.Size = new Size(82, 20);
@@ -207,7 +195,7 @@ namespace ParserNII
                 var checkBox = new CheckBox();
                 panel3.Controls.Add(checkBox);
                 checkBox.AutoSize = true;
-                checkBox.Location = new Point(110, 6 + i * 26);
+                checkBox.Location = new Point(108, 6 + i * 26);
                 checkBox.Name = $"checkBox{i}";
                 checkBox.Size = new Size(80, 17);
                 checkBox.TabIndex = 0;
@@ -216,7 +204,6 @@ namespace ParserNII
                 checkBoxes.Add(checkBox);
                 checkBox.Checked = true;
                 int index = i;
-                button1.Visible = true;
 
                 checkBox.CheckedChanged += (object sender, EventArgs e) =>
                 {
@@ -226,15 +213,16 @@ namespace ParserNII
 
                 var panel = new Panel();
                 panel3.Controls.Add(panel);
-                panel.Location = new Point(90, 6 + i * 26);
+                panel.Location = new Point(88, 6 + i * 26);
                 panel.Name = $"panel{i}";
                 panel.Size = new Size(17, 17);
                 panel.TabIndex = 0;
                 panels.Add(panel);
 
                 uidNames.Add(DisplayedParamNames[i], textBoxes[i]);
-
             }
+
+            button1.Visible = true;
         }
 
         private void zedGraphControl1_Load(object sender, EventArgs e)
@@ -244,12 +232,10 @@ namespace ParserNII
 
         private void button1_Click(object sender, EventArgs e)
         {
-                foreach (var checkBox in checkBoxes)
-                {
-                    checkBox.Checked = false;
-                }
-                
+            foreach (var checkBox in checkBoxes)
+            {
+                checkBox.Checked = false;
+            }
         }
     }
 }
-
