@@ -16,7 +16,7 @@ namespace ParserNII
         private List<CheckBox> checkBoxes;
         private Dictionary<string, TextBox> uidNames;
         private List<Panel> panels;
-        private List<string> DisplayedParamNames;
+        private Dictionary<string, int> DisplayedParamNames;
         private List<ZedGraphControl.PointValueHandler> pointEventHandlers = new List<ZedGraphControl.PointValueHandler>();
 
         public Form1()
@@ -146,7 +146,7 @@ namespace ParserNII
                         keys[i],
                         Drawer.GetColor(i));
 
-                    panels[DisplayedParamNames.IndexOf(keys[i])].BackColor = Drawer.GetColor(i);
+                    panels[DisplayedParamNames[keys[i]]].BackColor = Drawer.GetColor(i);
                 }
 
                 zedGraphControl1.IsShowPointValues = true;
@@ -172,7 +172,7 @@ namespace ParserNII
         private void DisplayPanelElements(DataFile data)
         {
             panel3.Controls.Clear();
-            DisplayedParamNames = new List<string>();
+            DisplayedParamNames = new Dictionary<string, int>();
             textBoxes = new List<TextBox>();
             checkBoxes = new List<CheckBox>();
             panels = new List<Panel>();
@@ -181,7 +181,7 @@ namespace ParserNII
 
             for (int i = 0; i < keys.Length; i++)
             {
-                DisplayedParamNames.Add(keys[i]);
+                DisplayedParamNames.Add(keys[i], i);
 
                 var textBox = new TextBox();
                 textBoxes.Add(textBox);
@@ -199,7 +199,7 @@ namespace ParserNII
                 checkBox.Name = $"checkBox{i}";
                 checkBox.Size = new Size(80, 17);
                 checkBox.TabIndex = 0;
-                checkBox.Text = DisplayedParamNames[i];
+                checkBox.Text = keys[i];
                 checkBox.UseVisualStyleBackColor = true;
                 checkBoxes.Add(checkBox);
                 checkBox.Checked = true;
@@ -208,7 +208,14 @@ namespace ParserNII
                 checkBox.CheckedChanged += (object sender, EventArgs e) =>
                 {
                     zedGraphControl1.GraphPane.CurveList[index].IsVisible = checkBox.Checked;
-                    zedGraphControl1.Refresh();
+                    if (checkBox.Checked)
+                    {
+                        zedGraphControl1.RestoreScale(zedGraphControl1.GraphPane);
+                    }
+                    else
+                    {
+                        zedGraphControl1.Refresh();
+                    }
                 };
 
                 var panel = new Panel();
@@ -219,7 +226,7 @@ namespace ParserNII
                 panel.TabIndex = 0;
                 panels.Add(panel);
 
-                uidNames.Add(DisplayedParamNames[i], textBoxes[i]);
+                uidNames.Add(keys[i], textBoxes[i]);
             }
 
             button1.Visible = true;
