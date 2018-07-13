@@ -138,6 +138,8 @@ namespace ParserNII
                 else
                 {
                     xValues = result.Select(r => DateTimeOffset.FromUnixTimeMilliseconds((long)r.Data["Время в “UNIX” формате"].OriginalValue).AddHours(3)).ToList();
+                    string[] nameParams = Path.GetFileName(ofd.FileName).Split('_', '-');
+                    label10.Text = nameParams[2];
                 }
 
                 var arrayResult = parser.ToArray(result);
