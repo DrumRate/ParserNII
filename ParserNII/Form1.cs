@@ -119,6 +119,7 @@ namespace ParserNII
                     label4.Text = DateTimeOffset.Now.ToString("dd.MM.yyyy HH:mm:ss");
                     label7.Text = result[0].Data["Тип локомотива"].DisplayValue;
                     label6.Text = (stream.Length / 1024).ToString();
+
                     //  label10.Text = result[0].Data["Секция локомотива"].DisplayValue;
                     label10.Text = TrainNames.NamesDictionary[(byte)result[0].Data["Тип локомотива"].OriginalValue];
                     label12.Text = result[0].Data["№ тепловоза"].DisplayValue;
@@ -130,6 +131,9 @@ namespace ParserNII
                     xValues = result.Select(r => DateTimeOffset.FromUnixTimeMilliseconds((long)r.Data["Время в “UNIX” формате"].OriginalValue).AddHours(3)).ToList();
                     string[] nameParams = Path.GetFileName(ofd.FileName).Split('_', '-');
                     label10.Text = nameParams[2];
+                    label12.Text = nameParams[3];
+                    label7.Text = nameParams[4];
+                    //label6.Text = (stream.Length / 1024).ToString();
                 }
 
                 var arrayResult = parser.ToArray(result);
