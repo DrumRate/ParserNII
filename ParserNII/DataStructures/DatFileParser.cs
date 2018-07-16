@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace ParserNII.DataStructures
 {
@@ -225,8 +226,8 @@ namespace ParserNII.DataStructures
                 for (int i = 0; i < 20; i++)
                 {
                     secondsResult[i] = result.Clone();
-
-                    //  SecondBlock result = new SecondBlock();
+                    uint timeWithSeconds = unixTime + (uint) (i * 3);
+                    secondsResult[i].Data["Время в “UNIX” формате"] = new DataElement { OriginalValue = timeWithSeconds, DisplayValue = DateTimeOffset.FromUnixTimeSeconds(timeWithSeconds).AddHours(3).ToString("dd.MM.yyyy HH:mm:ss") };
 
                     // short (enum)
                     buffer = new byte[] { dataChunk[position++], dataChunk[position++] };

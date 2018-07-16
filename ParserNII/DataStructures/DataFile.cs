@@ -6,10 +6,6 @@ namespace ParserNII.DataStructures
     {
         public Dictionary<string, DataElement> Data = new Dictionary<string, DataElement>();
 
-        
-        // time data
-        public readonly SecondBlock[] SecondsBlock = new SecondBlock[20];
-
         public DataFile Clone()
         {
             return new DataFile
