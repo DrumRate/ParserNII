@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices;
+using System.Linq;
 
 namespace ParserNII.DataStructures
 {
@@ -299,6 +299,22 @@ namespace ParserNII.DataStructures
                     // skip byte
                     position++;
                     
+                }
+
+                if (j > 0 && (uint)secondsResult[0].Data["Время в “UNIX” формате"].OriginalValue -
+                    (uint)results.Last().Data["Время в “UNIX” формате"].OriginalValue > 63)
+                {
+                    var emptyResult = secondsResult[0].Clone();
+                    var dataKeys = emptyResult.Data.Keys.ToArray();
+                    for (int k = 0; k < dataKeys.Length; k++)
+                    {
+                        if (emptyResult.Data[dataKeys[k]].Display)
+                        {
+                            emptyResult.Data[dataKeys[k]] = new DataElement() { OriginalValue = null, DisplayValue = "Разрыв", ChartValue = double.NaN, Display = true };
+                        }
+                    }
+
+                    results.Add(emptyResult);
                 }
 
                 results.AddRange(secondsResult);
