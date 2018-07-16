@@ -79,6 +79,8 @@ namespace ParserNII
             LineItem myCurve = pane.AddCurve(name, list1, color, SymbolType.None);
             myCurve.YAxisIndex = yAxis;
             myCurve.Line.Width = 1.0F;
+            myCurve.Line.StepType = StepType.ForwardStep;
+
             //   pane.XAxis.Scale.Min = 0;
             pane.YAxisList[yAxis].Scale.Min = 0;
             //    pane.XAxis.Scale.Max = Xmax;

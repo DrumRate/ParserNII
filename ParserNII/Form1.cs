@@ -213,7 +213,8 @@ namespace ParserNII
 
                         if (checkBox.Checked)
                         {
-                            zedGraphControl1.RestoreScale(zedGraphControl1.GraphPane);
+                            zedGraphControl1.AxisChange();
+                            zedGraphControl1.Refresh();
                         }
                         else
                         {
