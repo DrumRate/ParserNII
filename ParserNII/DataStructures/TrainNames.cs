@@ -2,7 +2,7 @@
 
 namespace ParserNII.DataStructures
 {
-    public class TrainNames
+    public static class TrainNames
     {
         public static readonly Dictionary<byte, string> NamesDictionary = new Dictionary<byte, string>
         {

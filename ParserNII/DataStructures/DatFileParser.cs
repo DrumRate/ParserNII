@@ -29,8 +29,7 @@ namespace ParserNII.DataStructures
                 result.Data.Add("Тип метки", new DataElement { OriginalValue = labelType, DisplayValue = labelType.ToString() });
 
                 // int
-                buffer = new byte[] { dataChunk[position++], dataChunk[position++], dataChunk[position++], dataChunk[position++] };
-                // stream.Read(buffer, 0, buffer.Length);
+                buffer = new[] { dataChunk[position++], dataChunk[position++], dataChunk[position++], dataChunk[position++] };
                 var unixTime = BitConverter.ToUInt32(buffer, 0);
                 result.Data.Add("Время в “UNIX” формате", new DataElement { OriginalValue = unixTime, DisplayValue = DateTimeOffset.FromUnixTimeSeconds(unixTime).AddHours(3).ToString("dd.MM.yyyy HH:mm:ss") });
 
@@ -39,8 +38,7 @@ namespace ParserNII.DataStructures
                 result.Data.Add("Тип локомотива", new DataElement { OriginalValue = LocomotiveType, DisplayValue = LocomotiveType.ToString() });
 
                 // short
-                buffer = new byte[] { dataChunk[position++], dataChunk[position++] };
-                // stream.Read(buffer, 0, buffer.Length);
+                buffer = new[] { dataChunk[position++], dataChunk[position++] };
                 var LocomotiveNumber = BitConverter.ToUInt16(buffer, 0);
                 result.Data.Add("№ тепловоза", new DataElement { OriginalValue = LocomotiveNumber, DisplayValue = LocomotiveNumber.ToString() });
 
@@ -51,8 +49,7 @@ namespace ParserNII.DataStructures
 
 
                 // short (enum)
-                buffer = new byte[] { dataChunk[position++], dataChunk[position++] };
-                //stream.Read(buffer, 0, buffer.Length);
+                buffer = new[] { dataChunk[position++], dataChunk[position++] };
                 var MinuteByteParametrs = (FirstMinuteByteParams)BitConverter.ToInt16(buffer, 0);
 
 
@@ -61,26 +58,22 @@ namespace ParserNII.DataStructures
                 result.Data.Add("Температура контура охлаждения", new DataElement { OriginalValue = CoolingCircuitTemperature, DisplayValue = CoolingCircuitTemperature.ToString(), ChartValue = CoolingCircuitTemperature, Display = true });
 
                 // short
-                buffer = new byte[] { dataChunk[position++], dataChunk[position++] };
-                //stream.Read(buffer, 0, buffer.Length);
+                buffer = new[] { dataChunk[position++], dataChunk[position++] };
                 var LeftFuelVolume = BitConverter.ToUInt16(buffer, 0);
                 result.Data.Add("Объем топлива левый", new DataElement { OriginalValue = LeftFuelVolume, DisplayValue = LeftFuelVolume.ToString(), ChartValue = LeftFuelVolume, Display = true });
 
                 // short
-                buffer = new byte[] { dataChunk[position++], dataChunk[position++] };
-                //stream.Read(buffer, 0, buffer.Length);
+                buffer = new[] { dataChunk[position++], dataChunk[position++] };
                 var RightFuelVolume = BitConverter.ToUInt16(buffer, 0);
                 result.Data.Add("Объем топлива правый", new DataElement { OriginalValue = RightFuelVolume, DisplayValue = RightFuelVolume.ToString(), ChartValue = RightFuelVolume, Display = true });
 
                 // short
-                buffer = new byte[] { dataChunk[position++], dataChunk[position++] };
-                // stream.Read(buffer, 0, buffer.Length);
+                buffer = new[] { dataChunk[position++], dataChunk[position++] };
                 var MiddleFuelVolume = BitConverter.ToUInt16(buffer, 0);
                 result.Data.Add("Объем топлива средний", new DataElement { OriginalValue = MiddleFuelVolume, DisplayValue = MiddleFuelVolume.ToString(), ChartValue = MiddleFuelVolume, Display = true });
 
                 // short
-                buffer = new byte[] { dataChunk[position++], dataChunk[position++] };
-                //stream.Read(buffer, 0, buffer.Length);
+                buffer = new[] { dataChunk[position++], dataChunk[position++] };
                 var FuelMass = BitConverter.ToUInt16(buffer, 0);
                 result.Data.Add("Масса  топлива", new DataElement { OriginalValue = FuelMass, DisplayValue = FuelMass.ToString(), ChartValue = FuelMass, Display = true });
 
@@ -93,14 +86,12 @@ namespace ParserNII.DataStructures
                 result.Data.Add("Температура ТС ДУТ правая", new DataElement { OriginalValue = RightTsDutTemperature, DisplayValue = RightTsDutTemperature.ToString(), ChartValue = RightTsDutTemperature, Display = true });
 
                 // int
-                buffer = new byte[] { dataChunk[position++], dataChunk[position++], dataChunk[position++], dataChunk[position++] };
-                //stream.Read(buffer, 0, buffer.Length);
+                buffer = new[] { dataChunk[position++], dataChunk[position++], dataChunk[position++], dataChunk[position++] };
                 var Latitude = BitConverter.ToInt32(buffer, 0);
                 result.Data.Add("Широта", new DataElement { OriginalValue = Latitude, DisplayValue = ParseCoordinate(Latitude), ChartValue = Latitude, Display = true });
 
                 // int
-                buffer = new byte[] { dataChunk[position++], dataChunk[position++], dataChunk[position++], dataChunk[position++] };
-                //stream.Read(buffer, 0, buffer.Length);
+                buffer = new[] { dataChunk[position++], dataChunk[position++], dataChunk[position++], dataChunk[position++] };
                 var Longitude = BitConverter.ToInt32(buffer, 0);
                 result.Data.Add("Долгота", new DataElement { OriginalValue = Longitude, DisplayValue = ParseCoordinate(Longitude), ChartValue = Longitude, Display = true });
 
@@ -130,94 +121,78 @@ namespace ParserNII.DataStructures
                 result.Data.Add("Напряжение ИБП", new DataElement { OriginalValue = UPSVoltage, DisplayValue = UPSVoltage.ToString(), ChartValue = UPSVoltage, Display = true });
 
                 // int
-                buffer = new byte[] { dataChunk[position++], dataChunk[position++], dataChunk[position++], dataChunk[position++] };
-                //stream.Read(buffer, 0, buffer.Length);
-                var TabularNumber = BitConverter.ToInt32(buffer, 0);
-                result.Data.Add("Табельный номер", new DataElement { OriginalValue = TabularNumber, DisplayValue = TabularNumber.ToString(), ChartValue = TabularNumber });
+                buffer = new[] { dataChunk[position++], dataChunk[position++], dataChunk[position++], dataChunk[position++] };
+                var tabularNumber = BitConverter.ToInt32(buffer, 0);
+                result.Data.Add("Табельный номер", new DataElement { OriginalValue = tabularNumber, DisplayValue = tabularNumber.ToString(), ChartValue = tabularNumber });
 
                 // skip 2 bytes
-                //stream.ReadByte();
-                //stream.ReadByte();
-                position++;
-                position++;
+                position+=2;
 
                 // short
-                buffer = new byte[] { dataChunk[position++], dataChunk[position++] };
-                //stream.Read(buffer, 0, buffer.Length);
+                buffer = new[] { dataChunk[position++], dataChunk[position++] };
                 var TKCoefficient = BitConverter.ToInt16(buffer, 0);
                 result.Data.Add("Коэффициент по ТК", new DataElement { OriginalValue = TKCoefficient, DisplayValue = TKCoefficient.ToString(), ChartValue = TKCoefficient, Display = true });
 
                 // short
-                buffer = new byte[] { dataChunk[position++], dataChunk[position++] };
-                //stream.Read(buffer, 0, buffer.Length);
-                var EquipmentAmount = BitConverter.ToInt16(buffer, 0);
-                result.Data.Add("Объем экипировки", new DataElement { OriginalValue = EquipmentAmount, DisplayValue = EquipmentAmount.ToString(), ChartValue = EquipmentAmount, Display = true });
+                buffer = new[] { dataChunk[position++], dataChunk[position++] };
+                var equipmentAmount = BitConverter.ToInt16(buffer, 0);
+                result.Data.Add("Объем экипировки", new DataElement { OriginalValue = equipmentAmount, DisplayValue = equipmentAmount.ToString(), ChartValue = equipmentAmount, Display = true });
 
                 // short
-                buffer = new byte[] { dataChunk[position++], dataChunk[position++] };
-                //stream.Read(buffer, 0, buffer.Length);
+                buffer = new[] { dataChunk[position++], dataChunk[position++] };
                 var BIVersion = BitConverter.ToUInt16(buffer, 0);
                 result.Data.Add("Версия БИ", new DataElement { OriginalValue = BIVersion, DisplayValue = BIVersion.ToString(), ChartValue = BIVersion });
 
                 // short
-                buffer = new byte[] { dataChunk[position++], dataChunk[position++] };
-                //stream.Read(buffer, 0, buffer.Length);
-                var LeftDUTOffset = (double)BitConverter.ToInt16(buffer, 0) / 10;
-                result.Data.Add("Смещение ДУТ левого", new DataElement { OriginalValue = LeftDUTOffset, DisplayValue = LeftDUTOffset.ToString(), ChartValue = LeftDUTOffset, Display = true });
+                buffer = new[] { dataChunk[position++], dataChunk[position++] };
+                var leftDUTOffset = (double)BitConverter.ToInt16(buffer, 0) / 10;
+                result.Data.Add("Смещение ДУТ левого", new DataElement { OriginalValue = leftDUTOffset, DisplayValue = leftDUTOffset.ToString(), ChartValue = leftDUTOffset, Display = true });
 
                 // short
-                buffer = new byte[] { dataChunk[position++], dataChunk[position++] };
-                //stream.Read(buffer, 0, buffer.Length);
-                var RightDUTOffset = (double)BitConverter.ToInt16(buffer, 0) / 10;
-                result.Data.Add("Смещение ДУТ правого", new DataElement { OriginalValue = RightDUTOffset, DisplayValue = RightDUTOffset.ToString(), ChartValue = RightDUTOffset, Display = true });
+                buffer = new[] { dataChunk[position++], dataChunk[position++] };
+                var rightDutOffset = (double)BitConverter.ToInt16(buffer, 0) / 10;
+                result.Data.Add("Смещение ДУТ правого", new DataElement { OriginalValue = rightDutOffset, DisplayValue = rightDutOffset.ToString(), ChartValue = rightDutOffset, Display = true });
 
                 // short
-                buffer = new byte[] { dataChunk[position++], dataChunk[position++] };
-                //stream.Read(buffer, 0, buffer.Length);
-                var CurrentCoefficient = BitConverter.ToInt16(buffer, 0);
-                result.Data.Add("Коэффициент по току", new DataElement { OriginalValue = CurrentCoefficient, DisplayValue = CurrentCoefficient.ToString(), ChartValue = CurrentCoefficient, Display = true });
+                buffer = new[] { dataChunk[position++], dataChunk[position++] };
+                var currentCoefficient = BitConverter.ToInt16(buffer, 0);
+                result.Data.Add("Коэффициент по току", new DataElement { OriginalValue = currentCoefficient, DisplayValue = currentCoefficient.ToString(), ChartValue = currentCoefficient, Display = true });
 
                 // short
-                buffer = new byte[] { dataChunk[position++], dataChunk[position++] };
-                //stream.Read(buffer, 0, buffer.Length);
-                var VoltageCoefficient = BitConverter.ToInt16(buffer, 0);
-                result.Data.Add("Коэффициент по напряжению", new DataElement { OriginalValue = VoltageCoefficient, DisplayValue = VoltageCoefficient.ToString(), ChartValue = VoltageCoefficient, Display = true });
+                buffer = new[] { dataChunk[position++], dataChunk[position++] };
+                var voltageCoefficient = BitConverter.ToInt16(buffer, 0);
+                result.Data.Add("Коэффициент по напряжению", new DataElement { OriginalValue = voltageCoefficient, DisplayValue = voltageCoefficient.ToString(), ChartValue = voltageCoefficient, Display = true });
 
                 // byte
-                var DieselSpeed = (byte)dataChunk[position++];
-                result.Data.Add("Коэффициент по оборотам дизеля", new DataElement { OriginalValue = DieselSpeed, DisplayValue = DieselSpeed.ToString(), ChartValue = DieselSpeed, Display = true });
+                var dieselSpeed = (byte)dataChunk[position++];
+                result.Data.Add("Коэффициент по оборотам дизеля", new DataElement { OriginalValue = dieselSpeed, DisplayValue = dieselSpeed.ToString(), ChartValue = dieselSpeed, Display = true });
 
                 // skip 2 bytes
-                //stream.ReadByte();
-                //stream.ReadByte();
-                position++;
-                position++;
+                position+=2;
 
                 // byte
-                var ColdWaterCircuitTemperature = (sbyte)dataChunk[position++];
-                result.Data.Add("Температура воды холодного контура", new DataElement { OriginalValue = ColdWaterCircuitTemperature, DisplayValue = ColdWaterCircuitTemperature.ToString(), ChartValue = ColdWaterCircuitTemperature, Display = true });
+                var coldWaterCircuitTemperature = (sbyte)dataChunk[position++];
+                result.Data.Add("Температура воды холодного контура", new DataElement { OriginalValue = coldWaterCircuitTemperature, DisplayValue = coldWaterCircuitTemperature.ToString(), ChartValue = coldWaterCircuitTemperature, Display = true });
 
                 // int
-                buffer = new byte[] { dataChunk[position++], dataChunk[position++], dataChunk[position++], dataChunk[position++] };
-                //stream.Read(buffer, 0, buffer.Length);
-                var MinuteRecordId = BitConverter.ToInt32(buffer, 0);
-                result.Data.Add("ID минутной записи", new DataElement { OriginalValue = MinuteRecordId, DisplayValue = MinuteRecordId.ToString(), ChartValue = MinuteRecordId });
+                buffer = new[] { dataChunk[position++], dataChunk[position++], dataChunk[position++], dataChunk[position++] };
+                var minuteRecordId = BitConverter.ToInt32(buffer, 0);
+                result.Data.Add("ID минутной записи", new DataElement { OriginalValue = minuteRecordId, DisplayValue = minuteRecordId.ToString(), ChartValue = minuteRecordId });
 
                 // byte
                 var MRKStatusFlags = (byte)dataChunk[position++];
                 result.Data.Add("Флаги состояния МРК", new DataElement { OriginalValue = MRKStatusFlags, DisplayValue = MRKStatusFlags.ToString(), ChartValue = MRKStatusFlags });
 
                 // byte
-                var FuelDensityOnEquip = (short)((sbyte)dataChunk[position++] + 850);
-                result.Data.Add("Плотность топлива при экипировке", new DataElement { OriginalValue = FuelDensityOnEquip, DisplayValue = FuelDensityOnEquip.ToString(), ChartValue = FuelDensityOnEquip, Display = true });
+                var fuelDensityOnEquip = (short)((sbyte)dataChunk[position++] + 850);
+                result.Data.Add("Плотность топлива при экипировке", new DataElement { OriginalValue = fuelDensityOnEquip, DisplayValue = fuelDensityOnEquip.ToString(), ChartValue = fuelDensityOnEquip, Display = true });
 
 
                 // skip byte
-                //stream.ReadByte();
                 position++;
 
                 // short
-                buffer = new byte[] { dataChunk[dataChunk.Length - 2], dataChunk[dataChunk.Length - 1] };
+                buffer = new[] { dataChunk[dataChunk.Length - 2], dataChunk[dataChunk.Length - 1] };
                 stream.Read(buffer, 0, buffer.Length);
                 var CRC = BitConverter.ToInt16(buffer, 0);
                 result.Data.Add("CRC", new DataElement { OriginalValue = CRC, DisplayValue = CRC.ToString(), ChartValue = CRC });
@@ -230,43 +205,36 @@ namespace ParserNII.DataStructures
                     secondsResult[i].Data["Время в “UNIX” формате"] = new DataElement { OriginalValue = timeWithSeconds, DisplayValue = DateTimeOffset.FromUnixTimeSeconds(timeWithSeconds).AddHours(3).ToString("dd.MM.yyyy HH:mm:ss") };
 
                     // short (enum)
-                    buffer = new byte[] { dataChunk[position++], dataChunk[position++] };
-                    //stream.Read(buffer, 0, buffer.Length);
+                    buffer = new[] { dataChunk[position++], dataChunk[position++] };
                     var secondsByteParametrs = (FirstSecondByteParams)BitConverter.ToInt16(buffer, 0);
 
                     // short
-                    buffer = new byte[] { dataChunk[position++], dataChunk[position++] };
-                    //stream.Read(buffer, 0, buffer.Length);
+                    buffer = new[] { dataChunk[position++], dataChunk[position++] };
                     var dieselTurneover = BitConverter.ToInt16(buffer, 0);
                     secondsResult[i].Data.Add("Обороты дизеля", new DataElement { OriginalValue = dieselTurneover, DisplayValue = dieselTurneover.ToString(), ChartValue = dieselTurneover, Display = true });
 
                     // short
-                    buffer = new byte[] { dataChunk[position++], dataChunk[position++] };
-                    //stream.Read(buffer, 0, buffer.Length);
+                    buffer = new[] { dataChunk[position++], dataChunk[position++] };
                     var turbochanrgerTurnovers = BitConverter.ToInt16(buffer, 0);
                     secondsResult[i].Data.Add("Обороты турбокомпрессора", new DataElement { OriginalValue = turbochanrgerTurnovers, DisplayValue = turbochanrgerTurnovers.ToString(), ChartValue = turbochanrgerTurnovers, Display = true });
 
                     // short
-                    buffer = new byte[2] { dataChunk[position++], dataChunk[position++] };
-                    //stream.Read(buffer, 0, buffer.Length);
+                    buffer = new[] { dataChunk[position++], dataChunk[position++] };
                     var generatorPower = BitConverter.ToInt16(buffer, 0);
                     secondsResult[i].Data.Add("Мощность генератора", new DataElement { OriginalValue = generatorPower, DisplayValue = generatorPower.ToString(), ChartValue = generatorPower, Display = true });
 
                     // short
-                    buffer = new byte[2] { dataChunk[position++], dataChunk[position++] };
-                    // stream.Read(buffer, 0, buffer.Length);
+                    buffer = new[] { dataChunk[position++], dataChunk[position++] };
                     var generatorCurrent = BitConverter.ToInt16(buffer, 0);
                     secondsResult[i].Data.Add("Ток генератора", new DataElement { OriginalValue = generatorCurrent, DisplayValue = generatorCurrent.ToString(), ChartValue = generatorCurrent, Display = true });
 
                     // short
-                    buffer = new byte[2] { dataChunk[position++], dataChunk[position++] };
-                    //stream.Read(buffer, 0, buffer.Length);
+                    buffer = new[] { dataChunk[position++], dataChunk[position++] };
                     var generatorVoltage = BitConverter.ToInt16(buffer, 0);
                     secondsResult[i].Data.Add("Напряжение генератора", new DataElement { OriginalValue = generatorVoltage, DisplayValue = generatorVoltage.ToString(), ChartValue = generatorVoltage, Display = true });
 
                     // short
-                    buffer = new byte[2] { dataChunk[position++], dataChunk[position++] };
-                    //stream.Read(buffer, 0, buffer.Length);
+                    buffer = new[] { dataChunk[position++], dataChunk[position++] };
                     var speed = BitConverter.ToInt16(buffer, 0);
                     secondsResult[i].Data.Add("Скорость", new DataElement { OriginalValue = speed, DisplayValue = speed.ToString(), ChartValue = speed, Display = true });
 
@@ -275,8 +243,7 @@ namespace ParserNII.DataStructures
                     secondsResult[i].Data.Add("Давление наддува", new DataElement { OriginalValue = boostPressure, DisplayValue = boostPressure.ToString(), ChartValue = boostPressure, Display = true });
 
                     // short
-                    buffer = new byte[2] { dataChunk[position++], dataChunk[position++] };
-                    //stream.Read(buffer, 0, buffer.Length);
+                    buffer = new[] { dataChunk[position++], dataChunk[position++] };
                     var averageFuelVolume = BitConverter.ToInt16(buffer, 0);
                     secondsResult[i].Data.Add("Объем топлива средний 2", new DataElement { OriginalValue = averageFuelVolume, DisplayValue = averageFuelVolume.ToString(), ChartValue = averageFuelVolume, Display = true });
 
@@ -301,8 +268,7 @@ namespace ParserNII.DataStructures
                     
                 }
 
-                if (j > 0 && (uint)secondsResult[0].Data["Время в “UNIX” формате"].OriginalValue -
-                    (uint)results.Last().Data["Время в “UNIX” формате"].OriginalValue > 63)
+                if (j > 0 && (uint)secondsResult[0].Data["Время в “UNIX” формате"].OriginalValue - (uint)results.Last().Data["Время в “UNIX” формате"].OriginalValue > 63)
                 {
                     var emptyResult = secondsResult[0].Clone();
                     var dataKeys = emptyResult.Data.Keys.ToArray();
@@ -321,74 +287,6 @@ namespace ParserNII.DataStructures
             }
             return results;
         }
-
-        private SecondBlock ParseSecondBlock(byte[] dataChunk, int position)
-        {
-            SecondBlock result = new SecondBlock();
-
-            byte[] buffer;
-
-            // short (enum)
-            buffer = new byte[] { dataChunk[position++], dataChunk[position++] };
-            //stream.Read(buffer, 0, buffer.Length);
-            result.BitParametrsSecond = (FirstSecondByteParams)BitConverter.ToInt16(buffer, 0);
-
-            // short
-            buffer = new byte[] { dataChunk[position++], dataChunk[position++] };
-            //stream.Read(buffer, 0, buffer.Length);
-            result.TurnoversDisel = BitConverter.ToInt16(buffer, 0);
-
-            // short
-            buffer = new byte[] { dataChunk[position++], dataChunk[position++] };
-            //stream.Read(buffer, 0, buffer.Length);
-            result.TurnoversTurbochanrger = BitConverter.ToInt16(buffer, 0);
-
-            // short
-            buffer = new byte[2] { dataChunk[position++], dataChunk[position++] };
-            //stream.Read(buffer, 0, buffer.Length);
-            result.GeneratorPower = BitConverter.ToInt16(buffer, 0);
-
-            // short
-            buffer = new byte[2] { dataChunk[position++], dataChunk[position++] };
-            // stream.Read(buffer, 0, buffer.Length);
-            result.GeneratorCurrent = BitConverter.ToInt16(buffer, 0);
-
-            // short
-            buffer = new byte[2] { dataChunk[position++], dataChunk[position++] };
-            //stream.Read(buffer, 0, buffer.Length);
-            result.VoltageGenerator = BitConverter.ToInt16(buffer, 0);
-
-            // short
-            buffer = new byte[2] { dataChunk[position++], dataChunk[position++] };
-            //stream.Read(buffer, 0, buffer.Length);
-            result.Speed = BitConverter.ToInt16(buffer, 0);
-
-            // byte
-            result.BoostPressure = dataChunk[position++];
-
-            // short
-            buffer = new byte[2] { dataChunk[position++], dataChunk[position++] };
-            //stream.Read(buffer, 0, buffer.Length);
-            result.AverageFuelVolume = BitConverter.ToInt16(buffer, 0);
-
-            // byte
-            result.FuelPressure = dataChunk[position++];
-
-            // byte
-            result.OilPressure = dataChunk[position++];
-
-            // byte
-            result.PositionControllerDriver = dataChunk[position++];
-
-            // byte
-            result.OilPressureWithFilter = dataChunk[position++];
-
-            // skip byte
-            position++;
-
-            return result;
-        }
-
 
 
         private string ParseCoordinate(int coordinate)

@@ -96,13 +96,6 @@ namespace ParserNII.DataStructures
             return ToDataFile(result);
         }
 
-        public Dictionary<string, List<BinFile>> ToDictionary(List<BinFile> data)
-        {
-        //    var temp = data.Select(d => d.Uid).Distinct().ToArray();
-
-            return data.GroupBy(r => r.Uid).ToDictionary(r => uidsNames[r.Key], r => r.ToList());
-        }
-
         private List<DataFile> ToDataFile(List<BinFile> data)
         {
             var result = new List<DataFile>();

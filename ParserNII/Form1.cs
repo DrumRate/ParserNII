@@ -100,6 +100,7 @@ namespace ParserNII
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 Stream stream = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+                label6.Text = (stream.Length / 1024).ToString();
                 var parser = Path.GetExtension(ofd.FileName) == ".dat" ? (Parser)new DatFileParser() : new BinFileParser();
                 List<DataFile> result = parser.Parse(stream);
 
@@ -118,13 +119,8 @@ namespace ParserNII
                     label2.Text = result[0].Data["Тип метки"].DisplayValue;
                     label4.Text = DateTimeOffset.Now.ToString("dd.MM.yyyy HH:mm:ss");
                     label7.Text = result[0].Data["Тип локомотива"].DisplayValue;
-                    label6.Text = (stream.Length / 1024).ToString();
-
-                    //  label10.Text = result[0].Data["Секция локомотива"].DisplayValue;
                     label10.Text = TrainNames.NamesDictionary[(byte)result[0].Data["Тип локомотива"].OriginalValue];
                     label12.Text = result[0].Data["№ тепловоза"].DisplayValue;
-
-                    label40.Text = result.First().Data["Время в “UNIX” формате"].DisplayValue + " - " + result.Last().Data["Время в “UNIX” формате"].DisplayValue;
                 }
                 else
                 {
@@ -133,8 +129,9 @@ namespace ParserNII
                     label10.Text = nameParams[2];
                     label12.Text = nameParams[3];
                     label7.Text = nameParams[4];
-                    //label6.Text = (stream.Length / 1024).ToString();
                 }
+
+                label40.Text = result.First().Data["Время в “UNIX” формате"].DisplayValue + " - " + result.Last().Data["Время в “UNIX” формате"].DisplayValue;
 
                 var arrayResult = parser.ToArray(result);
 

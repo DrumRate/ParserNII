@@ -68,8 +68,6 @@ namespace ParserNII
         {
             GraphPane pane = control.GraphPane;
 
-            //pane.Title.Text = title;
-
             PointPairList list1 = new PointPairList();
 
             for (int i = 0; i < x.Count; i++)
@@ -91,8 +89,6 @@ namespace ParserNII
             pane.XAxis.Scale.Min = new XDate(x.First().DateTime);
             pane.XAxis.Scale.Max = new XDate(x.Last().DateTime);
             pane.YAxisList[yAxis].Scale.Min = 0;
-            //    pane.XAxis.Scale.Max = Xmax;
-            //    pane.YAxisList[yAxis].Scale.Max = Ymax + 0.05;
             pane.YAxisList[yAxis].MajorGrid.IsVisible = true;
             pane.YAxisList[yAxis].MajorGrid.DashOn = 10;
             pane.YAxisList[yAxis].MajorGrid.DashOff = 5;
@@ -121,7 +117,6 @@ namespace ParserNII
 
             pane.CurveList.Clear();
             pane.YAxisList.Clear();
-            //     control.AxisChange();
             control.Invalidate();
         }
     }
