@@ -104,7 +104,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 130);
             this.groupBox1.MinimumSize = new System.Drawing.Size(507, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(507, 630);
+            this.groupBox1.Size = new System.Drawing.Size(507, 610);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "График";
@@ -122,7 +122,7 @@
             this.zedGraphControl1.ScrollMinX = 0D;
             this.zedGraphControl1.ScrollMinY = 0D;
             this.zedGraphControl1.ScrollMinY2 = 0D;
-            this.zedGraphControl1.Size = new System.Drawing.Size(501, 611);
+            this.zedGraphControl1.Size = new System.Drawing.Size(501, 591);
             this.zedGraphControl1.TabIndex = 0;
             this.zedGraphControl1.UseExtendedPrintDialog = true;
             this.zedGraphControl1.Load += new System.EventHandler(this.zedGraphControl1_Load);
@@ -294,7 +294,7 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(890, 800);
+            this.MinimumSize = new System.Drawing.Size(890, 766);
             this.Name = "Form1";
             this.Text = "Название для проги";
             this.menuStrip1.ResumeLayout(false);

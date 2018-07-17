@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using ZedGraph;
 
 namespace ParserNII
@@ -55,6 +56,12 @@ namespace ParserNII
             pane.XAxis.MajorGrid.Color = Color.LightGray;
             pane.XAxis.MajorGrid.IsZeroLine = true;
             control.IsEnableVZoom = false;
+            control.IsEnableVPan = false;
+            control.IsEnableHPan = false;
+            control.IsShowHScrollBar = true;
+            control.IsAutoScrollRange = true;
+            control.ScrollGrace = 0.01;
+
         }
 
         public static void DrawGraph(ZedGraphControl control, List<DateTimeOffset> x, List<double> y, string name, Color color)
@@ -81,7 +88,8 @@ namespace ParserNII
             myCurve.Line.Width = 1.0F;
             myCurve.Line.StepType = StepType.ForwardStep;
 
-            //   pane.XAxis.Scale.Min = 0;
+            pane.XAxis.Scale.Min = new XDate(x.First().DateTime);
+            pane.XAxis.Scale.Max = new XDate(x.Last().DateTime);
             pane.YAxisList[yAxis].Scale.Min = 0;
             //    pane.XAxis.Scale.Max = Xmax;
             //    pane.YAxisList[yAxis].Scale.Max = Ymax + 0.05;
