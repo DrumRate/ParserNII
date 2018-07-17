@@ -136,13 +136,13 @@ namespace ParserNII
                 var arrayResult = parser.ToArray(result);
 
                 DisplayPanelElements(result[0]);
+                Drawer drawer = new Drawer(zedGraphControl1);
 
-                Drawer.Initialize(zedGraphControl1);
                 var keys = result[0].Data.Keys.Where(k => result[0].Data[k].Display).ToArray();
 
                 for (int i = 0; i < keys.Length; i++)
                 {
-                    Drawer.DrawGraph(zedGraphControl1, xValues,
+                    drawer.DrawGraph(xValues,
                         arrayResult.Data[keys[i]].Select(d => d.ChartValue).ToList(),
                         keys[i],
                         Drawer.GetColor(i));
@@ -152,7 +152,7 @@ namespace ParserNII
 
                 zedGraphControl1.IsShowPointValues = true;
 
-                Drawer.Refresh(zedGraphControl1);
+                drawer.Refresh();
 
                 pointEventHandlers.Add((pointSender, graphPane, curve, pt) =>
                 {

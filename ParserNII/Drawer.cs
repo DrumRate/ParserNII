@@ -8,6 +8,8 @@ namespace ParserNII
 {
     public class Drawer
     {
+        private readonly ZedGraphControl control;
+
         public static Color GetColor(int i)
         {
             List<Color> colors = new List<Color>();
@@ -40,9 +42,10 @@ namespace ParserNII
             return colors[i % colors.Count];
         }
 
-        public static void Initialize(ZedGraphControl control)
+        public Drawer(ZedGraphControl control)
         {
-            Clear(control);
+            this.control = control;
+            Clear();
 
             GraphPane pane = control.GraphPane;
             pane.XAxis.Type = AxisType.Date;
@@ -64,7 +67,7 @@ namespace ParserNII
 
         }
 
-        public static void DrawGraph(ZedGraphControl control, List<DateTimeOffset> x, List<double> y, string name, Color color)
+        public void DrawGraph(List<DateTimeOffset> x, List<double> y, string name, Color color)
         {
             GraphPane pane = control.GraphPane;
 
@@ -99,14 +102,14 @@ namespace ParserNII
             control.GraphPane.Legend.IsVisible = false;
         }
 
-        public static void Refresh(ZedGraphControl control)
+        public void Refresh()
         {
             control.RestoreScale(control.GraphPane);
             control.AxisChange();
             control.Invalidate();
         }
 
-        public static void Clear(ZedGraphControl control)
+        private void Clear()
         {
             GraphPane pane = control.GraphPane;
 

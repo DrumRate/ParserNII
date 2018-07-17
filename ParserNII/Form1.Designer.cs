@@ -296,7 +296,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(890, 766);
             this.Name = "Form1";
-            this.Text = "Название для проги";
+            this.Text = "ParserKotoriySmog ver. 0.01";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
