@@ -7,12 +7,10 @@ namespace ParserNII.DataStructures
 {
     public class DatFileParser : Parser
     {
-        public override List<DataFile> Parse(Stream stream)
+        public override List<DataFile> Parse(byte[] fileBytes)
         {
             List<DataFile> results = new List<DataFile>();
-            byte[] streamBuffer = new byte[stream.Length];
-            stream.Read(streamBuffer, 0, (int)stream.Length);
-            List<byte[]> dataChunks = Split(streamBuffer);
+            List<byte[]> dataChunks = Split(fileBytes);
 
             for (int j = 0; j < dataChunks.Count; j++)
             {
@@ -20,9 +18,8 @@ namespace ParserNII.DataStructures
                 int position = 0;
                 var result = new DataFile();
                 // 3 bytes
-                byte[] buffer = new byte[3];
-                stream.Read(buffer, 0, buffer.Length);
-                result.Data.Add("Три байта 0xEE", new DataElement { OriginalValue = (dataChunk[position++], dataChunk[position++], dataChunk[position++]) });
+                byte[] buffer = new byte[3] {dataChunk[position++], dataChunk[position++], dataChunk[position++]};
+                result.Data.Add("Три байта 0xEE", new DataElement { OriginalValue = (buffer[0], buffer[1], buffer[2]) });
 
                 // byte
                 var labelType = dataChunk[position++];
@@ -193,7 +190,6 @@ namespace ParserNII.DataStructures
 
                 // short
                 buffer = new[] { dataChunk[dataChunk.Length - 2], dataChunk[dataChunk.Length - 1] };
-                stream.Read(buffer, 0, buffer.Length);
                 var CRC = BitConverter.ToInt16(buffer, 0);
                 result.Data.Add("CRC", new DataElement { OriginalValue = CRC, DisplayValue = CRC.ToString(), ChartValue = CRC });
 

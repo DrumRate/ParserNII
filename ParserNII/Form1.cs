@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using ParserNII.DataStructures;
 using ZedGraph;
@@ -33,9 +34,11 @@ namespace ParserNII
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 Stream stream = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+                byte[] fileBytes = new byte[stream.Length];
+                stream.Read(fileBytes, 0, (int)stream.Length);
                 label6.Text = (stream.Length / 1024).ToString();
                 var parser = Path.GetExtension(ofd.FileName) == ".dat" ? (Parser)new DatFileParser() : new BinFileParser();
-                List<DataFile> result = parser.Parse(stream);
+                List<DataFile> result = parser.Parse(fileBytes);
 
                 foreach (var pointEventHandler in pointEventHandlers)
                 {

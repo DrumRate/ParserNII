@@ -60,40 +60,52 @@ namespace ParserNII.DataStructures
                 { 3192, "Работа САЗДТ" }
             };
 
-        public override List<DataFile> Parse(Stream stream)
+        public override List<DataFile> Parse(byte[] fileBytes)
         {
             List<BinFile> result = new List<BinFile>();
+            List<byte[]> dataChunks = Split(fileBytes);
             double timeNowEpoch = Convert.ToInt64(DateTime.Now.ToUniversalTime().Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds);
-            using (BinaryReader reader = new BinaryReader(stream))
+           for (int i = 0; i < dataChunks.Count; i++)
             {
-                while (stream.Position < stream.Length)
+                long time = BitConverter.ToInt64(dataChunks[i], 0);
+                int uid = BitConverter.ToInt32(dataChunks[i], 8);
+                double value = BitConverter.ToDouble(dataChunks[i], 12);
+
+
+                if (time > (timeNowEpoch * 1000))
+                    continue;
+
+                if ((uid == 2 || uid == 6 || uid == 9 || uid == 19
+                    || uid == 20 || uid == 50 || uid == 101
+                    || uid == 3101 || uid == 3102 || uid == 3104)
+                    && (value > 127))
                 {
-                    long time = reader.ReadInt64();
-                    int uid = reader.ReadInt32();
-                    double value = reader.ReadDouble();
-
-
-                    if (time > (timeNowEpoch * 1000))
-                        continue;
-
-                    if ((uid == 2 || uid == 6 || uid == 9 || uid == 19
-                        || uid == 20 || uid == 50 || uid == 101
-                        || uid == 3101 || uid == 3102 || uid == 3104)
-                        && (value > 127))
-                    {
-                        value -= 256;
-                    }
-
-                    result.Add(new BinFile
-                    {
-                        Date = time,
-                        Uid = uid,
-                        Value = value
-                    });
+                    value -= 256;
                 }
+
+                result.Add(new BinFile
+                {
+                    Date = time,
+                    Uid = uid,
+                    Value = value
+                });
             }
 
+
             return ToDataFile(result);
+        }
+
+        private List<byte[]> Split(byte[] fileBytes)
+        {
+            var source = fileBytes.ToList();
+            var result = new List<byte[]>();
+
+            for (int i = 0; i < fileBytes.Length; i += 20)
+            {
+                result.Add(source.GetRange(i, 20).ToArray());
+            }
+
+            return result;
         }
 
         private List<DataFile> ToDataFile(List<BinFile> data)

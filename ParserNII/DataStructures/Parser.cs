@@ -6,7 +6,7 @@ namespace ParserNII.DataStructures
 {
     public abstract class Parser
     {
-        public abstract List<DataFile> Parse(Stream stream);
+        public abstract List<DataFile> Parse(byte[] fileBytes);
 
         public DataArrays ToArray(List<DataFile> data)
         {
