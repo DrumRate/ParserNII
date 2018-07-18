@@ -1,5 +1,5 @@
 ﻿{
-  "paramsData": [
+  "binFileParams": [
     {
       "number": 25,
       "name": "Табельный номер",
@@ -330,8 +330,8 @@
       "name": "Температура топлива левая",
       "shortname": "ДТТЛ",
       "measure": "°C",
-      "min": 0,
-      "max": 0,
+      "min": -30,
+      "max": 127,
       "type": "byte",
       "display": false,
       "round": 0.01,
@@ -342,8 +342,8 @@
       "name": "Температура топлива правая",
       "shortname": "ДТТП",
       "measure": "°C",
-      "min": 0,
-      "max": 0,
+      "min": -30,
+      "max": 127,
       "type": "byte",
       "display": false,
       "round": 0.01,
@@ -354,8 +354,8 @@
       "name": "Температура топлива",
       "shortname": "Темп. Топлива",
       "measure": "°C",
-      "min": 0,
-      "max": 0,
+      "min": -30,
+      "max": 127,
       "type": "string",
       "display": false,
       "round": 0.01,
@@ -546,4 +546,6 @@
     "104": "ЧМЭ3Т",
     "105": "ЧМЭ3Э"
   }
+} "datFileParams": {
+
 }
