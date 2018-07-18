@@ -111,13 +111,13 @@ namespace ParserNII.DataStructures
         private List<DataFile> ToDataFile(List<BinFile> data)
         {
             var result = new List<DataFile>();
-            var dates = data.Select(d => d.Date).Distinct().OrderBy(d => d).ToList();
+            var dates = data.GroupBy(d => d.Date).ToArray();
 
-            for (int i = 0; i < dates.Count; i++)
+            foreach (var date in dates)
             {
-                var elementsOfDate = data.Where(d => d.Date == dates[i]).ToList();
+                List<BinFile> elementsOfDate = date.ToList();
                 var resultElement = new DataFile();
-                resultElement.Data.Add("Время в “UNIX” формате", new DataElement { OriginalValue = dates[i], DisplayValue = DateTimeOffset.FromUnixTimeMilliseconds(dates[i]).AddHours(3).ToString("dd.MM.yyyy HH:mm:ss") });
+                resultElement.Data.Add("Время в “UNIX” формате", new DataElement { OriginalValue = date.Key, DisplayValue = DateTimeOffset.FromUnixTimeMilliseconds(date.Key).AddHours(3).ToString("dd.MM.yyyy HH:mm:ss") });
 
                 for (int j = 0; j < elementsOfDate.Count; j++)
                 {
@@ -130,7 +130,7 @@ namespace ParserNII.DataStructures
                     resultElement.Data.Add(uidsNames[elementsOfDate[j].Uid], dataElement);
                 }
 
-                if (i > 0 && result.Last().Data.Count > resultElement.Data.Count)
+                if (date != dates.First() && result.Last().Data.Count > resultElement.Data.Count)
                 {
                     var keys = result.Last().Data.Keys;
                     foreach (var key in keys)
@@ -143,7 +143,6 @@ namespace ParserNII.DataStructures
                 }
 
                 result.Add(resultElement);
-
             }
 
             return result;
