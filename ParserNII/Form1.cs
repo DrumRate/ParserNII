@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 using ParserNII.DataStructures;
 using ZedGraph;
 
@@ -18,11 +19,14 @@ namespace ParserNII
         private List<Panel> panels;
         private Dictionary<string, int> DisplayedParamNames;
         private List<ZedGraphControl.PointValueHandler> pointEventHandlers = new List<ZedGraphControl.PointValueHandler>();
+        private readonly Config config;
+
 
         public Form1()
         {
             InitializeComponent();
             button1.Visible = false;
+            config = JsonConvert.DeserializeObject<Config>(File.ReadAllText(Environment.CurrentDirectory + "/config.json"));
         }
 
         private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
