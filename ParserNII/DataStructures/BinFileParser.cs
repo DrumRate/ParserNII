@@ -68,12 +68,11 @@ namespace ParserNII.DataStructures
             List<BinFile> result = new List<BinFile>();
             List<byte[]> dataChunks = Split(fileBytes);
             double timeNowEpoch = Convert.ToInt64(DateTime.Now.ToUniversalTime().Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds);
-           for (int i = 0; i < dataChunks.Count; i++)
+            for (int i = 0; i < dataChunks.Count; i++)
             {
                 long time = BitConverter.ToInt64(dataChunks[i], 0);
                 int uid = BitConverter.ToInt32(dataChunks[i], 8);
                 double value = BitConverter.ToDouble(dataChunks[i], 12);
-
 
                 if (time > (timeNowEpoch * 1000))
                     continue;
@@ -93,7 +92,6 @@ namespace ParserNII.DataStructures
                     Value = value
                 });
             }
-
 
             return ToDataFile(result);
         }
@@ -116,6 +114,8 @@ namespace ParserNII.DataStructures
             var result = new List<DataFile>();
             var dates = data.GroupBy(d => d.Date).ToArray();
 
+            bool first = true;
+
             foreach (var date in dates)
             {
                 List<BinFile> elementsOfDate = date.ToList();
@@ -133,7 +133,7 @@ namespace ParserNII.DataStructures
                     resultElement.Data.Add(uidsNames[elementsOfDate[j].Uid], dataElement);
                 }
 
-                if (date != dates.First() && result.Last().Data.Count > resultElement.Data.Count)
+                if (!first && result.Last().Data.Count > resultElement.Data.Count)
                 {
                     var keys = result.Last().Data.Keys;
                     foreach (var key in keys)
@@ -146,6 +146,8 @@ namespace ParserNII.DataStructures
                 }
 
                 result.Add(resultElement);
+
+                first = false;
             }
 
             return result;
