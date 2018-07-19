@@ -20,6 +20,7 @@ namespace ParserNII
         private Dictionary<string, int> DisplayedParamNames;
         private List<ZedGraphControl.PointValueHandler> pointEventHandlers = new List<ZedGraphControl.PointValueHandler>();
         private readonly Config config;
+        private LineObj verticalLine;
 
 
         public Form1()
@@ -51,10 +52,10 @@ namespace ParserNII
 
                 pointEventHandlers = new List<ZedGraphControl.PointValueHandler>();
 
-                List<DateTimeOffset> xValues;
+                List<XDate> xValues;
                 if (Path.GetExtension(ofd.FileName) == ".dat")
                 {
-                    xValues = result.Select(r => DateTimeOffset.FromUnixTimeSeconds((uint)r.Data["Время в “UNIX” формате"].OriginalValue).AddHours(3)).ToList();
+                    xValues = result.Select(r => new XDate(DateTimeOffset.FromUnixTimeSeconds((uint)r.Data["Время в “UNIX” формате"].OriginalValue).AddHours(3).DateTime)).ToList();
 
                     label2.Text = result[0].Data["Тип метки"].DisplayValue;
                     label4.Text = DateTimeOffset.Now.ToString("dd.MM.yyyy HH:mm:ss");
@@ -64,7 +65,7 @@ namespace ParserNII
                 }
                 else
                 {
-                    xValues = result.Select(r => DateTimeOffset.FromUnixTimeMilliseconds((long)r.Data["Время в “UNIX” формате"].OriginalValue).AddHours(3)).ToList();
+                    xValues = result.Select(r => new XDate(DateTimeOffset.FromUnixTimeMilliseconds((long)r.Data["Время в “UNIX” формате"].OriginalValue).AddHours(3).DateTime)).ToList();
                     string[] nameParams = Path.GetFileName(ofd.FileName).Split('_', '-');
                     label10.Text = nameParams[2];
                     label12.Text = nameParams[3];
@@ -90,9 +91,9 @@ namespace ParserNII
                     panels[DisplayedParamNames[keys[i]]].BackColor = Drawer.GetColor(i);
                 }
 
-                zedGraphControl1.IsShowPointValues = true;
+                verticalLine = drawer.CrateVerticalLine();
 
-                drawer.Refresh();
+                zedGraphControl1.IsShowPointValues = true;
 
                 pointEventHandlers.Add((pointSender, graphPane, curve, pt) =>
                 {
@@ -101,10 +102,16 @@ namespace ParserNII
                         uidNames[keys[i]].Text = result[pt].Data[keys[i]].DisplayValue;
                     }
 
+                    verticalLine.Location.X = xValues[pt];
+                    verticalLine.Location.X1 = xValues[pt];
+                    zedGraphControl1.Refresh();
                     return "";
                 });
 
                 zedGraphControl1.PointValueEvent += pointEventHandlers.Last();
+
+
+                drawer.Refresh();
 
                 stream.Close();
             }

@@ -67,7 +67,7 @@ namespace ParserNII
 
         }
 
-        public void DrawGraph(List<DateTimeOffset> x, List<double> y, string name, Color color)
+        public void DrawGraph(List<XDate> x, List<double> y, string name, Color color)
         {
             GraphPane pane = control.GraphPane;
 
@@ -77,7 +77,7 @@ namespace ParserNII
             {
                 var point = new PointPair()
                 {
-                    X = new XDate(x[i].DateTime),
+                    X = x[i],
                     Y = y[i]
                 };
                 list1.Add(point);
@@ -89,8 +89,8 @@ namespace ParserNII
             myCurve.Line.Width = 1.0F;
             myCurve.Line.StepType = StepType.ForwardStep;
 
-            pane.XAxis.Scale.Min = new XDate(x.First().DateTime);
-            pane.XAxis.Scale.Max = new XDate(x.Last().DateTime);
+            pane.XAxis.Scale.Min = x.First();
+            pane.XAxis.Scale.Max = x.Last();
             pane.YAxisList[yAxis].Scale.Min = 0;
             pane.YAxisList[yAxis].MajorGrid.IsVisible = true;
             pane.YAxisList[yAxis].MajorGrid.DashOn = 10;
@@ -121,6 +121,19 @@ namespace ParserNII
             pane.CurveList.Clear();
             pane.YAxisList.Clear();
             control.Invalidate();
+        }
+
+        public LineObj CrateVerticalLine()
+        {
+            LineObj threshHoldLine = new LineObj(
+            Color.Red,
+            control.GraphPane.XAxis.Scale.Min,
+            0,
+            control.GraphPane.XAxis.Scale.Min,
+            1);
+            threshHoldLine.Location.CoordinateFrame = CoordType.XScaleYChartFraction;
+            control.GraphPane.GraphObjList.Add(threshHoldLine);
+            return threshHoldLine;
         }
     }
 }
