@@ -546,7 +546,395 @@
     "104": "ЧМЭ3Т",
     "105": "ЧМЭ3Э"
   },
-  "datFileParams": {
-
-  }
+  "datFileParams": [
+    {
+      
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "number": 25,
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "number": 25,
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "number": 25,
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
+      "name": "Табельный номер",
+      "shortname": "Таб. ном.",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "string",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    }
+  ]
 }
