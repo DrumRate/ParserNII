@@ -9,6 +9,8 @@ namespace ParserNII.DataStructures
     {
         public override List<DataFile> Parse(byte[] fileBytes)
         {
+            Dictionary<string, ConfigElement> datFileParams = Config.Instance.datFileParams.ToDictionary(d => d.name);
+
             List<DataFile> results = new List<DataFile>();
             List<byte[]> dataChunks = Split(fileBytes);
 
@@ -19,7 +21,7 @@ namespace ParserNII.DataStructures
                 var result = new DataFile();
                 // 3 bytes
                 byte[] buffer = new byte[3] {dataChunk[position++], dataChunk[position++], dataChunk[position++]};
-                result.Data.Add("Три байта 0xEE", new DataElement { OriginalValue = (buffer[0], buffer[1], buffer[2]) });
+                result.Data.Add("Три байта 0xEE", new DataElement { OriginalValue = (buffer[0], buffer[1], buffer[2]), DataParams = datFileParams["Три байта 0xEE"] });
 
                 // byte
                 var labelType = dataChunk[position++];

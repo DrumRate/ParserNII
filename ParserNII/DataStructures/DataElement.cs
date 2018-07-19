@@ -6,5 +6,6 @@
         public double ChartValue;
         public string DisplayValue;
         public bool Display;
+        public ConfigElement DataParams;
     }
 }

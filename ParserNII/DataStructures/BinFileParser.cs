@@ -111,6 +111,8 @@ namespace ParserNII.DataStructures
 
         private List<DataFile> ToDataFile(List<BinFile> data)
         {
+            Dictionary<int, ConfigElement> binFileParams = Config.Instance.binFileParams.ToDictionary(d => d.number);
+
             var result = new List<DataFile>();
             var dates = data.GroupBy(d => d.Date).ToArray();
 
@@ -128,9 +130,10 @@ namespace ParserNII.DataStructures
                     {
                         ChartValue = elementsOfDate[j].Value,
                         DisplayValue = elementsOfDate[j].Value.ToString(),
-                        Display = true
+                        Display = true,
+                        DataParams = binFileParams[elementsOfDate[j].Uid]
                     };
-                    resultElement.Data.Add(uidsNames[elementsOfDate[j].Uid], dataElement);
+                    resultElement.Data.Add(dataElement.DataParams.name, dataElement);
                 }
 
                 if (!first && result.Last().Data.Count > resultElement.Data.Count)
