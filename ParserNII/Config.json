@@ -670,7 +670,6 @@
   },
   "datFileParams": [
     {
-
       "name": "Три байта 0xEE",
       "shortname": "",
       "measure": "",
@@ -682,7 +681,7 @@
       "group": 0
     },
     {
-      "name": "Тип метки (0xC6, 198)",
+      "name": "Тип метки",
       "shortname": "",
       "measure": "",
       "min": 0,
@@ -748,7 +747,7 @@
       "group": 0
     },
     {
-      "name": "Объем топлива левого",
+      "name": "Объем топлива левый",
       "shortname": "",
       "measure": "",
       "min": 0,
@@ -760,7 +759,7 @@
     },
     {
       "number": 25,
-      "name": "Объем топлива правого",
+      "name": "Объем топлива правый",
       "shortname": "",
       "measure": "",
       "min": 0,
@@ -902,7 +901,7 @@
       "group": 0
     },
     {
-      "name": "табельный номер",
+      "name": "Табельный номер",
       "shortname": "",
       "measure": "",
       "min": 0,
@@ -1045,6 +1044,17 @@
       "group": 0
     },
     {
+      "name": "CRC",
+      "shortname": "",
+      "measure": "",
+      "min": 0,
+      "max": 0,
+      "type": "ushort",
+      "display": false,
+      "round": 0.01,
+      "group": 0
+    },
+    {
       "name": "Обороты дизеля",
       "shortname": "",
       "measure": "",
@@ -1122,7 +1132,7 @@
       "group": 0
     },
     {
-      "name": "Объем топлива средний",
+      "name": "Объем топлива секундный",
       "shortname": "",
       "measure": "",
       "min": 0,
