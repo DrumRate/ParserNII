@@ -287,11 +287,7 @@ namespace ParserNII.DataStructures
         }
 
 
-        private string ParseCoordinate(int coordinate)
-        {
-            double coordDouble = coordinate * 0.000001000;
-            return coordDouble.ToString();
-        }
+        
 
         private List<byte[]> Split(byte[] dataStream)
         {
