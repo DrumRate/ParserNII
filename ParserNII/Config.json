@@ -738,7 +738,7 @@
     {
       "name": "Температура контура охлаждения",
       "shortname": "",
-      "measure": "",
+      "measure": "°C",
       "min": 0,
       "max": 0,
       "type": "byte",
@@ -749,7 +749,7 @@
     {
       "name": "Объем топлива левый",
       "shortname": "",
-      "measure": "",
+      "measure": "л",
       "min": 0,
       "max": 0,
       "type": "ushort",
@@ -761,7 +761,7 @@
       "number": 25,
       "name": "Объем топлива правый",
       "shortname": "",
-      "measure": "",
+      "measure": "л",
       "min": 0,
       "max": 0,
       "type": "ushort",
@@ -772,7 +772,7 @@
     {
       "name": "Объем топлива средний",
       "shortname": "",
-      "measure": "",
+      "measure": "л",
       "min": 0,
       "max": 0,
       "type": "ushort",
@@ -783,7 +783,7 @@
     {
       "name": "Масса топлива",
       "shortname": "",
-      "measure": "",
+      "measure": "кг",
       "min": 0,
       "max": 0,
       "type": "ushort",
@@ -794,7 +794,7 @@
     {
       "name": "Температура ТС ДУТ левого",
       "shortname": "",
-      "measure": "",
+      "measure": "°C",
       "min": 0,
       "max": 0,
       "type": "short",
@@ -805,7 +805,7 @@
     {
       "name": "Температура ТС ДУТ правого",
       "shortname": "",
-      "measure": "",
+      "measure": "°C",
       "min": -10,
       "max": 127,
       "type": "short",
@@ -816,7 +816,7 @@
     {
       "name": "Широта",
       "shortname": "",
-      "measure": "",
+      "measure": "°",
       "min": 0,
       "max": 0,
       "type": "uint",
@@ -827,7 +827,7 @@
     {
       "name": "Долгота",
       "shortname": "",
-      "measure": "",
+      "measure": "°",
       "min": 0,
       "max": 0,
       "type": "uint",
@@ -838,7 +838,7 @@
     {
       "name": "Температура топлива",
       "shortname": "",
-      "measure": "",
+      "measure": "°C",
       "min": 0,
       "max": 0,
       "type": "byte",
@@ -849,7 +849,7 @@
     {
       "name": "Плотность топлива текущая",
       "shortname": "",
-      "measure": "",
+      "measure": "г/см³",
       "min": 0,
       "max": 0,
       "type": "byte",
@@ -860,7 +860,7 @@
     {
       "name": "Плотность топлива при 20 С",
       "shortname": "",
-      "measure": "",
+      "measure": "г/см³",
       "min": 0,
       "max": 0,
       "type": "byte",
@@ -871,7 +871,7 @@
     {
       "name": "Температура контура масла",
       "shortname": "",
-      "measure": "",
+      "measure": "°C",
       "min": 0,
       "max": 0,
       "type": "byte",
@@ -882,7 +882,7 @@
     {
       "name": "Температура окружающего воздуха",
       "shortname": "",
-      "measure": "",
+      "measure": "°C",
       "min": -50,
       "max": 127,
       "type": "byte",
@@ -893,7 +893,7 @@
     {
       "name": "Напряжение ИБП",
       "shortname": "",
-      "measure": "",
+      "measure": "В",
       "max": 13,
       "type": "ubyte",
       "display": false,
@@ -925,7 +925,7 @@
     {
       "name": "Объем экипировки",
       "shortname": "",
-      "measure": "",
+      "measure": "л",
       "min": 0,
       "max": 7500,
       "type": "ushort",
@@ -1002,7 +1002,7 @@
     {
       "name": "Температура воды холодного контура",
       "shortname": "",
-      "measure": "",
+      "measure": "°",
       "min": -10,
       "max": 127,
       "type": "byte",
@@ -1035,7 +1035,7 @@
     {
       "name": "Плотность топлива при экипировке",
       "shortname": "",
-      "measure": "",
+      "measure": "г/см³",
       "min": 750,
       "max": 900,
       "type": "byte",
@@ -1057,7 +1057,7 @@
     {
       "name": "Обороты дизеля",
       "shortname": "",
-      "measure": "",
+      "measure": "об/мин",
       "min": 0,
       "max": 1000,
       "type": "ushort",
@@ -1068,7 +1068,7 @@
     {
       "name": "Обороты турбокомпрессора",
       "shortname": "",
-      "measure": "",
+      "measure": "об/мин",
       "min": 0,
       "max": 30000,
       "type": "ushort",
@@ -1079,7 +1079,7 @@
     {
       "name": "Мощность генератора",
       "shortname": "",
-      "measure": "",
+      "measure": "кВт",
       "min": 0,
       "max": 2000,
       "type": "ushort",
@@ -1090,7 +1090,7 @@
     {
       "name": "Ток генератора",
       "shortname": "",
-      "measure": "",
+      "measure": "А",
       "min": 0,
       "max": 10000,
       "type": "ushort",
@@ -1101,7 +1101,7 @@
     {
       "name": "Напряжение генератора",
       "shortname": "",
-      "measure": "",
+      "measure": "В",
       "min": 0,
       "max": 0,
       "type": "ushort",
@@ -1112,7 +1112,7 @@
     {
       "name": "Скорость",
       "shortname": "",
-      "measure": "",
+      "measure": "км/ч",
       "min": 0,
       "max": 110,
       "type": "ushort",
@@ -1123,7 +1123,7 @@
     {
       "name": "Давление наддува",
       "shortname": "",
-      "measure": "",
+      "measure": "кгс/см²",
       "min": 0,
       "max": 2.0,
       "type": "byte",
@@ -1134,7 +1134,7 @@
     {
       "name": "Объем топлива секундный",
       "shortname": "",
-      "measure": "",
+      "measure": "л",
       "min": 0,
       "max": 0,
       "type": "ushort",
@@ -1145,7 +1145,7 @@
     {
       "name": "Давление топлива",
       "shortname": "",
-      "measure": "",
+      "measure": "кгс/см²",
       "min": 0,
       "max": 0,
       "type": "ubyte",
@@ -1156,7 +1156,7 @@
     {
       "name": "Давление масла",
       "shortname": "",
-      "measure": "",
+      "measure": "кгс/см²",
       "min": 0,
       "max": 0,
       "type": "ubyte",
@@ -1178,7 +1178,7 @@
     {
       "name": "Давление масла с фильтром",
       "shortname": "",
-      "measure": "",
+      "measure": "кгс/см²",
       "min": 0,
       "max": 12.5,
       "type": "ubyte",

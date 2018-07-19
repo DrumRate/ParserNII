@@ -145,7 +145,7 @@ namespace ParserNII
                 checkBox.Name = $"checkBox{i}";
                 checkBox.Size = new Size(80, 17);
                 checkBox.TabIndex = 0;
-                checkBox.Text = keys[i];
+                checkBox.Text = keys[i] + " " + data.Data[keys[i]].DataParams.measure;
                 checkBox.UseVisualStyleBackColor = true;
                 checkBoxes.Add(checkBox);
                 checkBox.Checked = true;

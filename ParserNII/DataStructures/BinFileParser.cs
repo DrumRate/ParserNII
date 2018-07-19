@@ -121,7 +121,7 @@ namespace ParserNII.DataStructures
             foreach (var date in dates)
             {
                 List<BinFile> elementsOfDate = date.ToList();
-                var resultElement = new DataFile();
+                var resultElement = new DataFile();                
                 resultElement.Data.Add("Время в “UNIX” формате", new DataElement { OriginalValue = date.Key, DisplayValue = DateTimeOffset.FromUnixTimeMilliseconds(date.Key).AddHours(3).ToString("dd.MM.yyyy HH:mm:ss") });
 
                 for (int j = 0; j < elementsOfDate.Count; j++)
@@ -134,7 +134,17 @@ namespace ParserNII.DataStructures
                         case 21:
                         case 22:
                             displayValue = ParseCoordinate((int)element.Value);
-                        break;
+                            break;
+                        case 29:                            
+                        case 15:                            
+                        case 16:                            
+                        case 102:                            
+                        case 151:
+                            displayValue = (element.Value * 0.1).ToString();
+                            break;
+                        case 30:
+                            displayValue = (element.Value * 0.01).ToString();
+                            break;
                         default:
                             displayValue = element.Value.ToString();
                             break;
